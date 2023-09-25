@@ -1,0 +1,253 @@
+{
+  "default": {
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "doubt": "¿Preguntas? Visite nuestro",
+    "central": "Centro de Ayuda de Feg Solar",
+    "development": "Desarrollo"
+  },
+  "menu": {
+    "ERP_GESTAO": "Gestión",
+    "ERP_GESTAO_EMPRESA": "Empresa",
+    "ERP_GESTAO_EMPRESA_MATRIZ": "Sede Central",
+    "ERP_GESTAO_EMPRESA_MATRIZ_EDIT": "Editar",
+    "ERP_GESTAO_EMPRESA_AREAS": "Áreas",
+    "ERP_GESTAO_EMPRESA_AREAS_ADD": "Agregar",
+    "ERP_GESTAO_EMPRESA_AREAS_EDIT": "Editar",
+    "ERP_GESTAO_EMPRESA_AREAS_DELETE": "Eliminar",
+    "ERP_GESTAO_RH": "Recursos Humanos",
+    "ERP_GESTAO_RH_COLABORADORES": "Empleados",
+    "ERP_GESTAO_RH_COLABORADORES_ADD": "Agregar",
+    "ERP_GESTAO_RH_COLABORADORES_EDIT": "Editar",
+    "ERP_GESTAO_RH_COLABORADORES_DELETE": "Eliminar",
+    "ERP_GESTAO_RH_PERFIL": "Perfil",
+    "ERP_GESTAO_RH_PERFIL_ADD": "Agregar",
+    "ERP_GESTAO_RH_PERFIL_EDIT": "Editar",
+    "ERP_GESTAO_RH_PERFIL_DELETE": "Eliminar",
+    "ERP_GESTAO_PRODUTO": "Productos",
+    "ERP_GESTAO_PRODUTO_EQUIPAMENTOS": "Equipos",
+    "ERP_GESTAO_PRODUTO_EQUIPAMENTOS_ADD": "Agregar",
+    "ERP_GESTAO_PRODUTO_EQUIPAMENTOS_EDIT": "Editar",
+    "ERP_GESTAO_PRODUTO_EQUIPAMENTOS_DELETE": "Eliminar",
+    "ERP_GESTAO_PRODUTO_TIPOS_EQUIPAMENTOS": "Tipos de Equipos",
+    "ERP_GESTAO_PRODUTO_TIPOS_EQUIPAMENTOS_ADD": "Agregar",
+    "ERP_GESTAO_PRODUTO_TIPOS_EQUIPAMENTOS_EDIT": "Editar",
+    "ERP_GESTAO_PRODUTO_TIPOS_EQUIPAMENTOS_DELETE": "Eliminar",
+    "ERP_GESTAO_EMPRESA_STATUS": "Estado",
+    "ERP_GESTAO_EMPRESA_STATUS_ADD": "Agregar",
+    "ERP_GESTAO_EMPRESA_STATUS_EDIT": "Editar",
+    "ERP_GESTAO_EMPRESA_STATUS_DELETE": "Eliminar",
+    "ERP_GESTAO_CLIENTES": "Clientes",
+    "ERP_GESTAO_CLIENTES_CADASTRADOS": "Registrados",
+    "ERP_GESTAO_CLIENTES_CADASTRADOS_ADD": "Agregar",
+    "ERP_GESTAO_CLIENTES_CADASTRADOS_EDIT": "Editar",
+    "ERP_GESTAO_CLIENTES_PROJETOS": "Proyectos",
+    "ERP_GESTAO_CLIENTES_PROJETOS_ADD": "Agregar",
+    "ERP_GESTAO_CLIENTES_PROJETOS_EDIT": "Editar",
+    "ERP_GESTAO_CLIENTES_PROJETOS_DELETE": "Eliminar",
+    "ERP_GESTAO_FINANCEIRO": "Finanzas",
+    "ERP_GESTAO_FINANCEIRO_TIPO_SOLICITACOES": "Tipos de Solicitudes",
+    "ERP_GESTAO_FINANCEIRO_TIPO_SOLICITACOES_ADD": "Agregar",
+    "ERP_GESTAO_FINANCEIRO_TIPO_SOLICITACOES_EDIT": "Editar",
+    "ERP_GESTAO_FINANCEIRO_TIPO_SOLICITACOES_DELETE": "Eliminar"
+  },
+  "auth": {
+    "login": {
+      "insertemail": "Tu correo electrónico",
+      "insertpaswoord": "Tu contraseña",
+      "forgotpassword": "Olvidé mi contraseña",
+      "remember": "Recordarme",
+      "register": "Registrarse",
+      "toenter": "Ingresar"
+    },
+    "alterpassword": {
+      "textemail": "Enviaremos un correo electrónico con instrucciones para cambiar tu contraseña.",
+      "youremail": "Tu correo electrónico",
+      "emailsent": "Hemos enviado un correo electrónico al cliente registrado.",
+      "sendemail": "Enviar correo electrónico"
+    },
+    "newpassword": {
+      "newpassword": "Nueva contraseña",
+      "confirmpassword": "Confirmar contraseña",
+      "passworddontmatch": "Las contraseñas no coinciden",
+      "updatepassword": "Actualizar contraseña"
+    },
+    "register": {
+      "cnpj": "CNPJ",
+      "corporatename": "Nombre de la empresa",
+      "fantasyname": "Nombre de fantasía",
+      "name": "Nombre",
+      "emailregistration": "Correo electrónico",
+      "passwordregistration": "Contraseña",
+      "confirmpassword": "Confirmar contraseña",
+      "wrongpassword": "Las contraseñas no coinciden.",
+      "finalize": "Finalizar registro"
+    }
+  },
+  "management": {
+    "company": {
+      "businessmanagement": "Gestión de empresas",
+      "namematrix": "Sede central",
+      "headquarters": {
+        "cnpj": "CNPJ",
+        "corporatename": "Nombre de la empresa",
+        "fantasyname": "Nombre de fantasía",
+        "socialregistration": "Registro social",
+        "zipcode": "Código postal",
+        "publicplace": "Lugar público",
+        "number": "Número",
+        "complement": "Complemento",
+        "neighborhood": "Barrio",
+        "city": "Ciudad",
+        "state": "Estado"
+      },
+      "area": {
+        "addarea": "Agregar área",
+        "editarea": "Editar área",
+        "id": "ID",
+        "name": "Nombre",
+        "status": "Estado",
+        "active": "Activo",
+        "inactive": "Inactivo",
+        "namearea": "Nombre del área"
+      },
+      "status": {
+        "addarea": "Agregar estado",
+        "editarea": "Editar estado",
+        "id": "ID",
+        "name": "Nombre",
+        "status": "Estado",
+        "active": "Activo",
+        "inactive": "Inactivo",
+        "namestatus": "Nombre del estado",
+        "friendlyname": "Nombre amigable",
+        "description": "Descripción",
+        "usage": "Uso"
+      },
+      "newpassword": {
+        "newpassword": "Nueva contraseña",
+        "confirmpassword": "Confirmar contraseña",
+        "passworddontmatch": "Las contraseñas no coinciden",
+        "updatepassword": "Actualizar contraseña"
+      }
+    },
+    "hr": {
+      "collaborators": {
+        "hrmanagement": "Gestión de recursos humanos",
+        "addcollaborator": "Agregar colaborador",
+        "name": "Nombre",
+        "profile": "Perfil",
+        "status": "Estado",
+        "nameprofile": "Nombre del perfil",
+        "accessprofile": "Acceso del perfil"
+      },
+      "profile": {
+        "profile": "Perfil",
+        "employees": "Empleados",
+        "addprofile": "Agregar perfil",
+        "editprofile": "Editar perfil",
+        "name": "Nombre",
+        "status": "Estado",
+        "profilename": "Nombre del perfil:",
+        "profileaccess": "Acceso del perfil:"
+      }
+    },
+    "products": {
+      "productmanagement": "Gestión de productos",
+      "typeequipment": {
+        "nameequip": "Tipo de equipo",
+        "equip": "Tipo de equipo",
+        "addequip": "Agregar tipo de equipo",
+        "editequip": "Editar tipo de equipo",
+        "id": "ID",
+        "typeequipment": "Tipo de equipo",
+        "status": "Estado",
+        "active": "Activo",
+        "inactive": "Inactivo",
+        "savetypeequipment": "Tipo de equipo guardado exitosamente.",
+        "inactivetypeequipment": "Tipo de equipo desactivado exitosamente.",
+        "activetypeequipment": "Tipo de equipo ahora está activo.",
+        "modaltittletypeequipment": "¿Deseas desactivar este tipo de equipo?",
+        "modalsubtittletypeequipment": "Los datos no se perderán.",
+        "modalactivetittletypeequipment": "¿Deseas activar este tipo de equipo?",
+        "modalcanceltypeequipment": "Cancelar",
+        "modalconfirmtypeequipment": "Confirmar"
+      },
+      "equipment": {
+        "addequipment": "Agregar equipo",
+        "editequipment": "Editar equipo",
+        "inactiveequipment": "El equipo está ahora inactivo.",
+        "activeequipment": "El equipo está ahora activo.",
+        "doactiveequipment": "¿Deseas activar este equipo?",
+        "doinactiveequipment": "¿Deseas desactivar este equipo?",
+        "id": "ID",
+        "equipment": "Equipo",
+        "saveequipment": "Equipo guardado exitosamente.",
+        "status": "Estado",
+        "active": "Activo",
+        "inactive": "Inactivo",
+        "externalcode": "Código externo",
+        "hardwaretype": "Tipo de hardware",
+        "price": "Precio",
+        "currancy": "Moneda",
+        "code": "Código",
+        "assurancetime": "Tiempo de garantía"
+      }
+    },
+    "customers": {
+      "clientmanagement": "Gestión de clientes",
+      "registered": {
+        "addcustomer": "Agregar cliente",
+        "editcustomer": "Editar cliente",
+        "id": "ID",
+        "name": "Nombre",
+        "status": "Estado",
+        "active": "Activo",
+        "inactive": "Inactivo",
+        "corporateName": "Nombre corporativo",
+        "cnpj": "CNPJ",
+        "ie": "IE",
+        "fantasyName": "Nombre de fantasía"
+      },
+      "projects": {
+        "projects": "Proyectos",
+        "addprojects": "Agregar nuevo proyecto",
+        "actions": "Acciones",
+        "details": "Detalles",
+        "manageevents": "Gestionar eventos",
+        "contract": "Contrato",
+        "manageaccess": "Gestionar acceso",
+        "client": "Cliente",
+        "selectclient": "Seleccionar un cliente",
+        "name": "Nombre",
+        "code": "Código",
+        "cnpj": "CNPJ",
+        "ie": "I.E",
+        "cep": "Código postal",
+        "lat": "Lat",
+        "lng": "Lng",
+        "address": "Dirección",
+        "num": "Nº",
+        "complement": "Complemento",
+        "neighborhood": "Barrio",
+        "city": "Ciudad",
+        "state": "Estado",
+        "country": "País",
+        "freight": "Flete",
+        "decisionorder": "Despacho decisivo Nº",
+        "executivedeclaratoryact": "Acto declarativo ejecutivo Nº"
+      }
+    },
+    "financial": {
+      "title": "Gestión financiera",
+      "financialrequesttype": {
+        "addfinancialrequesttype": "Agregar tipo de solicitud",
+        "id": "ID",
+        "name": "Nombre",
+        "status": "Estado",
+        "active": "Activo",
+        "inactive": "Inactivo"
+      }
+    }
+  }
+}

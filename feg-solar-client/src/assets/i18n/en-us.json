@@ -1,0 +1,251 @@
+{
+  "default": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "doubt": "Questions? Visit our",
+    "central": "Feg Solar Help Center",
+    "development": "Development"
+  },
+  "menu": {
+    "ERP_GESTAO": "Management",
+    "ERP_GESTAO_EMPRESA": "Company",
+    "ERP_GESTAO_EMPRESA_MATRIZ": "Headquarters",
+    "ERP_GESTAO_EMPRESA_MATRIZ_EDIT": "Edit",
+    "ERP_GESTAO_EMPRESA_AREAS": "Areas",
+    "ERP_GESTAO_EMPRESA_AREAS_ADD": "Add",
+    "ERP_GESTAO_EMPRESA_AREAS_EDIT": "Edit",
+    "ERP_GESTAO_EMPRESA_AREAS_DELETE": "Delete",
+    "ERP_GESTAO_RH": "Human Resources",
+    "ERP_GESTAO_RH_COLABORADORES": "Employees",
+    "ERP_GESTAO_RH_COLABORADORES_ADD": "Add",
+    "ERP_GESTAO_RH_COLABORADORES_EDIT": "Edit",
+    "ERP_GESTAO_RH_COLABORADORES_DELETE": "Delete",
+    "ERP_GESTAO_RH_PERFIL": "Profile",
+    "ERP_GESTAO_RH_PERFIL_ADD": "Add",
+    "ERP_GESTAO_RH_PERFIL_EDIT": "Edit",
+    "ERP_GESTAO_RH_PERFIL_DELETE": "Delete",
+    "ERP_GESTAO_PRODUTO": "Products",
+    "ERP_GESTAO_PRODUTO_EQUIPAMENTOS": "Equipment",
+    "ERP_GESTAO_PRODUTO_EQUIPAMENTOS_ADD": "Add",
+    "ERP_GESTAO_PRODUTO_EQUIPAMENTOS_EDIT": "Edit",
+    "ERP_GESTAO_PRODUTO_EQUIPAMENTOS_DELETE": "Delete",
+    "ERP_GESTAO_PRODUTO_TIPOS_EQUIPAMENTOS": "Equipment Types",
+    "ERP_GESTAO_PRODUTO_TIPOS_EQUIPAMENTOS_ADD": "Add",
+    "ERP_GESTAO_PRODUTO_TIPOS_EQUIPAMENTOS_EDIT": "Edit",
+    "ERP_GESTAO_PRODUTO_TIPOS_EQUIPAMENTOS_DELETE": "Delete",
+    "ERP_GESTAO_EMPRESA_STATUS": "Status",
+    "ERP_GESTAO_EMPRESA_STATUS_ADD": "Add",
+    "ERP_GESTAO_EMPRESA_STATUS_EDIT": "Edit",
+    "ERP_GESTAO_EMPRESA_STATUS_DELETE": "Delete",
+    "ERP_GESTAO_CLIENTES": "Customers",
+    "ERP_GESTAO_CLIENTES_CADASTRADOS": "Registered",
+    "ERP_GESTAO_CLIENTES_CADASTRADOS_ADD": "Add",
+    "ERP_GESTAO_CLIENTES_CADASTRADOS_EDIT": "Edit",
+    "ERP_GESTAO_CLIENTES_PROJETOS": "Projects",
+    "ERP_GESTAO_CLIENTES_PROJETOS_ADD": "Add",
+    "ERP_GESTAO_CLIENTES_PROJETOS_EDIT": "Edit",
+    "ERP_GESTAO_CLIENTES_PROJETOS_DELETE": "Delete",
+    "ERP_GESTAO_FINANCEIRO": "Financial",
+    "ERP_GESTAO_FINANCEIRO_TIPO_SOLICITACOES": "Request Types",
+    "ERP_GESTAO_FINANCEIRO_TIPO_SOLICITACOES_ADD": "Add",
+    "ERP_GESTAO_FINANCEIRO_TIPO_SOLICITACOES_EDIT": "Edit",
+    "ERP_GESTAO_FINANCEIRO_TIPO_SOLICITACOES_DELETE": "Delete"
+  },
+  "auth": {
+    "login": {
+      "insertemail": "Your email",
+      "insertpaswoord": "Your password",
+      "forgotpassword": "Forgot my password",
+      "remember": "Remember me",
+      "register": "Register",
+      "toenter": "Enter"
+    },
+    "alterpassword": {
+      "textemail": "We will send an email with instructions to change your password.",
+      "youremail": "Your email",
+      "emailsent": "We have sent an email to the registered client!",
+      "sendemail": "Send email"
+    },
+    "newpassword": {
+      "newpassword": "New Password",
+      "confirmpassword": "Confirm Password",
+      "passworddontmatch": "Passwords do not match",
+      "updatepassword": "Update Password"
+    },
+    "register": {
+      "cnpj": "CNPJ",
+      "corporatename": "Corporate Name",
+      "fantasyname": "Fantasy Name",
+      "name": "Name",
+      "emailregistration": "Email",
+      "passwordregistration": "Password",
+      "confirmpassword": "Confirm Password",
+      "wrongpassword": "Passwords do not match.",
+      "finalize": "Finish registration"
+    }
+  },
+  "management": {
+    "company": {
+      "businessmanagement": "Business Management",
+      "namematrix": "Headquarters",
+      "headquarters": {
+        "cnpj": "CNPJ",
+        "corporatename": "Corporate Name",
+        "fantasyname": "Fantasy Name",
+        "socialregistration": "Social Registration",
+        "zipcode": "ZIP Code",
+        "publicplace": "Public Place",
+        "number": "Number",
+        "complement": "Complement",
+        "neighborhood": "Neighborhood",
+        "city": "City",
+        "state": "State"
+      },
+      "area": {
+        "addarea": "Add Area",
+        "editarea": "Edit Area",
+        "id": "ID",
+        "name": "Name",
+        "status": "Status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "namearea": "Area Name"
+      },
+      "status": {
+        "addarea": "Add Status",
+        "editarea": "Edit Status",
+        "id": "ID",
+        "name": "Name",
+        "status": "Status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "namestatus": "Status Name",
+        "friendlyname": "Friendly Name",
+        "description": "Description",
+        "usage": "Usage"
+      },
+      "newpassword": {
+        "newpassword": "New Password",
+        "confirmpassword": "Confirm Password",
+        "passworddontmatch": "Passwords do not match",
+        "updatepassword": "Update Password"
+      }
+    },
+    "hr": {
+      "collaborators": {
+        "hrmanagement": "Human Resources Management",
+        "addcollaborator": "Add Collaborator",
+        "name": "Name",
+        "profile": "Profile",
+        "status": "Status",
+        "nameprofile": "Profile Name",
+        "accessprofile": "Profile Access"
+      },
+      "profile": {
+        "profile": "Profile",
+        "employees": "Employees",
+        "addprofile": "Add Profile",
+        "name": "Name",
+        "status": "Status",
+        "profilename": "Profile Name:",
+        "profileaccess": "Profile Access:"
+      }
+    },
+    "products": {
+      "productmanagement": "Product Management",
+      "typeequipment": {
+        "nameequip": "Equipment Type",
+        "equip": "Equipment Type",
+        "addequip": "Add Equipment Type",
+        "id": "ID",
+        "typeequipment": "Equipment Type",
+        "status": "Status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "savetypeequipment": "Equipment type saved successfully!",
+        "inactivetypeequipment": "Equipment type deactivated successfully!",
+        "activetypeequipment": "Equipment type is now active!",
+        "modaltittletypeequipment": "Do you want to deactivate this Equipment Type?",
+        "modalsubtittletypeequipment": "Data will not be lost.",
+        "modalactivetittletypeequipment": "Do you want to activate this equipment type?",
+        "modalcanceltypeequipment": "Cancel",
+        "modalconfirmtypeequipment": "Confirm"
+      },
+      "equipment": {
+        "addequipment": "Add Equipment",
+        "editequipment": "Edit Equipment",
+        "inactiveequipment": "Equipment is now inactive!",
+        "activeequipment": "Equipment is now active!",
+        "doactiveequipment": "Do you want to activate this Equipment?",
+        "doinactiveequipment": "Do you want to deactivate this Equipment?",
+        "id": "ID",
+        "equipment": "Equipment",
+        "saveequipment": "Equipment saved successfully!",
+        "status": "Status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "externalcode": "External Code",
+        "hardwaretype": "Hardware Type",
+        "price": "Price",
+        "currancy": "Currency",
+        "code": "Code",
+        "assurancetime": "Warranty Time"
+      }
+    },
+    "customers": {
+      "clientmanagement": "Client Management",
+      "registered": {
+        "addcustomer": "Add Customer",
+        "editcustomer": "Edit Customer",
+        "id": "ID",
+        "name": "Name",
+        "status": "Status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "corporateName": "Corporate Name",
+        "cnpj": "CNPJ",
+        "ie": "IE",
+        "fantasyName": "Fantasy Name"
+      },
+      "projects": {
+        "projects": "Projects",
+        "addprojects": "Add New Project",
+        "actions": "Actions",
+        "details": "Details",
+        "manageevents": "Manage Events",
+        "contract": "Contract",
+        "manageaccess": "Manage Access",
+        "client": "Client",
+        "selectclient": "Select a Client",
+        "name": "Name",
+        "code": "Code",
+        "cnpj": "CNPJ",
+        "ie": "I.E",
+        "cep": "ZIP Code",
+        "lat": "Lat",
+        "lng": "Lng",
+        "address": "Address",
+        "num": "No.",
+        "complement": "Complement",
+        "neighborhood": "Neighborhood",
+        "city": "City",
+        "state": "State",
+        "country": "Country",
+        "freight": "Freight",
+        "decisionorder": "Decision Dispatch No.",
+        "executivedeclaratoryact": "Executive Declaratory Act No."
+      }
+    },
+    "financial": {
+      "title": "Financial Management",
+      "financialrequesttype": {
+        "addfinancialrequesttype": "Add Request Type",
+        "id": "ID",
+        "name": "Name",
+        "status": "Status",
+        "active": "Active",
+        "inactive": "Inactive"
+      }
+    }
+  }
+}

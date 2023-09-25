@@ -1,0 +1,90 @@
+@font-face {
+    font-family: "Spartan-Black";
+    src: local("Spartan-Black"), url("Spartan-Black.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Spartan-Bold";
+    src: local("Spartan-Bold"), url("Spartan-Bold.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Spartan-ExtraBold";
+    src: local("Spartan-ExtraBold"), url("Spartan-ExtraBold.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Spartan-ExtraLight";
+    src: local("Spartan-ExtraLight"), url("Spartan-ExtraLight.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Spartan-Light";
+    src: local("Spartan-Light"), url("Spartan-Light.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Spartan-Medium";
+    src: local("Spartan-Medium"), url("Spartan-Medium.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Spartan-Regular";
+    src: local("Spartan-Regular"), url("Spartan-Regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Spartan-Semibold";
+    src: local("Spartan-Semibold"), url("Spartan-SemiBold.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Spartan-Thin";
+    src: local("Spartan-Thin"), url("Spartan-Thin.ttf") format("truetype");
+}
+@font-face {
+  font-family: "bars";
+  src: local("3OF9_new"), url("3OF9_new.TTF") format("truetype");
+}
+@font-face {
+    font-family: "monkey";
+    src: local("monkey"), url("monkey.TTF") format("truetype");
+}
+
+
+.spartan-black {
+    font-family: "Spartan-Black", Arial, Helvetica, sans-serif;
+}
+
+.spartan-bold {
+    font-family: "Spartan-Bold", Arial, Helvetica, sans-serif;
+}
+
+.spartan-extrabold {
+    font-family: "Spartan-ExtraBold", Arial, Helvetica, sans-serif;
+}
+
+.spartan-extralight {
+    font-family: "Spartan-ExtraLight", Arial, Helvetica, sans-serif;
+}
+
+.spartan-light {
+    font-family: "Spartan-Light", Arial, Helvetica, sans-serif;
+}
+
+.spartan-medium {
+    font-family: "Spartan-Medium", Arial, Helvetica, sans-serif;
+}
+
+.spartan-regular {
+    font-family: "Spartan-Regular", Arial, Helvetica, sans-serif;
+}
+
+.spartan-semibold {
+    font-family: "Spartan-Semibold", Arial, Helvetica, sans-serif;
+}
+
+.spartan-thin {
+    font-family: "Spartan-Thin", Arial, Helvetica, sans-serif;
+}
+
+.bars {
+  font-family: "bars", Arial, Helvetica, sans-serif;
+}
+
+.monkey {
+  font-family: "monkey", Arial, Helvetica, sans-serif;
+}
+

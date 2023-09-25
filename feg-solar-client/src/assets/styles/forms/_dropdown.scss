@@ -1,0 +1,8 @@
+p-dropdown .p-dropdown:not(.p-disabled):hover {
+    border-color: $secundary;
+}
+
+p-dropdown .p-dropdown:not(.p-disabled).p-focus {
+    box-shadow: 0 0 0 0.2rem $tertiary;
+    border-color: $secundary;
+}

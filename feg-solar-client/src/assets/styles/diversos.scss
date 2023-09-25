@@ -1,0 +1,40 @@
+@media screen and (max-height: 800px) {
+  .p-card .p-card-body {
+    padding: 1rem;
+  }
+  .scala {
+    transform: scale(0.5);
+    margin-top: -10px;
+    width: 7px;
+  }
+  .scala-grid {
+    width: 7%;
+  }
+  .font-scala {
+    font-size: 10px;
+  }
+}
+@media screen and (min-height: 770px) {
+  .scala {
+    transform: scale(0.8);
+    // margin-top: -10px;
+  }
+  .font-scala {
+    font-size: 14px;
+  }
+  .scala-grid {
+    width: 10%;
+  }
+}
+
+/* Webkit browsers */
+::-webkit-scrollbar {
+  width: 6px; /* Tamanho da barra de rolagem */
+  background-color: #f5f5f5; /* Cor de fundo da barra de rolagem */
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px; /* Arredondamento dos cantos da barra de rolagem */
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); /* Sombra interna da barra de rolagem */
+  background-color: rgba(85, 85, 85, 0.312); /* Cor da barra de rolagem */
+}

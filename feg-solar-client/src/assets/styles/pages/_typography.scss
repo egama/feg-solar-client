@@ -1,0 +1,42 @@
+.title {
+    font-size: 26px;
+    font-family: "Spartan-Bold";
+}
+
+.name {
+    font-size: 20px;
+    font-family: "Spartan-Bold";
+}
+
+body {
+    background-color: $body;
+}
+
+p,
+span:not(.p-tag-value, .pi),
+label,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Spartan-Medium", Arial, Helvetica, sans-serif;
+    margin: 0;
+    color: $black;
+
+    &.bold {
+        font-family: "Spartan-Bold";
+    }
+
+    &.extra-bold {
+        font-family: "Spartan-ExtraBold";
+    }
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+    color: $primary;
+}

@@ -1,0 +1,117 @@
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col-12">
+      <div class="col-12">
+        <span class="p-float-label cf-color-secundary">
+          <p-inputMask
+            mask="99.999.999/9999-99"
+            class="col-12"
+            inputStyleClass="col-12"
+            styleClass="col-12 feg-input"
+            id="float-input"
+            type="text"
+            formControlName="cnpj"
+          >
+          </p-inputMask>
+          <label class="spartan-medium" for="float-input">{{'auth.register.cnpj' | translate}}</label>
+        </span>
+      </div>
+
+      <div class="col-12">
+        <span class="p-float-label my-5 cf-color-secundary">
+          <input
+            class="col-12 cs-input"
+            id="float-input"
+            type="text"
+            formControlName="corporateName"
+            pInputText
+          />
+          <label class="spartan-medium" for="float-input">{{'auth.register.corporatename' | translate}}</label>
+        </span>
+      </div>
+
+      <div class="col-12">
+        <span class="p-float-label my-5 cf-color-secundary">
+          <input
+            class="col-12 cs-input"
+            id="float-input"
+            type="text"
+            formControlName="fantasyName"
+            pInputText
+          />
+          <label class="spartan-medium" for="float-input">{{'auth.register.fantasyname' | translate}}</label>
+        </span>
+      </div>
+
+      <p-divider></p-divider>
+
+      <div class="col-12">
+        <span class="p-float-label my-5 cf-color-secundary">
+          <input
+            class="col-12 cs-input"
+            id="float-input"
+            type="text"
+            formControlName="contactName"
+            pInputText
+          />
+          <label class="spartan-medium" for="float-input">{{'auth.register.name' | translate}}</label>
+        </span>
+      </div>
+
+      <div class="col-12">
+        <span class="p-float-label cs-color-secundary">
+          <input
+            class="col-12 cs-input"
+            id="float-input"
+            type="text"
+            formControlName="contactEmail"
+            pInputText
+          />
+          <label class="spartan-medium" for="float-input">{{'auth.register.emailregistration' | translate}}</label>
+        </span>
+      </div>
+
+      <div class="col-12">
+        <span class="p-float-label my-5">
+          <p-password
+            class="col-12"
+            inputStyleClass="col-12"
+            styleClass="col-12 feg-input"
+            [toggleMask]="true"
+            [feedback]="false"
+            formControlName="contactPassword"
+          ></p-password>
+          <label for="float-input cf-color-secundary">{{'auth.register.passwordregistration' | translate}}</label>
+        </span>
+      </div>
+
+      <div class="col-12">
+        <span class="p-float-label mt-5">
+          <p-password
+            class="col-12"
+            inputStyleClass="col-12"
+            styleClass="col-12 feg-input"
+            [toggleMask]="true"
+            [feedback]="false"
+            formControlName="confirmPassword"
+          ></p-password>
+          <label for="float-input cf-color-secundary">{{'auth.register.confirmpassword' | translate}}</label>
+        </span>
+        <p *ngIf="!passwordsMatch" class="text-danger feg-fs-12 mt-2">
+          {{'auth.register.wrongpassword' | translate}}
+        </p>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-12">
+          <p-button
+            styleClass="col-12"
+            [loading]="loading"
+            (onClick)="cadastrar()"
+            label=" {{'auth.register.finalize' | translate}}"
+          ></p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

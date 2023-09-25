@@ -1,0 +1,71 @@
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col-12">
+      <span class="p-float-label feg-color-secundary">
+        <input
+          class="col-12 feg-input"
+          id="float-input"
+          type="text"
+          formControlName="email"
+          pInputText
+        />
+        <label class="spartan-medium" for="float-input">{{
+          "auth.login.insertemail" | translate
+        }}</label>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <span class="p-float-label mt-5 feg-color-secundary">
+        <p-password
+          class="col-12"
+          styleClass="col-12 feg-input"
+          inputStyleClass="col-12"
+          [toggleMask]="true"
+          [feedback]="false"
+          formControlName="password"
+          (keyup)="enter($event)"
+        ></p-password>
+        <label for="float-input feg-color-secundary">{{
+          "auth.login.insertpaswoord" | translate
+        }}</label>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-6 mt-3">
+      <a
+        class="feg-color-gray5 fs-13"
+        role="button"
+        routerLink="/alterar-senha"
+        >{{ "auth.login.forgotpassword" | translate }}</a
+      >
+    </div>
+    <div
+      class="col-12 col-md-6 mt-3 d-flex justify-content-end align-items-center"
+    >
+      <span class="spartan-medium pe-3 feg-fs-12">{{
+        "auth.login.remember" | translate
+      }}</span>
+      <p-checkbox
+        formControlName="lembrar"
+        [binary]="true"
+        inputId="ny"
+      ></p-checkbox>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-12">
+      <p-button styleClass="col-12" (click)="login()" label="{{'auth.login.toenter' | translate}}"></p-button>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-12 text-center">
+      <a routerLink="/cadastro" role="button">{{
+        "auth.login.register" | translate
+      }}</a>
+    </div>
+  </div>
+</form>

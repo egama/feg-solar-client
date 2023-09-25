@@ -1,0 +1,42 @@
+@use "./based-colors.scss" as bs-color;
+
+
+.login.m-h {
+  min-height: 100vh;
+  .imgbg {
+    background-image: url("../../assets/images/login-portal.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+  }
+
+  .f2 {
+    background-image: linear-gradient(to bottom, #f8eef1, #f8f5ee);
+  }
+
+  .content {
+    width: 100%;
+    max-width: 500px;
+
+    .title {
+      line-height: 16px;
+      text-align: left;
+    }
+
+    .btn-entrar {
+      border: 1px solid #e51255;
+      height: 48px;
+      border-radius: 15px;
+    }
+  }
+}
+
+.logo{
+  width: 130px;
+  margin-left: 15px;
+}
+
+.logo-feg-solar{
+  width: 250px;
+  margin-left: 15px;
+}

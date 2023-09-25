@@ -1,0 +1,27 @@
+.p-inputtext {
+    padding: 6px 6px;
+}
+.feg-4 {
+    height: 40px;
+}
+
+.p-inputtext:enabled:focus {
+    box-shadow: 0 0 0 0.2rem $tertiary;
+    border-color: $secundary;
+}
+
+.p-inputtext:enabled:hover {
+    border-color: $secundary;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+input:-internal-autofill-selected {
+    background-color: $secundary !important;
+}
+
+td p-inputnumber span.p-inputnumber input {
+    border: none;
+}

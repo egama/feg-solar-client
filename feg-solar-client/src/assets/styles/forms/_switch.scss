@@ -1,0 +1,22 @@
+p-inputswitch.p-element {
+    .p-inputswitch {
+        &.p-inputswitch-checked .p-inputswitch-slider {
+            background: $secundary;
+
+            &:hover {
+                background: $primary;
+            }
+        }
+        .p-inputswitch-slider {
+            background: $grey3;
+            &:hover {
+                background: $grey4;
+            }
+        }
+        &.p-focus {
+            .p-inputswitch-slider {
+                box-shadow: 0 0 0 0;
+            }
+        }
+    }
+}

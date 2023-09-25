@@ -1,0 +1,15 @@
+p-card .no-content-padding {
+    .p-card-content {
+        padding: 0;
+    }
+}
+
+p-card .grey {
+    &>.p-card-body {
+        background-color: $grey;
+    }
+    .scrollable-card {
+        max-height: 400px;
+        overflow-y: auto;
+      }
+}

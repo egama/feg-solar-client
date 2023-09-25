@@ -1,0 +1,128 @@
+button.p-button {
+    background: $primary;
+    border: 1px solid $primary;
+
+    span {
+        color: $white;
+    }
+
+    &:enabled:active,
+    &:enabled:hover,
+    &:hover {
+        background: $secundary;
+        border: 1px solid $secundary;
+
+        span {
+            color: $white;
+        }
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 2px $white, 0 0 0 4px $primary, 0 1px 2px 0 $black;
+    }
+
+    &.leaked-bottom {
+        background-color: $white;
+        color: $primary;
+        border-bottom: 7px solid $primary;
+        height: 40px;
+        box-shadow: 0 0 0 0px $white, 0 0 0 0px $secundary, 0 2px 3px 0 $black;
+
+        span {
+            color: $primary;
+        }
+
+        &:enabled:active,
+        &:enabled:hover,
+        &:hover {
+            background-color: $secundary;
+            border-bottom: 7px solid $white;
+            box-shadow: 0 0 0 0px #fff, 0 0 0 1px $secundary, 0 2px 3px 0 $black;
+
+            span {
+                color: $white;
+            }
+        }
+    }
+
+    &.p-button-outlined {
+        background: rgba(59, 130, 246, 0.04);
+        color: $primary;
+        span {
+            color: $primary;
+        }
+        &:enabled:hover{
+            border: 1px solid $secundary;
+            color: $primary;
+            span {
+                color: $primary;
+            }
+        }
+    }
+
+    &-secundary {
+        background: $secundary;
+        border: 1px solid $secundary;
+    }
+    &-white {
+        background: $white;
+        border: 1px solid $secundary;
+
+        span {
+            color: $secundary;
+        }
+
+        &:enabled:active,
+        &:enabled:hover,
+        &:hover {
+            background: $white;
+            border: 1px solid $primary;
+
+            span {
+                color: $primary;
+            }
+        }
+    }
+    &-green {
+        background: $green2;
+        border: 1px solid $green;
+
+        span {
+            color: $black;
+        }
+
+        &:enabled:active,
+        &:enabled:hover,
+        &:hover {
+            background: $green2;
+            border: 1px solid $green2;
+
+            span {
+                color: $black;
+            }
+        }
+    }
+    &-yellow {
+        background: $yellow;
+        border: 1px solid $yellow;
+
+        span {
+            color: $black;
+        }
+
+        &:enabled:active,
+        &:enabled:hover,
+        &:hover {
+            background: $yellow;
+            border: 1px solid $yellow;
+
+            span {
+                color: $black;
+            }
+        }
+    }
+}
+
+
+
+

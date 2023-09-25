@@ -1,0 +1,25 @@
+<p-dialog
+  [header]="title"
+  [(visible)]="displayModal"
+  [modal]="true"
+  [style]="{ width: '800px', 'max-width': '200vw', height: '570px' }"
+  [draggable]="false"
+  [resizable]="true"
+>
+  <ng-template pTemplate="body">
+    <img
+      class="max-h-full max-w-full"
+      *ngIf="tipoImage == 'image'"
+      [src]="image"
+    />
+    <div class="h-full">
+      <!-- <pdf-viewer
+        *ngIf="tipoImage == 'pdf'"
+        [original-size]="false"
+        [render-text]="true"
+        class="h-100 d-block"
+        [src]="{ url: image, withCredentials: false }"
+      ></pdf-viewer> -->
+    </div>
+  </ng-template>
+</p-dialog>

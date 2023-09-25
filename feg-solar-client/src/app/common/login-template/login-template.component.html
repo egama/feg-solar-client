@@ -1,0 +1,72 @@
+<div class="container-fluid">
+  <div
+    class="row justify-content-center align-items-center flex-column flex-md-row"
+  >
+    <div
+      class="col-11 col-md-5 feg-border-radius-40 feg-bg-color-white feg-bg-color-md-transparent overflow-auto h-vh-full py-5 d-flex align-items-start justify-content-center"
+    >
+      <div
+        class="row d-flex h-full w-full flex-row align-items-center justify-content-center py-5"
+        style="align-self: normal"
+      >
+        <div
+          class="cursor-pointer position-absolute feg-w-30 feg-top-20 feg-right-50"
+        >
+          <img
+            (click)="opl.toggle($event)"
+            class="feg-w-30"
+            src="assets/images/lang/{{ language }}.png"
+          />
+          <p-overlayPanel #opl styleClass="language-op">
+            <ng-template pTemplate>
+              <div
+                class="feg-w-30"
+                *ngFor="let item of languages"
+                (click)="setLang(item, opl, $event)"
+              >
+                <img
+                  class="feg-w-30 cursor-pointer"
+                  src="assets/images/lang/{{ item.code }}.png"
+                />
+              </div>
+            </ng-template>
+          </p-overlayPanel>
+        </div>
+
+        <div class="col-10">
+          <p-card>
+            <div class="row">
+              <div class="col-12 text-center">
+                <img src="assets/images/logo-feg-solar.png" class="feg-h-150" />
+              </div>
+            </div>
+
+            <router-outlet></router-outlet>
+          </p-card>
+        </div>
+        <div class="col-10 text-center pb-5">
+          <p
+            class="mt-3 feg-color-secundary spartan-medium font-weight-500 feg-fs-12"
+          >
+            {{ "default.doubt" | translate }}
+            <strong class="spartan-bold">
+              {{ "default.central" | translate }}
+            </strong>
+          </p>
+          <p
+            class="mt-3 feg-color-secundary spartan-medium font-weight-500 feg-fs-12"
+          >
+            {{ "default.development" | translate }}
+            <span class="spartan-bold font-weight-700">
+              <img class="logo feg-h-30" src="/assets/images/logo-feg-it.png" />
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-none d-md-block col-md-7 p-0">
+      <div class="w-full h-vh-full d-flex bg-sign-in"></div>
+    </div>
+  </div>
+</div>

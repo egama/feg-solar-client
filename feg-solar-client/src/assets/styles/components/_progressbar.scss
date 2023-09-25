@@ -1,0 +1,22 @@
+p-progressbar {
+  .feg-progress-green {
+    .p-progressbar-value {
+      background-color: $green2;
+    }
+  }
+  .feg-progress-red {
+    .p-progressbar-value {
+      background-color: $red;
+    }
+  }
+  .feg-progress-blue {
+    .p-progressbar-value {
+      background-color: $blue2;
+    }
+  }
+  .feg-progress-orange {
+    .p-progressbar-value {
+      background-color: $orange2;
+    }
+  }
+}

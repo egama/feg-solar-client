@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-12 {{ showForm ? 'd-none d-md-block col-md-8' : '' }}">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="col-12 col-md-4 box-min-content-rigth" [hidden]="!showForm">
+    <div class="row">
+      <div
+        class="d-block d-md-none col-1 d-flex justify-content-center align-items-center"
+      >
+        <button
+          (click)="exitClick()"
+          type="button"
+          pripple=""
+          class="p-ripple p-element p-tabmenu-nav-next p-tabmenu-nav-btn p-link ng-star-inserted"
+        >
+          <span class="pi pi-chevron-left"></span>
+        </button>
+      </div>
+      <div class="col-10">
+        <p-tabMenu
+          styleClass="feg-content-aba-top"
+          [model]="items"
+          [activeItem]="items[0]"
+        >
+        </p-tabMenu>
+      </div>
+      <div
+        class="d-none d-md-flex col-2 justify-content-center align-items-center"
+      >
+        <p-button
+          (onClick)="exitClick()"
+          styleClass="d-none d-md-block p-0 exit feg-w-26 feg-h-26"
+          aria-label="Close"
+          label="&times;"
+        >
+        </p-button>
+      </div>
+    </div>
+    <div class="box-page box-aba-form">
+      <div class="box-content-aba">
+        <div abaform class="col-12">
+          <div class="row">
+            <div class="col-12">
+              <div #pagecontent class="ok"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<feg-modal-confirm [data]="modal" #mconf></feg-modal-confirm>

@@ -1,0 +1,36 @@
+$total-size: 500;
+$sizes: (
+  "": 0px,
+  "-md": 768px,
+);
+@each $size, $sizevalue in $sizes {
+  @for $i from 0 through $total-size {
+    @media (min-width: $sizevalue) {
+      .feg-h#{"" + $size}-#{$i} {
+        height: #{$i}px;
+      }
+      .feg-lh#{"" + $size}-#{$i} {
+        line-height: #{$i}px;
+      }
+      .feg-max-h#{"" + $size}-#{$i} {
+        max-height: #{$i}px;
+      }
+      .feg-min-h#{"" + $size}-#{$i} {
+        min-height: #{$i}px;
+      }
+      .feg-w#{"" + $size}-#{$i} {
+        width: #{$i}px;
+      }
+      .feg-fs#{"" + $size}-#{$i} {
+        font-size: #{$i}px;
+        line-height: #{$i}px;
+      }
+      .feg-top#{"" + $size}-#{$i} {
+        top: #{$i}px;
+      }
+      .feg-right#{"" + $size}-#{$i} {
+        right: #{$i}px;
+      }
+    }
+  }
+}

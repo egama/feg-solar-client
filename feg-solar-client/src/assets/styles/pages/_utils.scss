@@ -1,0 +1,48 @@
+.w-full {
+    width: 100%;
+}
+.w-md-auto {
+    @media only screen and (min-width: 769px) {
+        width: auto;
+    }
+}
+
+.h-full {
+    height: 100%;
+}
+.max-w-full {
+    max-width: 100%;
+}
+.max-h-full {
+    max-height: 100%;
+}
+.w-vw-full {
+    width: 100vw;
+}
+.h-vh-full {
+    height: 100vh;
+}
+.obj-fit-cover {
+    object-fit: cover;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.pulsing {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.2;
+    }
+  }
+  
+  .bt-pointer {
+    cursor: pointer;
+}

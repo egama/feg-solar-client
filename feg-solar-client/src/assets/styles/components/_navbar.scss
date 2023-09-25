@@ -1,0 +1,72 @@
+// @use "../_variables.scss" as feg-color;
+
+.navbar-container {
+    width: 85%;
+    float: right;
+}
+
+.navbar-header {
+    position: fixed;
+    z-index: 8;
+    border-bottom: 1px solid $grey2;
+    width: 85%;
+
+    @media only screen and (max-width: 999px) {
+        width: 100%;
+    }
+
+    @media only screen and (min-width: 999px) and (max-width: 1480px) {
+        width: 80%;
+    }
+}
+
+.navbar-icon-bar {
+    display: none;
+}
+
+/* Responsives */
+@media only screen and (min-width: 999px) and (max-width: 1480px) {
+    .navbar-container {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 999px) {
+    .navbar-container {
+        width: 100%;
+        float: left;
+    }
+
+    .navbar-cliente-img {
+        width: 160px !important;
+        display: block;
+        margin-left: 0px;
+    }
+
+    .navbar-icon-bar {
+        border-right: 1px solid $grey2;
+    }
+
+    .navbar-icon-bar i {
+        display: block;
+        font-size: 20px;
+        margin: auto 50%;
+        color: $secundary;
+    }
+}
+
+.logon-nav-bar {
+    .p-overlaypanel-content {
+        padding: 0;
+        min-width: 110px;
+
+        .logon-nav-item:hover {
+            background-color: $secundary;
+            color: $white;
+
+            span {
+                color: $white;
+            }
+        }
+    }
+}

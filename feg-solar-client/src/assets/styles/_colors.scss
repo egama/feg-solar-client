@@ -1,0 +1,78 @@
+@use "./_variables.scss" as bs-color;
+
+$sizes: (
+    "": 0px,
+    "-md": 798px,
+);
+$total-border: 10;
+$total-flex: 10;
+$total-border-radius: 100;
+
+$sides: (
+    "": "",
+    "-bottom": "-bottom",
+    "-top": "-top",
+    "-left": "-left",
+    "-right": "-right",
+);
+
+@each $sizename, $sizevalue in $sizes {
+    @each $name, $value in bs-color.$feg-colors {
+        .feg-color#{"" + $sizename}#{"-" + $name} {
+            @media (min-width: $sizevalue) {
+                color: $value !important;
+
+                &:hover {
+                    color: $value;
+                }
+            }
+        }
+
+        .feg-bg-color#{"" + $sizename}#{"-" + $name} {
+            @media (min-width: $sizevalue) {
+                background-color: $value !important;
+            }
+        }
+
+        .feg-bg-hover#{"" + $sizename}#{"-" + $name}:hover {
+            @media (min-width: $sizevalue) {
+                background-color: $value !important;
+            }
+        }
+
+        .feg-border-color#{"" + $sizename}#{"-" + $name} {
+            @media (min-width: $sizevalue) {
+                border-color: $value !important;
+            }
+        }
+    }
+
+    @each $side, $sideV in $sides {
+        @for $i from 0 through $total-border {
+            .feg-border#{"" + $side}#{"" + $sizename}#{"-" + $i} {
+                @media (min-width: $sizevalue) {
+                    border#{"" + $side}-width: #{$i}px;
+                    border#{"" + $side}-style: solid;
+                }
+            }
+        }
+    }
+
+    @each $side, $sideV in $sides {
+        @for $i from 0 through $total-border-radius {
+            .feg-border-radius#{"" + $sizename}#{"-" + $i} {
+                @media (min-width: $sizevalue) {
+                    border-radius: #{$i}px;
+                }
+            }
+        }
+    }
+
+    @for $i from 0 through $total-flex {
+        .feg-flex#{"" + $sizename}#{"-" + $i} {
+            @media (min-width: $sizevalue) {
+                flex: $i;
+            }
+        }
+    }
+}

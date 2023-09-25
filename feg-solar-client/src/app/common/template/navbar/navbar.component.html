@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <div class="row feg-h-60 feg-bg-color-white">
+    <div class="col-3 col-md-1 ps-0">
+      <div
+        (click)="toggleMenu()"
+        class="feg-h-60 feg-w-60 cursor-pointer feg-bg-color-white d-flex align-items-center justify-content-center feg-border-right-1 feg-border-color-primary"
+      >
+        <img
+          src="assets/images/globo-logo-feg-solar.png"
+          alt="FEGIT"
+          class="feg-h-40"
+        />
+      </div>
+    </div>
+    <div class="col-6 col-md-9 d-flex align-items-center">
+      <img *ngIf="getImage" [src]="getImage" alt="FEGIT" class="feg-h-45" />
+    </div>
+    <div
+      class="col-3 col-md-2 d-flex justify-content-center align-items-center"
+    >
+      <p-avatar
+        icon="pi pi-user"
+        styleClass="mr-2 feg-bg-color-primary cursor-pointer feg-color-white"
+        size="small"
+        shape="circle"
+        (click)="op.toggle($event)"
+      ></p-avatar>
+    </div>
+  </div>
+</div>
+
+<feg-navbar-logon #op></feg-navbar-logon>

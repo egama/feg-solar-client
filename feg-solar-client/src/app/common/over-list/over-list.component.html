@@ -1,0 +1,20 @@
+<p-overlayPanel #opli appendTo="body" styleClass="feg-over-list">
+  <ng-template pTemplate>
+    <div class="container-fluid">
+      <div class="row feg-w-200">
+        <div
+          class="logon-nav-item col-12 feg-h-50 d-flex justify-content-start align-items-center cursor-pointer"
+          *ngFor="let item of data"
+          (click)="item.command($event)"
+        >
+          <i
+            *ngIf="item.icon"
+            class="pi {{ item.icon }} text-center feg-fs-14 feg-w-30"
+          ></i>
+          <img *ngIf="item.image" class="feg-w-30" src="{{ item.image }}" />
+          <span class="ps-3">{{ item.label }}</span>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-overlayPanel>

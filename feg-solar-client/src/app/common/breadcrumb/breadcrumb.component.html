@@ -1,0 +1,11 @@
+<div *ngIf="breadcrumb && breadcrumb.length > 0">
+  <span class="feg-fs-10 feg-border-right-1 pe-2 feg-border-color-grey2">{{
+    userName
+  }}</span>
+  <span class="feg-fs-10 feg-border-right-1 px-2 feg-border-color-primary me-2">{{
+    companyName
+  }}</span>
+  <span class="feg-fs-10" *ngFor="let b of breadcrumb; let i = index">
+    {{ b }} {{ i <= breadcrumb.length - 2 ? ">" : "" }}
+  </span>
+</div>

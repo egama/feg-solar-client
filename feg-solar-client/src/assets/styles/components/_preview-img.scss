@@ -1,0 +1,36 @@
+.preview-img {
+    object-fit: cover;
+    overflow: hidden;
+    padding: 0px;
+    height: 26vw;
+    width: 26vw;
+    max-width: 220px;
+    max-height: 100%;
+    padding: 3px;
+    float: left;
+    position: relative;
+
+    .close {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        right: 6px;
+        top: 10px;
+        font-weight: 700;
+        color: $red;
+        cursor: pointer;
+    }
+
+    img {
+        background-color: $white;
+        border-radius: 15px;
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+
+    @media only screen and (min-width: 999px) {
+        height: 13.4vw;
+        width: 13.4vw;
+    }
+}

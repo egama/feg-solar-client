@@ -1,0 +1,40 @@
+<form [formGroup]="formGroup">
+  <div class="row">
+    <div class="col-12">
+      <div class="col-12">
+        <span class="p-float-label my-4">
+          <p-password
+            class="col-12"
+            inputStyleClass="col-12"
+            styleClass="col-12 feg-input"
+            [toggleMask]="true"
+            [feedback]="false"
+            formControlName="newPassword"
+          ></p-password>
+          <label for="float-input cf-color-secundary">{{ "auth.newpassword.newpassword" | translate }}</label>
+        </span>
+      </div>
+
+      <div class="col-12">
+        <span class="p-float-label mt-3">
+          <p-password
+            class="col-12"
+            inputStyleClass="col-12"
+            styleClass="col-12 feg-input"
+            [toggleMask]="true"
+            [feedback]="false"
+            formControlName="confirmPassword"
+          ></p-password>
+          <label for="float-input cf-color-secundary">{{ "auth.newpassword.confirmpassword" | translate }}</label>
+        </span>
+        <span *ngIf="!passwordsError" class="mt-2 feg-fs-12 d-flex m-2 text-danger">{{ "auth.newpassword.passworddontmatch" | translate }}</span>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-12">
+          <p-button styleClass="col-12" label="{{ 'auth.newpassword.updatepassword' | translate }}" (click)="submit()"></p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

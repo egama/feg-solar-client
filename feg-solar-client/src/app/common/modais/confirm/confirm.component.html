@@ -1,0 +1,30 @@
+<p-dialog
+  header=""
+  [(visible)]="displayModal"
+  [modal]="true"
+  [style]="{ width: '500px' }"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div class="d-flex justify-content-center align-items-center d-flex text-center flex-column">
+    <b class="m-0 rth-color-secundary">{{ data.title }}</b>
+    <label class="m-0 rth-color-secundary">{{ data.subtitle }}</label>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="row d-flex justify-content-center">
+      <div class="col-12 col-md-4 mb-3">
+        <p-button
+          (onClick)="primaryClick()"
+          [label]="data.labelPrimaryButton"
+        ></p-button>
+      </div>
+      <div class="col-12 col-md-4 mb-4">
+        <p-button
+          (onClick)="secundaryClick()"
+          [label]="data.labelSecundaryButton"
+          styleClass="p-button-outlined"
+        ></p-button>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>

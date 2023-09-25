@@ -1,0 +1,16 @@
+<feg-over-list #ol [data]="itensMenu"></feg-over-list>
+
+<p-overlayPanel #oplang styleClass="language-op">
+  <ng-template pTemplate>
+    <div
+      class="feg-w-30"
+      *ngFor="let item of languages"
+      (click)="setLang(item, oplang, $event)"
+    >
+      <img
+        class="feg-w-30 cursor-pointer"
+        src="assets/images/lang/{{ item.code }}.png"
+      />
+    </div>
+  </ng-template>
+</p-overlayPanel>

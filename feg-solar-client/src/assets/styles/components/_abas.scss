@@ -1,0 +1,44 @@
+@use "../_variables.scss" as rita-color;
+
+.p-tabmenu .p-tabmenu-nav {
+  background: transparent;
+  border: none;
+
+  .p-tabmenuitem {
+    &:nth-last-child(2) {
+      padding-right: 30px;
+    }
+
+    .p-menuitem-link {
+      font-size: 13px;
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    &.p-highlight .p-menuitem-link {
+      background: $white;
+      border-color: $white;
+      color: $secundary;
+    }
+
+    .p-menuitem-text {
+      font-weight: bold;
+    }
+  }
+}
+
+.p-tabmenu.with-bbord {
+  .p-tabmenu-nav {
+    li:hover,
+    li.p-tabmenuitem {
+      a.p-menuitem-link {
+        border-bottom: 7px solid $white;
+      }
+
+      &.p-highlight {
+        a.p-menuitem-link {
+          border-bottom: 7px solid $primary;
+        }
+      }
+    }
+  }
+}

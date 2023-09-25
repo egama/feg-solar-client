@@ -1,0 +1,54 @@
+<div *ngIf="active" class="sidebar-container w-full h-full" (click)="clickIconMenu()">
+  <div class="sidebar-body h-full feg-bg-color-white pt-3">
+    <div *ngFor="let m1 of menu">
+      <div class="menu {{ m1.active && 'active' }}">
+        <div
+          class="conteudo conteudo-m1  {{
+            m1.active && m1.type == 2 && 'conteudo-active'
+          }}"
+          (click)="clickMenu($event, m1)"
+        >
+          <p>{{ 'menu.' + m1.code | translate }}</p>
+          <i
+            *ngIf="m1.type == 1"
+            class="pi {{ m1.active ? ' pi-angle-down' : ' pi-angle-right' }}"
+          ></i>
+        </div>
+        <ng-container *ngIf="m1.active">
+          <div *ngFor="let m2 of m1.children">
+            <div class="menu {{ m2.active && 'active' }}">
+              <div
+                class="conteudo conteudo-m2 {{
+                  m2.active && m2.type == 2 && 'conteudo-active'
+                }}"
+                (click)="clickMenu($event, m2, m1)"
+              >
+                <p>{{ 'menu.' + m2.code | translate }}</p>
+                <i
+                  *ngIf="m2.type == 1"
+                  class="pi {{
+                    m2.active ? ' pi-angle-down' : ' pi-angle-right'
+                  }}"
+                ></i>
+              </div>
+              <ng-container *ngIf="m2.active">
+                <div *ngFor="let m3 of m2.children">
+                  <div class="menu {{ m3.active && 'active' }}">
+                    <div
+                      class="conteudo conteudo-m3 {{
+                        m3.active && m3.type == 2 && 'conteudo-active'
+                      }}"
+                      (click)="clickMenu($event, m3, m1, m2)"
+                    >
+                      <p>{{ m3.label }}</p>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+.feg-over-list {
+    .p-overlaypanel-content {
+        padding: 0;
+        min-width: 110px;
+
+        .logon-nav-item:hover {
+            background-color: $secundary;
+            color: $white;
+
+            span {
+                color: $white;
+            }
+        }
+    }
+}
