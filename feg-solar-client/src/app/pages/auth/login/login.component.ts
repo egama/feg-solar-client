@@ -47,10 +47,11 @@ export class LoginComponent implements OnInit {
 
   loading = false;
   login = () => {
+    debugger
     if (this.form.valid) {
       this.loading = true;
       this.authController
-        .login(this.form.value.email, this.form.value.password)
+        .loginClient(this.form.value.email, this.form.value.password)
         .subscribe({
           next: (resp: any) => {
             if (resp.data) {

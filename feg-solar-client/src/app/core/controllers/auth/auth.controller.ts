@@ -17,6 +17,18 @@ export class AuthController {
     );
   };
 
+  loginClient = (email: string, password: string): Observable<any> => {
+    debugger
+    return this.api.post(
+      `/auth/client`,
+      {
+        email,
+        password,
+      },
+      false
+    );
+  };
+
   esqueciSenha = (email: string): Observable<any> => {
     return this.api.post(
       `/auth/forgot`,
