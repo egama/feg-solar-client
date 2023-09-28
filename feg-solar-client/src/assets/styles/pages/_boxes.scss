@@ -53,6 +53,18 @@
     }
   }
 
+  .box-content2 {
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    border-radius: 6px 6px 6px 6px;
+    padding: 20px 0px 20px 0px;
+
+    @media only screen and (max-width: 767px) {
+      background-color: $white;
+      border-radius: 18px;
+      padding: 20px 0px;
+    }
+  }
+
   .box-content-aba {
     padding: 20px 0px 20px 0px;
   }

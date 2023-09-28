@@ -1,19 +1,41 @@
 <div class="container-fluid">
-  <div class="row feg-h-60 feg-bg-color-white">
+  <div class="row feg-h-70 feg-bg-color-white">
     <div class="col-3 col-md-1 ps-0">
       <div
-        (click)="toggleMenu()"
-        class="feg-h-60 feg-w-60 cursor-pointer feg-bg-color-white d-flex align-items-center justify-content-center feg-border-right-1 feg-border-color-primary"
+        (click)="backHome()"
+        class="feg-h-60 feg-w-60 cursor-pointer feg-bg-color-white d-flex align-items-center justify-content-center"
       >
         <img
-          src="assets/images/globo-logo-feg-solar.png"
+          src="assets/images/logo-feg-solar.png"
           alt="FEGIT"
-          class="feg-h-40"
+          class="feg-h-130 ml-75 mt-2"
         />
       </div>
     </div>
     <div class="col-6 col-md-9 d-flex align-items-center">
-      <img *ngIf="getImage" [src]="getImage" alt="FEGIT" class="feg-h-45" />
+      <div class="col-3 bt-pointer d-flex justify-content-end">
+        <!-- <p-button
+          styleClass="col-12 p-button-text p-button-white feg-h-5"
+          label="Home"
+          (onClick)="home()">
+        </p-button> -->
+      </div>
+      <div class="col-1"></div>
+      <div class="col-3 bt-pointer d-flex justify-content-start">
+        <p-button
+          styleClass="col-12 p-button-text p-button-white feg-h-5"
+          label="Abrir rma"
+          (onClick)="rma()">
+        </p-button>
+        <div class="col-1"></div>
+      </div>
+      <div class="col-3 bt-pointer d-flex justify-content-start">
+        <p-button
+          styleClass="col-12 p-button-text p-button-white feg-h-5"
+          label="Abrir Tickt"
+          (onClick)="tickt()">
+        </p-button>
+      </div>
     </div>
     <div
       class="col-3 col-md-2 d-flex justify-content-center align-items-center"

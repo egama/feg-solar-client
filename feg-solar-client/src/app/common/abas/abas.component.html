@@ -1,6 +1,6 @@
 <p-tabMenu [model]="items" [activeItem]="activeItem || items[0]" [scrollable]="true"> </p-tabMenu>
 <div class="box-page mb-4 px-3 px-md-0 pb-3 pb-md-0 {{styleClass}}">
-  <div class="box-content">
+  <div class="">
     <ng-container [ngTemplateOutlet]="routerIsActive ? complexLink : simpleLink">
     </ng-container>
   </div>
