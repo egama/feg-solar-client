@@ -21,7 +21,7 @@ const routes: Routes = [
     component: TemplateComponent,
     children: [
       {
-        path: "home",
+        path: "",
         loadChildren: () =>
           import("./pages/home/home.module").then((x) => x.HomeModule),
       },

@@ -27,20 +27,15 @@ export class NavbarComponent implements OnInit {
     );
   }
 
-  home() {
-    this.router.navigate(["home/meus-chamados"]);
-  }
-
   backHome() {
-    this.router.navigate(["home/meus-chamados"]);
+    this.router.navigate(["home"]);
   }
 
   rma = () => {
-    debugger
-    this.router.navigate(["home/abrir-rma"]);
+    this.router.navigate(["rma"]);
   };
 
   tickt = () => {
-    this.router.navigate(["home/abrir-tickt"]);
+    this.router.navigate(["ticket"]);
   };
 }
