@@ -31,11 +31,8 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(["home"]);
   }
 
-  rma = () => {
-    this.router.navigate(["rma"]);
-  };
 
-  tickt = () => {
-    this.router.navigate(["ticket"]);
+  novoSac = () => {
+    this.router.navigate(["novo-sac"]);
   };
 }

@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
 
   loading = false;
   login = () => {
-    debugger;
     if (this.form.valid) {
       this.loading = true;
       this.authController
@@ -51,7 +50,7 @@ export class LoginComponent implements OnInit {
             }
           },
           complete: () => {
-            this.router.navigate(["home"]);
+            this.router.navigate(["gestao"]);
           },
         });
     }

@@ -18,14 +18,16 @@ const routes: Routes = [
   {
     path: "",
     canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     component: TemplateComponent,
     children: [
       {
-        path: "",
+        path: "gestao",
         loadChildren: () =>
-          import("./pages/home/home.module").then((x) => x.HomeModule),
-      },
-
+          import("./pages/gestao/gestao.modules").then(
+            (x) => x.GestaoModule
+          ),
+      }
     ],
   },
   { path: "**", redirectTo: "portal/dashboard" },

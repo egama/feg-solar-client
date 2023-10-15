@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div
+    class="card-novo-sac justify-content-around px-5 py-3 {{
+      nextStep ? 'disable-cards' : ''
+    }}"
+  >
+    <div class="col-6 justify-content-start">
+      <label class="ps-3">Tipo Atendimento: </label>
+      <p-dropdown
+        placeholder="Selecione o Atendimento"
+        appendTo="body"
+        styleClass="col-4 ms-3"
+      ></p-dropdown>
+    </div>
+    <!-- <div class="row" *ngIf="factory">
+      <div class="d-flex justify-content-end">
+        <p-button
+        *ngIf="!nextStep"
+          styleClass="w-full"
+          label="Avançar"
+          (onClick)="avancar()"
+        ></p-button>
+      </div>
+    </div> -->
+  </div>
+</div>

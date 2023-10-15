@@ -1,0 +1,76 @@
+<div class="container-fluid">
+  <div
+    class="card-novo-sac justify-content-around px-5 py-3 {{
+      nextStep ? 'disable-cards' : ''
+    }}"
+  >
+    <div class="row">
+      <div class="col-6">
+        <div class="d-flex flex-column">
+          <label class="ps-3"
+            >Cliente: {{ nextStep ? customer.corporateName : "" }}</label
+          >
+          <div>
+            <p-dropdown
+              *ngIf="!nextStep"
+              placeholder="Selecione o Cliente"
+              appendTo="body"
+              styleClass="col-4 ms-3"
+              [options]="customers"
+              [(ngModel)]="customer"
+              [disabled]="optionDigit"
+              optionLabel="corporateName"
+              (onChange)="getAllProjetos()"
+            ></p-dropdown>
+
+            <input
+              *ngIf="optionDigit"
+              class="col-6 ms-3 feg-input"
+              id="float-input"
+              type="text"
+              pInputText
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="d-flex flex-column">
+          <label class="ps-3"
+            >Usina: {{ nextStep ? factory.nickname : "" }}</label
+          >
+          <div>
+          <p-dropdown
+            *ngIf="!nextStep"
+            placeholder="Selecione a Usina"
+            appendTo="body"
+            styleClass="col-4 ms-3"
+            optionLabel="nickname"
+            [options]="factorys"
+            [disabled]="optionDigit"
+            [(ngModel)]="factory"
+          ></p-dropdown>
+
+          <input
+          *ngIf="optionDigit"
+          class="col-6 ms-3 feg-input"
+          id="float-input"
+          type="text"
+          pInputText
+        />
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="factory">
+      <div class="d-flex justify-content-end">
+        <p-button
+          *ngIf="!nextStep"
+          styleClass="w-full"
+          label="Avançar"
+          (onClick)="avancar()"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+</div>
