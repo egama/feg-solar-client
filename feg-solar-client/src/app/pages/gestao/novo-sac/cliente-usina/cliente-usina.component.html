@@ -18,18 +18,9 @@
               styleClass="col-4 ms-3"
               [options]="customers"
               [(ngModel)]="customer"
-              [disabled]="optionDigit"
               optionLabel="corporateName"
               (onChange)="getAllProjetos()"
             ></p-dropdown>
-
-            <input
-              *ngIf="optionDigit"
-              class="col-6 ms-3 feg-input"
-              id="float-input"
-              type="text"
-              pInputText
-            />
           </div>
         </div>
       </div>
@@ -47,17 +38,8 @@
             styleClass="col-4 ms-3"
             optionLabel="nickname"
             [options]="factorys"
-            [disabled]="optionDigit"
             [(ngModel)]="factory"
           ></p-dropdown>
-
-          <input
-          *ngIf="optionDigit"
-          class="col-6 ms-3 feg-input"
-          id="float-input"
-          type="text"
-          pInputText
-        />
         </div>
         </div>
       </div>

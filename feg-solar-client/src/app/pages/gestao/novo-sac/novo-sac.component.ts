@@ -19,9 +19,14 @@ export class NovoSacComponent implements OnInit {
   ) { }
   stepOne: boolean = false;
   stepTwo: boolean = false
+  stepThree: boolean = false;
   ngOnInit() { }
 
   nextStep = (data: any) => {
-    this.stepTwo = true
+    if (!this.stepTwo) {
+      this.stepTwo = true
+    } else if (this.stepTwo && !this.stepThree) {
+      this.stepThree = true
+    }
   }
 }

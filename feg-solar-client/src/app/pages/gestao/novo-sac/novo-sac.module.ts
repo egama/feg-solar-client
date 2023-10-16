@@ -14,6 +14,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { NovoSacComponent } from "./novo-sac.component";
 import { ClienteUsinaComponent } from "./cliente-usina/cliente-usina.component";
 import { TipoAtendimentoComponent } from "./tipo-atendimento/tipo-atendimento.component";
+import { EquipamentoComponent } from "./equipamento/equipamento.component";
 
 registerLocaleData(localePT);
 
@@ -32,7 +33,8 @@ const routes: Routes = [
   declarations: [
     NovoSacComponent,
     ClienteUsinaComponent,
-    TipoAtendimentoComponent
+    TipoAtendimentoComponent,
+    EquipamentoComponent
   ],
   imports: [
     CommonModule,

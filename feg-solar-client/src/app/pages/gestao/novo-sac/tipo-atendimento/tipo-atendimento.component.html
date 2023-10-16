@@ -5,14 +5,19 @@
     }}"
   >
     <div class="col-6 justify-content-start">
-      <label class="ps-3">Tipo Atendimento: </label>
+      <label class="ps-3">Tipo Atendimento: {{tipoAt && nextStep ? tipoAt.name  : ''}}</label>
       <p-dropdown
         placeholder="Selecione o Atendimento"
         appendTo="body"
         styleClass="col-4 ms-3"
+        [options]="opTipoAten"
+        [(ngModel)]="tipoAt"
+        optionLabel="name"
+        *ngIf="!nextStep"
+
       ></p-dropdown>
     </div>
-    <!-- <div class="row" *ngIf="factory">
+    <div class="row" *ngIf="tipoAt">
       <div class="d-flex justify-content-end">
         <p-button
         *ngIf="!nextStep"
@@ -21,6 +26,6 @@
           (onClick)="avancar()"
         ></p-button>
       </div>
-    </div> -->
+    </div>
   </div>
 </div>

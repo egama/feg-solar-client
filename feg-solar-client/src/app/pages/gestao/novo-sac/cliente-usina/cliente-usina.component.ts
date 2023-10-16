@@ -18,7 +18,6 @@ export class ClienteUsinaComponent implements OnInit {
   customer: any;
   factory: any;
   nextStep: boolean = false;
-  optionDigit: boolean = false;
 
   ngOnInit() {
     this.getAllClientes();
@@ -28,26 +27,16 @@ export class ClienteUsinaComponent implements OnInit {
     this.clientesController.getAll().subscribe({
       next: (resp: any) => {
         this.customers = resp.data.map((m: any) => m.customer);
-        let op = {
-          corporateName: 'Digitar',
-          id: 0
-        }
-        this.customers.push(op)
-      },
-    });
+      }});
   };
 
   getAllProjetos = () => {
-    if (this.customer.id == 0) {
-      this.optionDigit = true;
-    } else {
-      this.optionDigit = false;
-      this.projetosController.getByCustomer(this.customer.id).subscribe({
-        next: (resp) => {
-          this.factorys = resp.data.map((m: any) => m.project);
-        },
-      });
-    }
+    this.projetosController.getByCustomer(this.customer.id).subscribe({
+      next: (resp) => {
+        this.factorys = resp.data.map((m: any) => m.project);
+      },
+    });
+
 
   };
 

@@ -1,0 +1,60 @@
+<div class="container-fluid">
+  <div
+    class="card-novo-sac justify-content-around px-5 py-3 {{
+      nextStep ? 'disable-cards' : ''
+    }}"
+  >
+    <!-- <div class="col-12 justify-content-start mb-4" *ngIf="eqp || eqpText">
+      <div class="card-novo-sac p-4">
+        <label
+          >{{ tipoEqp.name }} - <span *ngIf="eqpText && eqp.id == 0">{{ eqpText }}</span>
+          <span *ngIf="eqp.id != 0">{{ eqp.description }}</span></label
+        >
+      </div>
+    </div> -->
+
+    <div class="col-12 d-flex py-3 d-flex justify-content-between">
+      <div class="col-4 px-1">
+        <p-dropdown
+          placeholder="Selecione o tipo do equipamento"
+          appendTo="body"
+          styleClass="w-full"
+          optionLabel="name"
+          [(ngModel)]="tipoEqp"
+          [options]="tipoEqps"
+          (onChange)="getEqpById($event)"
+        ></p-dropdown>
+      </div>
+      <div class="col-4 px-1">
+        <p-dropdown
+          placeholder="Selecione o equipamento"
+          appendTo="body"
+          styleClass="w-full"
+          [options]="eqps"
+          [(ngModel)]="eqp"
+          optionLabel="description"
+          (onChange)="checkValue()"
+        ></p-dropdown>
+      </div>
+      <div class="col-4 px-1">
+        <input
+          *ngIf="optionDigit"
+          class="feg-input w-full"
+          id="float-input"
+          [(ngModel)]="eqpText"
+          (blur)="checkValue()"
+          type="text"
+          pInputText
+        />
+      </div>
+    </div>
+
+    <div class="col-12 d-flex py-3 d-flex justify-content-end" *ngIf="btnAv">
+      <p-button
+        styleClass="w-full"
+        label="Avançar"
+        (onClick)="avancar()"
+      ></p-button>
+    </div>
+  </div>
+</div>

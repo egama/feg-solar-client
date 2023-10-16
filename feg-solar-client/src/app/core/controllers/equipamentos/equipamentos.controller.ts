@@ -14,6 +14,10 @@ export class EquipamentosController {
     return this.api.get(`${this.prefix}/${id}`);
   };
 
+  getByType = (type: number, companyId: number): Observable<any> => {
+    return this.api.get(`${this.prefix}/${type}/${companyId}`);
+  };
+
   save = (body: any) => {
     return body.id ? this.put(body) : this.post(body);
   };
@@ -31,12 +35,13 @@ export class EquipamentosController {
   };
 
   delete = (id: number): Observable<any> => {
-    
+
     return this.api.delete(`${this.prefix}/${id}`);
   };
 
   active = (id: number): Observable<any> => {
     return this.api.put(`${this.prefix}/active/${id}`, {});
   };
+
 }
 
