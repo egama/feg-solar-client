@@ -4,16 +4,30 @@
       nextStep ? 'disable-cards' : ''
     }}"
   >
-    <!-- <div class="col-12 justify-content-start mb-4" *ngIf="eqp || eqpText">
+    <div
+      class="col-12 justify-content-start mb-4"
+      *ngFor="let eqp of Allequips"
+    >
       <div class="card-novo-sac p-4">
         <label
-          >{{ tipoEqp.name }} - <span *ngIf="eqpText && eqp.id == 0">{{ eqpText }}</span>
-          <span *ngIf="eqp.id != 0">{{ eqp.description }}</span></label
+          >{{ eqp.hardwareModel.hardwareType.name }} -
+          <span>{{ eqp.description }}</span></label
         >
       </div>
-    </div> -->
+    </div>
 
-    <div class="col-12 d-flex py-3 d-flex justify-content-between">
+    <div class="col-12 d-flex py-3 d-flex justify-content-end" *ngIf="!newEqp">
+      <p-button
+        styleClass="w-full"
+        label="Novo Equipamento"
+        (onClick)="newEqp = !newEqp"
+      ></p-button>
+    </div>
+
+    <div
+      *ngIf="newEqp"
+      class="col-12 d-flex py-3 d-flex justify-content-between"
+    >
       <div class="col-4 px-1">
         <p-dropdown
           placeholder="Selecione o tipo do equipamento"
@@ -48,11 +62,54 @@
         />
       </div>
     </div>
+    <form [formGroup]="formFilter">
+      <div
+        formArrayName="answers"
+        *ngFor="let pg of answersCommand; let i = index"
+        class="col-12 d-flex py-3 d-flex justify-content-start"
+      >
+        <div
+          [formGroupName]="i"
+          class="col-4 px-1"
+          *ngIf="pg.typeQuestion != 'switch'"
+        >
+          <span>{{ pg.description }}:</span>
+          <input
+            class="feg-input w-full"
+            id="float-input"
+            type="text"
+            formControlName="answer"
+            pInputText
+          />
+        </div>
+      </div>
+
+      <div class="col-12 d-flex py-3 d-flex justify-content-start">
+        <div
+          class="col-4 px-1"
+          formArrayName="answers"
+          *ngFor="let pg of answersCommand; let i = index"
+        >
+          <div [formGroupName]="i">
+            <span *ngIf="pg.typeQuestion == 'switch'"
+              >{{ pg.description }}:</span
+            >
+            <p-inputSwitch
+              *ngIf="pg.typeQuestion == 'switch'"
+              styleClass="d-flex"
+              [trueValue]="1"
+              formControlName="answer"
+              [falseValue]="0"
+            ></p-inputSwitch>
+          </div>
+        </div>
+      </div>
+    </form>
 
     <div class="col-12 d-flex py-3 d-flex justify-content-end" *ngIf="btnAv">
       <p-button
         styleClass="w-full"
-        label="Avançar"
+        label="Salvar Equipamento"
         (onClick)="avancar()"
       ></p-button>
     </div>

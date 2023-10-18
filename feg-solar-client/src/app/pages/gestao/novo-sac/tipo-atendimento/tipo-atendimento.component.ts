@@ -13,11 +13,13 @@ export class TipoAtendimentoComponent implements OnInit {
   opTipoAten = [
     {
       id: 1,
-      name: 'RMA'
+      name: 'RMA',
+      value: 'rma'
     },
     {
       id: 2,
-      name: 'Suporte'
+      name: 'Suporte Técnico',
+      value: 'ste'
     }
   ];
 
@@ -27,8 +29,11 @@ export class TipoAtendimentoComponent implements OnInit {
 
 
   avancar = () => {
+    let tipoAtend = {
+     tipo: this.tipoAt
+    }
     this.nextStep = true
-    this.onSave.emit();
+    this.onSave.emit(tipoAtend);
   }
 
 }
