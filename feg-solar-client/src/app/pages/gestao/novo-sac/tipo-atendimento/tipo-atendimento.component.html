@@ -1,26 +1,36 @@
 <div class="container-fluid">
-  <div
-    class="card-novo-sac justify-content-around px-5 py-3 {{
-      nextStep ? 'disable-cards' : ''
-    }}"
-  >
-    <div class="col-6 justify-content-start">
-      <label class="ps-3">Tipo Atendimento: {{tipoAt && nextStep ? tipoAt.name  : ''}}</label>
-      <p-dropdown
-        placeholder="Selecione o Atendimento"
-        appendTo="body"
-        styleClass="col-4 ms-3"
-        [options]="opTipoAten"
-        [(ngModel)]="tipoAt"
-        optionLabel="name"
-        *ngIf="!nextStep"
+  <div class="card-novo-sac justify-content-around px-5 py-3">
+    <div class="row">
+      <div class="col-6 justify-content-start">
+        <label class="ps-3 pt-1"
+          >Tipo Atendimento: {{ tipoAt && nextStep ? tipoAt.name : "" }}</label
+        >
+        <p-dropdown
+          placeholder="Selecione o Atendimento"
+          appendTo="body"
+          styleClass="col-4 ms-3"
+          [options]="opTipoAten"
+          [(ngModel)]="tipoAt"
+          optionLabel="name"
+          *ngIf="!nextStep"
+        ></p-dropdown>
+      </div>
 
-      ></p-dropdown>
+      <div class="col-6">
+        <div class="d-flex justify-content-end" *ngIf="nextStep">
+          <div
+            class="rounded-circle border-1 cursor-pointer feg-border-color-primary"
+            (click)="nextStep = !nextStep"
+          >
+            <i class="p-2 pi pi-pencil d-flex justify-content-end feg-color-primary"></i>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="row" *ngIf="tipoAt">
       <div class="d-flex justify-content-end">
         <p-button
-        *ngIf="!nextStep"
+          *ngIf="!nextStep"
           styleClass="w-full"
           label="Avançar"
           (onClick)="avancar()"

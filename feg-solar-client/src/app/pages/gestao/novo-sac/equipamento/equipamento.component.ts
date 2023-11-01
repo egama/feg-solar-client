@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormArray, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
-import { EquipamentosController } from "src/app/core/controllers/equipamentos/equipamentos.controller";
 import { ProjetosEquipamentosController } from "src/app/core/controllers/projetos-equipamentos/projetos-equipamentos.controller";
 import { TiposEquipamentosController } from "src/app/core/controllers/tipos-equipamentos/tipos-equipmentos.controller";
 import { TiposEquipamentosPerguntasController } from "src/app/core/controllers/tipos-equipametos-pergutas/tipos-equipametos-pergutas.controller";
+import { EquipamentosController } from "src/app/core/controllers/equipamentos/equipamentos.controller";
 
 @Component({
   selector: "feg-novo-equipamento",
@@ -17,14 +17,16 @@ export class EquipamentoComponent implements OnInit {
     private fb: UntypedFormBuilder,
     private tiposEquipamentosController: TiposEquipamentosController,
     private projetosEquipamentosController: ProjetosEquipamentosController,
-    private tiposEquipamentosPerguntasController: TiposEquipamentosPerguntasController
+    private tiposEquipamentosPerguntasController: TiposEquipamentosPerguntasController,
+    private equipamentosController: EquipamentosController
+
   ) { }
 
   nextStep: boolean = false;
   tipoEqps: any[] = [];
   tipoEqp: any;
   eqps: any[] = [];
-  Allequips: any[] = [];
+  allEquips: any[] = [];
   eqp: any;
   eqpText: string = ''
   optionDigit: boolean = false;
@@ -72,8 +74,8 @@ export class EquipamentoComponent implements OnInit {
           let op = {
             description: 'Digitar',
             id: 0
-          }
-          this.eqps.push(op)
+          };
+          this.eqps.push(op);
         },
       });
 
@@ -85,20 +87,22 @@ export class EquipamentoComponent implements OnInit {
         })
       },
     });
-
-  }
+  };
 
   getEquips = () => {
     this.projetosEquipamentosController
       .getByProjetoId(this.projectData.factory.id)
       .subscribe({
         next: (resp: any) => {
-          this.Allequips = resp.data;
+          this.allEquips = resp.data;
         },
       });
 
   }
 
+  deleteEqp = (e: any) => {
+    this.allEquips.splice(e, 1)
+  }
 
 
   checkValue = () => {
@@ -120,20 +124,34 @@ export class EquipamentoComponent implements OnInit {
   }
 
   avancar = () => {
+    debugger
     this.formFilter.value
-    let data = {
-      projectsCompanyId: this.eqp.projectsCompanyId,
-      type: this.projectData.tipo.value,
-      hardwares: {
-        hardwareProjectId: this.eqp.id,
-        hardwareTypeId: this.tipoEqp.id,
-        hardwareModelId: this.eqp.hardwareModelId,
-        hardwareProjectCode: this.eqp.projectsCompanyId,
-        respostas: {
+    this.eqpText
+    let newData = {
+      description: this.eqpText ? this.eqpText : this.eqp.description,
+      hardwareModel: {
+        hardwareType: {
+          name: this.tipoEqp.name
         }
       }
     }
-    this.onSave.emit();
+    debugger
+    this.allEquips.push(newData)
+    this.newEqp = !this.newEqp
+    // let data = {
+    //   projectsCompanyId: this.eqp.projectsCompanyId,
+    //   type: this.projectData.tipo.value,
+    //   hardwares: {
+    //     hardwareProjectId: this.eqp.id,
+    //     hardwareTypeId: this.tipoEqp.id,
+    //     hardwareModelId: this.eqp.hardwareModelId,
+    //     hardwareProjectCode: this.eqp.projectsCompanyId,
+    //     respostas: {
+
+    //     }
+    //   }
+    // }
+    // this.onSave.emit();
   }
 
 }

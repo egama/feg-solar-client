@@ -35,7 +35,6 @@ export class EquipamentosController {
   };
 
   delete = (id: number): Observable<any> => {
-
     return this.api.delete(`${this.prefix}/${id}`);
   };
 

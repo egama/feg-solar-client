@@ -4,16 +4,27 @@
       nextStep ? 'disable-cards' : ''
     }}"
   >
+    <label class="ps-4" *ngIf="allEquips.length > 0">{{
+      allEquips.length > 0
+        ? "Equipamentos:"
+        : "Não há equipamentos cadastrados nessa usina"
+    }}</label>
     <div
       class="col-12 justify-content-start mb-4"
-      *ngFor="let eqp of Allequips"
+      *ngFor="let eqp of allEquips; let i = index"
     >
       <div class="card-novo-sac p-4">
         <label
           >{{ eqp.hardwareModel.hardwareType.name }} -
-          <span>{{ eqp.description }}</span></label
-        >
+          <span
+            >{{ eqp.description }}
+            <i
+            (click)="deleteEqp(i)"
+              class="ms-2 p-2 rounded-circle border-1 cursor-pointer feg-border-color-primary pi pi-trash feg-color-red"
+            ></i></span
+        ></label>
       </div>
+      <p-divider></p-divider>
     </div>
 
     <div class="col-12 d-flex py-3 d-flex justify-content-end" *ngIf="!newEqp">
@@ -26,7 +37,7 @@
 
     <div
       *ngIf="newEqp"
-      class="col-12 d-flex py-3 d-flex justify-content-between"
+      class="col-12 d-flex py-3 px-4 d-flex justify-content-between"
     >
       <div class="col-4 px-1">
         <p-dropdown
@@ -62,18 +73,19 @@
         />
       </div>
     </div>
-    <form [formGroup]="formFilter">
+
+      <form *ngIf="newEqp" [formGroup]="formFilter">
       <div
         formArrayName="answers"
         *ngFor="let pg of answersCommand; let i = index"
-        class="col-12 d-flex py-3 d-flex justify-content-start"
+        class="py-3 px-4 d-flex"
       >
         <div
           [formGroupName]="i"
-          class="col-4 px-1"
+          class="col-6 px-1"
           *ngIf="pg.typeQuestion != 'switch'"
         >
-          <span>{{ pg.description }}:</span>
+          <span>{{ pg.description }}: </span>
           <input
             class="feg-input w-full"
             id="float-input"
@@ -82,31 +94,24 @@
             pInputText
           />
         </div>
-      </div>
 
-      <div class="col-12 d-flex py-3 d-flex justify-content-start">
         <div
-          class="col-4 px-1"
-          formArrayName="answers"
-          *ngFor="let pg of answersCommand; let i = index"
+          [formGroupName]="i"
+          *ngIf="pg.typeQuestion == 'switch'"
+          class="col-3"
         >
-          <div [formGroupName]="i">
-            <span *ngIf="pg.typeQuestion == 'switch'"
-              >{{ pg.description }}:</span
-            >
-            <p-inputSwitch
-              *ngIf="pg.typeQuestion == 'switch'"
-              styleClass="d-flex"
-              [trueValue]="1"
-              formControlName="answer"
-              [falseValue]="0"
-            ></p-inputSwitch>
-          </div>
+          <span class="me-2">{{ pg.description }}:</span>
+          <p-inputSwitch
+            styleClass="ps-3 d-flex"
+            [trueValue]="1"
+            formControlName="answer"
+            [falseValue]="0"
+          ></p-inputSwitch>
         </div>
       </div>
     </form>
 
-    <div class="col-12 d-flex py-3 d-flex justify-content-end" *ngIf="btnAv">
+    <div class="col-12 d-flex py-3 d-flex justify-content-end" *ngIf="btnAv && newEqp">
       <p-button
         styleClass="w-full"
         label="Salvar Equipamento"
