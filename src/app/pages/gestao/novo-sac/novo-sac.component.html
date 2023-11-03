@@ -1,0 +1,19 @@
+<div class="box-page box-aba-form">
+  <div class="box-content-aba">
+    <div abaform class="col-12">
+      <div class="row py-3">
+        <feg-cliente-usina (onSave)="nextStep($event)"></feg-cliente-usina>
+      </div>
+
+      <div class="row py-3" *ngIf="stepTwo">
+        <feg-tipo-atendimento
+          (onSave)="nextStep($event)"
+        ></feg-tipo-atendimento>
+      </div>
+
+      <div class="row py-3">
+        <feg-novo-equipamento [projectData]="AllData" *ngIf="stepThree"></feg-novo-equipamento>
+      </div>
+    </div>
+  </div>
+</div>
