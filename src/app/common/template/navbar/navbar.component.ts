@@ -33,6 +33,6 @@ export class NavbarComponent implements OnInit {
 
 
   novoSac = () => {
-    this.router.navigate(["novo-sac"]);
+    this.router.navigate(["sac/new"]);
   };
 }

@@ -1,8 +1,8 @@
-<div class="box-page box-aba-form">
+<div class="box-page box-aba-form mb-5">
   <div class="box-content-aba">
     <div abaform class="col-12">
       <div class="row py-3">
-        <feg-cliente-usina (onSave)="nextStep($event)"></feg-cliente-usina>
+        <feg-cliente-usina [form]="getFormChild('customer')" (onSave)="nextStep($event)"></feg-cliente-usina>
       </div>
 
       <div class="row py-3" *ngIf="stepTwo">

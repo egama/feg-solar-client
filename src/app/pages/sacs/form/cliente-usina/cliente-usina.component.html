@@ -1,7 +1,5 @@
 <div class="container-fluid">
-  <div
-    class="card-novo-sac justify-content-around px-5 py-3"
-  >
+  <div class="card-novo-sac justify-content-around">
     <div class="row">
       <div class="col-6">
         <div class="d-flex flex-column">
@@ -14,7 +12,7 @@
               placeholder="Selecione o Cliente"
               appendTo="body"
               styleClass="col-4 ms-3"
-              [options]="customers"
+              [options]="optionsCustomers"
               [(ngModel)]="customer"
               optionLabel="corporateName"
               (onChange)="getAllProjetos()"
@@ -36,7 +34,7 @@
               appendTo="body"
               styleClass="col-5 ms-3"
               optionLabel="nickname"
-              [options]="factorys"
+              [options]="optionsProjects"
               [(ngModel)]="factory"
             ></p-dropdown>
           </div>
@@ -45,17 +43,23 @@
 
       <div class="col-1">
         <div class="d-flex justify-content-end" *ngIf="nextStep">
-          <div class="rounded-circle border-1 cursor-pointer feg-border-color-primary" (click)="nextStep = !nextStep">
-            <i class="p-2 pi pi-pencil d-flex justify-content-end feg-color-primary "></i>
+          <div
+            class="rounded-circle border-1 cursor-pointer feg-border-color-primary"
+            (click)="nextStep = !nextStep"
+          >
+            <i
+              class="p-2 pi pi-pencil d-flex justify-content-end feg-color-primary"
+            ></i>
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="factory">
+      <div class="row">
         <div class="d-flex justify-content-end">
           <p-button
-            *ngIf="!nextStep"
+            *ngIf="page == 'edit'"
             styleClass="w-full"
             label="Avançar"
+            [disabled]="!form.valid"
             (onClick)="avancar()"
           ></p-button>
         </div>
