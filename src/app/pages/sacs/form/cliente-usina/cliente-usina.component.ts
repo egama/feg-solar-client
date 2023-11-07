@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ClientesController } from 'src/app/core/controllers/clientes/clientes.controller';
 import { ProjetosController } from 'src/app/core/controllers/projetos/projetos.controller';
 
@@ -14,27 +19,43 @@ export class ClienteUsinaComponent implements OnInit {
 
   constructor(
     private clientesController: ClientesController,
-    private projetosController: ProjetosController
+    private projetosController: ProjetosController,
+    private fb: FormBuilder
   ) {}
 
   optionsCustomers: any[] = [];
   optionsProjects: any[] = [];
+  selectedCustomer: any;
+  selectedFactory: any;
+  selectedCustomerId: any;
+  isEditing: boolean = true;
+  public registerForm!: FormGroup;
 
   page: 'view' | 'edit' = 'edit';
 
-  stepOne: boolean = false; //remover
   customer: any; //reover
   factory: any; //remover
 
-  nextStep: boolean = false; //remover
 
   ngOnInit() {
     this.getAllClientes();
+    this.initForm();
+  }
 
-    console.log(this.form);
+  initForm = () => {
+    this.registerForm = this.fb.group({
+      idCustomer: [null, [Validators.required]],
+      idProject: [null, [Validators.required]],
+    });
+  };
+
+  onCustomerClear() {
+    this.registerForm.controls['idProject'].reset();
+    this.selectedFactory = null;
   }
 
   getAllClientes = () => {
+    debugger;
     this.clientesController.getAll().subscribe({
       next: (resp: any) => {
         this.optionsCustomers = resp.data.map((m: any) => m.customer);
@@ -42,8 +63,26 @@ export class ClienteUsinaComponent implements OnInit {
     });
   };
 
+  editar = () => {
+    this.isEditing = true;
+    this.registerForm.controls['idCustomer'].enable();
+    this.registerForm.controls['idProject'].enable();
+  };
+
+  selectedClien: any;
+  onCustomerSelect(event: any) {
+    this.selectedCustomer = event;
+    this.selectedCustomerId = event.id;
+    this.getAllProjetos();
+  }
+
+  onFactorySelected(event: any) {
+    this.selectedFactory = event;
+  }
+
   getAllProjetos = () => {
-    this.projetosController.getByCustomer(this.customer.id).subscribe({
+    debugger;
+    this.projetosController.getByCustomer(this.selectedCustomerId).subscribe({
       next: (resp) => {
         this.optionsProjects = resp.data.map((m: any) => m.project);
       },
@@ -55,7 +94,9 @@ export class ClienteUsinaComponent implements OnInit {
       customer: this.customer,
       factory: this.factory,
     };
-    this.nextStep = true;
+    this.isEditing = false;
+    this.registerForm.controls['idCustomer'].disable();
+    this.registerForm.controls['idProject'].disable();
     this.onSave.emit(data);
   };
 }

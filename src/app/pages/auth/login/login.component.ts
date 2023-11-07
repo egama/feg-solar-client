@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
             }
           },
           complete: () => {
-            this.router.navigate(["gestao"]);
+            this.router.navigate(["sac"]);
           },
         });
     }

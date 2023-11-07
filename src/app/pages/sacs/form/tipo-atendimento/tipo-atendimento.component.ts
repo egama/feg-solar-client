@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: "feg-tipo-atendimento",
@@ -7,8 +8,13 @@ import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 export class TipoAtendimentoComponent implements OnInit {
   @Output() onSave = new EventEmitter();
   constructor(
+    private fb: FormBuilder
   ) { }
   nextStep: boolean = false;
+  public registerForm!: FormGroup;
+  tipoAt: any;
+
+  page: 'view' | 'edit' = 'edit';
 
   opTipoAten = [
     {
@@ -23,16 +29,28 @@ export class TipoAtendimentoComponent implements OnInit {
     }
   ];
 
-  tipoAt: any;
   ngOnInit() {
+    this.initForm();
   }
-
+  initForm = () => {
+    this.registerForm = this.fb.group({
+      tipoAt: [null, [Validators.required]],
+    });
+  };
+  
+  editar = () => {
+    this.nextStep = true;
+    this.registerForm.controls['tipoAt'].enable();
+    this.nextStep = false;
+  };
 
   avancar = () => {
+    debugger
     let tipoAtend = {
-     tipo: this.tipoAt
+      tipo: this.registerForm.controls['tipoAt'].value
     }
     this.nextStep = true
+    this.registerForm.controls['tipoAt'].disable();
     this.onSave.emit(tipoAtend);
   }
 

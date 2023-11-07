@@ -22,6 +22,7 @@ export class EquipamentoComponent implements OnInit {
 
   ) { }
 
+  public registerForm!: FormGroup
   nextStep: boolean = false;
   tipoEqps: any[] = [];
   tipoEqp: any;
@@ -46,6 +47,12 @@ export class EquipamentoComponent implements OnInit {
     this.getEquips()
   }
 
+  initForm = () => {
+    this.registerForm = this.fb.group({
+      
+    })
+  }
+
   formFilter!: UntypedFormGroup;
   createFilterForm = () => {
     this.formFilter = this.fb.group({
@@ -65,8 +72,9 @@ export class EquipamentoComponent implements OnInit {
   }
 
   getEqpById = (data: any) => {
+    debugger
     this.projetosEquipamentosController
-      .getByProjetoId(this.projectData.factory.id)
+      .getByProjetoId(this.projectData.tipo.id)
       .subscribe({
         next: (resp: any) => {
           this.eqps = resp.data;
@@ -91,7 +99,7 @@ export class EquipamentoComponent implements OnInit {
 
   getEquips = () => {
     this.projetosEquipamentosController
-      .getByProjetoId(this.projectData.factory.id)
+      .getByProjetoId(this.projectData.tipo.id)
       .subscribe({
         next: (resp: any) => {
           this.allEquips = resp.data;
