@@ -9,24 +9,14 @@ export class TipoAtendimentoComponent implements OnInit {
   @Output() onSave = new EventEmitter();
   constructor(
     private fb: FormBuilder
-  ) { }
-  nextStep: boolean = false;
+  ) {}
   public registerForm!: FormGroup;
   tipoAt: any;
-
   page: 'view' | 'edit' = 'edit';
 
   opTipoAten = [
-    {
-      id: 1,
-      name: 'RMA',
-      value: 'rma'
-    },
-    {
-      id: 2,
-      name: 'Suporte Técnico',
-      value: 'ste'
-    }
+    {id: 1, name: 'RMA', value: 'rma'},
+    {id: 2, name: 'Suporte Técnico', value: 'ste'}
   ];
 
   ngOnInit() {
@@ -39,19 +29,14 @@ export class TipoAtendimentoComponent implements OnInit {
   };
   
   editar = () => {
-    this.nextStep = true;
+    this.page = 'edit';
     this.registerForm.controls['tipoAt'].enable();
-    this.nextStep = false;
   };
 
   avancar = () => {
-    debugger
-    let tipoAtend = {
-      tipo: this.registerForm.controls['tipoAt'].value
-    }
-    this.nextStep = true
+    let tipoAtend = {tipo: this.registerForm.controls['tipoAt'].value}
+    this.page = 'view';
     this.registerForm.controls['tipoAt'].disable();
     this.onSave.emit(tipoAtend);
   }
-
 }

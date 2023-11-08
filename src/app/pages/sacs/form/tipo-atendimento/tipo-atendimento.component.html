@@ -1,47 +1,41 @@
 <form class="py-3" autocomplete="off" [formGroup]="registerForm">
-<div class="container-fluid">
-  <div class="card-novo-sac justify-content-around">
-    <div class="row">
-      <div class="col-11 justify-content-start">
-        <label class="ps-3 pt-1 d-flex flex-column"
-          >Tipo Atendimento:</label
-        >
-        <p-dropdown
-          placeholder="Selecione o Atendimento"
-          appendTo="body"
-          styleClass="col-4 ms-3"
-          [options]="opTipoAten"
-          formControlName="tipoAt"
-          optionLabel="name"
-          [disabled]="nextStep"
-        ></p-dropdown>
-      </div>
+  <div class="container-fluid">
+    <div class="card-novo-sac justify-content-around">
+      <div class="row">
+        <div class="col-11 justify-content-start">
+          <label class="ps-3 pt-1 d-flex flex-column">Tipo Atendimento:</label>
+          <p-dropdown
+            placeholder="Selecione o Atendimento"
+            appendTo="body"
+            styleClass="col-4 ms-3"
+            [options]="opTipoAten"
+            formControlName="tipoAt"
+            optionLabel="name">
+          </p-dropdown>
+        </div>
 
-      <div class="col-1">
-        <div class="d-flex justify-content-start" *ngIf="nextStep">
-          <div
-            class="rounded-circle border-1 cursor-pointer feg-border-color-primary"
-            (click)="editar()"
-          >
-            <i
-              class="p-2 pi pi-pencil d-flex justify-content-end feg-color-primary"
-            ></i>
+        <div class="col-1">
+          <div class="d-flex justify-content-start" *ngIf="page == 'view'">
+            <div 
+              class="rounded-circle border-1 cursor-pointer feg-border-color-primary"
+              (click)="editar()">
+              <i class="p-2 pi pi-pencil d-flex justify-content-end feg-color-primary"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="d-flex justify-content-end">
+            <p-button
+              *ngIf="page == 'edit'"
+              styleClass="w-full"
+              label="Avançar"
+              [disabled]="!registerForm.valid"
+              (onClick)="avancar()">
+            </p-button>
           </div>
         </div>
       </div>
-
-    <div class="row">
-      <div class="d-flex justify-content-end">
-        <p-button
-          *ngIf="page == 'edit'"
-          styleClass="w-full"
-          label="Avançar"
-          [disabled]="!registerForm.valid"
-          (onClick)="avancar()"
-        ></p-button>
-      </div>
     </div>
   </div>
-  </div>
-</div>
 </form>

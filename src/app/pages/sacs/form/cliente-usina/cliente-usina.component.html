@@ -1,69 +1,65 @@
-<form class="py-3" autocomplete="off" [formGroup]="registerForm">
+<form class="py-3" autocomplete="off" [formGroup]="form">
   <div class="container-fluid">
     <div class="card-novo-sac justify-content-around">
       <div class="row">
         <div class="col-6">
           <div class="d-flex flex-column">
-            <label class="ps-3 pt-1"
-              >Cliente:</label
-            >
+            <label class="ps-3 pt-1">Cliente:</label>
             <div>
               <p-dropdown
                 [showClear]="true"
-                [disabled]="!isEditing"
                 placeholder="Selecione o Cliente"
                 appendTo="body"
+                formControlName="customerId"
                 styleClass="col-4 ms-3"
+                optionValue="id"
                 [options]="optionsCustomers"
-                formControlName="idCustomer"
                 optionLabel="corporateName"
                 (onChange)="onCustomerSelect($event.value)"
-                (onClear)="onCustomerClear()"
-              ></p-dropdown>
+                (onClear)="onCustomerClear()">
+              </p-dropdown>
             </div>
           </div>
         </div>
 
         <div class="col-5">
           <div class="d-flex flex-column">
-            <label class="ps-3 pt-1"
-              >Usina:</label
-            >
+            <label class="ps-3 pt-1">Usina:</label>
 
             <div>
               <p-dropdown
+                [showClear]="true"
                 placeholder="Selecione a Usina"
                 appendTo="body"
+                formControlName="projectsId"
+                optionValue="id"
                 styleClass="col-5 ms-3"
                 optionLabel="nickname"
                 [options]="optionsProjects"
-                formControlName="idProject"
-                (onChange)="onFactorySelected($event.value)"
-              ></p-dropdown>
+                (onChange)="onFactorySelected($event.value)">
+              </p-dropdown>
             </div>
           </div>
         </div>
 
         <div class="col-1">
-          <div class="d-flex justify-content-start" *ngIf="!isEditing">
-            <div
-              class="rounded-circle border-1 cursor-pointer feg-border-color-primary mt-4"
-              (click)="editar()">
+          <div class="d-flex justify-content-start" *ngIf="page == 'view'">
+            <div class="rounded-circle border-1 cursor-pointer feg-border-color-primary mt-4" (click)="editar()">
               <i class="p-2 pi pi-pencil d-flex justify-content-end feg-color-primary"></i>
             </div>
           </div>
         </div>
 
         <div class="d-flex col-6 flex-column mt-2">
-          <label class="ps-3 col-md-6 pt-1" *ngIf="selectedCustomer"><strong>CNPJ do Cliente:<br /> </strong> {{ selectedCustomer?.cnpj }}</label>
-          <label class="ps-3 col-md-6 pt-1" *ngIf="selectedCustomer"><strong>Inscrição Estadual do Cliente:<br /> </strong>{{ selectedCustomer?.ie }}</label>
+          <label class="ps-3 col-md-6 pt-1" *ngIf="selectedCustomer"><strong>CNPJ do Cliente:<br /> </strong>{{ selectedCustomer?.cnpj }}</label>
+          <label class="ps-3 col-md-6 pt-1" *ngIf="selectedCustomer"><strong>IE do Cliente:<br /> </strong>{{ selectedCustomer?.ie }}</label>
         </div>
 
         <div class="d-flex col-5 flex-column mt-2">
           <label class="ps-3 pt-1 col-md-6" *ngIf="selectedFactory"><strong>CNPJ da Usina:<br /> </strong>{{ selectedFactory?.document }}</label>
-          <label class="ps-3 pt-1 col-md-6" *ngIf="selectedFactory"><strong>Inscrição Estadual da Usina:<br /> </strong>{{ selectedFactory?.ie }}</label>
+          <label class="ps-3 pt-1 col-md-6" *ngIf="selectedFactory"><strong>IE da Usina:<br /> </strong>{{ selectedFactory?.ie }}</label>
+          <label class="ps-3 pt-1 col-md-6" *ngIf="selectedFactory"><strong>Endereço da Usina:<br /> </strong>{{ selectedFactory?.address }}, {{selectedFactory?.addressNumber}} - {{selectedFactory?.addressCity}}</label>
         </div>
-
 
         <div class="row">
           <div class="d-flex justify-content-end">
@@ -71,9 +67,9 @@
               *ngIf="page == 'edit'"
               styleClass="w-full"
               label="Avançar"
-              [disabled]="!registerForm.valid"
-              (onClick)="avancar()"
-            ></p-button>
+              [disabled]="!form.valid"
+              (onClick)="avancar()">
+            </p-button>
           </div>
         </div>
       </div>
