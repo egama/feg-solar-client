@@ -64,7 +64,6 @@ export class ClienteUsinaComponent implements OnInit {
   };
 
   avancar = () => {
-    debugger
     this.page = 'view';
     this.form.controls['customerId'].disable();
     this.form.controls['projectsId'].disable();
