@@ -3,7 +3,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { TranslateService } from "@ngx-translate/core";
 import { AccessService } from "src/app/core/services/access.service";
 import { MenuService } from "src/app/core/services/menu.service";
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "feg-navbar",
@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
   }
 
   backHome() {
-    this.router.navigate(["home"]);
+    this.router.navigate(["sac"]);
   }
 
 

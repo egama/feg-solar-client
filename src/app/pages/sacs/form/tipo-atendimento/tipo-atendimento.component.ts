@@ -1,16 +1,14 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { FormGroup } from "@angular/forms";
 
 @Component({
   selector: "feg-tipo-atendimento",
   templateUrl: "./tipo-atendimento.component.html",
 })
 export class TipoAtendimentoComponent implements OnInit {
+  @Input() form!: any;
   @Output() onSave = new EventEmitter();
-  constructor(
-    private fb: FormBuilder
-  ) {}
-  public registerForm!: FormGroup;
+  constructor() {}
   tipoAt: any;
   page: 'view' | 'edit' = 'edit';
 
@@ -19,24 +17,17 @@ export class TipoAtendimentoComponent implements OnInit {
     {id: 2, name: 'Suporte Técnico', value: 'ste'}
   ];
 
-  ngOnInit() {
-    this.initForm();
-  }
-  initForm = () => {
-    this.registerForm = this.fb.group({
-      tipoAt: [null, [Validators.required]],
-    });
-  };
+  ngOnInit() {}
   
   editar = () => {
     this.page = 'edit';
-    this.registerForm.controls['tipoAt'].enable();
+    this.form.controls['atttId'].enable();
   };
 
   avancar = () => {
-    let tipoAtend = {tipo: this.registerForm.controls['tipoAt'].value}
+    let tipoAtend = {tipo: this.form.controls['atttId'].value}
     this.page = 'view';
-    this.registerForm.controls['tipoAt'].disable();
+    this.form.controls['atttId'].disable();
     this.onSave.emit(tipoAtend);
   }
 }

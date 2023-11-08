@@ -8,6 +8,7 @@
       <div class="row py-3" *ngIf="stepTwo">
         <feg-tipo-atendimento
           (onSave)="nextStep($event)"
+          [form]="getFormAttendance('attendance')"
         ></feg-tipo-atendimento>
       </div>
 

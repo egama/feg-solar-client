@@ -1,4 +1,4 @@
-<form class="py-3" autocomplete="off" [formGroup]="registerForm">
+<form class="py-3" autocomplete="off" [formGroup]="form">
   <div class="container-fluid">
     <div class="card-novo-sac justify-content-around">
       <div class="row">
@@ -9,7 +9,7 @@
             appendTo="body"
             styleClass="col-4 ms-3"
             [options]="opTipoAten"
-            formControlName="tipoAt"
+            formControlName="atttId"
             optionLabel="name">
           </p-dropdown>
         </div>
@@ -30,7 +30,7 @@
               *ngIf="page == 'edit'"
               styleClass="w-full"
               label="Avançar"
-              [disabled]="!registerForm.valid"
+              [disabled]="!form.valid"
               (onClick)="avancar()">
             </p-button>
           </div>

@@ -25,6 +25,9 @@ export class FormComponent implements OnInit {
   getFormChild = (name: string) => {
     return this.form.controls[name];
   };
+  getFormAttendance = (name: string) => {
+    return this.form.controls[name];
+  };
 
   stepOne: boolean = false;
   AllData: any;
