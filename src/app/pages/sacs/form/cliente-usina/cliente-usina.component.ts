@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ClientesController } from 'src/app/core/controllers/clientes/clientes.controller';
 import { ProjetosController } from 'src/app/core/controllers/projetos/projetos.controller';
+import { StepScreen } from '../form.types';
 
 @Component({
   selector: 'feg-cliente-usina',
@@ -9,16 +10,19 @@ import { ProjetosController } from 'src/app/core/controllers/projetos/projetos.c
 export class ClienteUsinaComponent implements OnInit {
   @Input() form!: any;
   @Output() onSave = new EventEmitter();
+  @Input() allData!: any;
+  @Output() onEditInProgress = new EventEmitter();
 
   constructor(
     private clientesController: ClientesController,
-    private projetosController: ProjetosController,
+    private projetosController: ProjetosController
   ) {}
 
   optionsCustomers: any[] = [];
   optionsProjects: any[] = [];
   selectedCustomer: any;
   selectedFactory: any;
+  oldVersion: any = null;
 
   page: 'view' | 'edit' = 'edit';
 
@@ -28,6 +32,8 @@ export class ClienteUsinaComponent implements OnInit {
 
   onCustomerClear() {
     this.form.controls['projectsId'].reset();
+    this.form.controls['customerId'].reset();
+    this.selectedCustomer = null;
     this.selectedFactory = null;
   }
 
@@ -40,15 +46,30 @@ export class ClienteUsinaComponent implements OnInit {
   };
 
   editar = () => {
+    debugger
     this.page = 'edit';
-    this.form.controls['customerId'].enable();
-    this.form.controls['projectsId'].enable();
+    this.enableField(true);
+    this.oldVersion = this.form.value;
+    this.onEditInProgress.emit({ step: StepScreen.CLIENTE });
+  };
+
+  enableField = (value: boolean) => {
+    if (value) {
+      this.form.controls['customerId'].enable();
+      this.form.controls['projectsId'].enable();
+    } else {
+      this.form.controls['customerId'].disable();
+      this.form.controls['projectsId'].disable();
+    }
   };
 
   onCustomerSelect(event: any) {
-    this.selectedCustomer = this.optionsCustomers.find((x: any) => x.id == event);
-    this.getAllProjetos();
-    console.log(this.selectedCustomer)
+    if (event) {
+      this.selectedCustomer = this.optionsCustomers.find(
+        (x: any) => x.id == event
+      );
+      this.getAllProjetos();
+    }
   }
 
   onFactorySelected(event: any) {
@@ -64,9 +85,17 @@ export class ClienteUsinaComponent implements OnInit {
   };
 
   avancar = () => {
+    debugger;
     this.page = 'view';
-    this.form.controls['customerId'].disable();
-    this.form.controls['projectsId'].disable();
-    this.onSave.emit(this.form);
+    this.oldVersion == null ? this.oldVersion = this.form.value : ''
+    let equal: boolean = false;
+    this.oldVersion === this.form.value ? equal = !equal : ''
+    this.enableField(false);
+      this.onSave.emit({
+        old: this.oldVersion,
+        data: this.form.value,
+        step: StepScreen.CLIENTE,
+        equal: equal
+      });
   };
 }

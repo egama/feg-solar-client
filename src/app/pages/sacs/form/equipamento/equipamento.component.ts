@@ -10,66 +10,109 @@ import { ProjetosEquipamentosController } from 'src/app/core/controllers/projeto
 import { TiposEquipamentosController } from 'src/app/core/controllers/tipos-equipamentos/tipos-equipmentos.controller';
 import { TiposEquipamentosPerguntasController } from 'src/app/core/controllers/tipos-equipametos-pergutas/tipos-equipametos-pergutas.controller';
 import { EquipamentosController } from 'src/app/core/controllers/equipamentos/equipamentos.controller';
-
+import { StepScreen } from '../form.types';
+import { SacsController } from 'src/app/core/controllers/sacs/sacs.controller';
+import { MessageService } from 'src/app/core/services/messageService';
+import { Router } from '@angular/router';
 @Component({
   selector: 'feg-novo-equipamento',
   templateUrl: './equipamento.component.html',
 })
 export class EquipamentoComponent implements OnInit {
+  /** Variables */
+  optionsTipoEquipamentos: any[] = [];
+  optionsEquipamentos: any[] = [];
+  optionsAwnser: any[] = [];
+  allEquips: any[] = [];
+  newEquips: any[] = [];
+  answer: any[] = [];
+  finalizar: boolean = false;
+
+  /** Input & Output * ViewChild */
+  @Input() form!: any;
+  @Input() projectId!: any;
   @Output() onSave = new EventEmitter();
-  @Input() projectData: any;
 
   constructor(
     private fb: UntypedFormBuilder,
     private tiposEquipamentosController: TiposEquipamentosController,
     private projetosEquipamentosController: ProjetosEquipamentosController,
     private tiposEquipamentosPerguntasController: TiposEquipamentosPerguntasController,
-    private equipamentosController: EquipamentosController
+    private sacsController: SacsController,
+    private router: Router,
+    private messageService: MessageService
   ) {}
 
-  public registerForm!: FormGroup;
-  nextStep: boolean = false;
-  tipoEqps: any[] = [];
-  tipoEqp: any;
-  eqps: any[] = [];
-  allEquips: any[] = [];
-  eqp: any;
-  eqpText: string = '';
   optionDigit: boolean = false;
-  newEqp: boolean = false;
-  btnAv: boolean = false;
-  questions: any[] = [];
-  hardwares: any[] = [];
   answersCommand: any[] = [];
 
   ngOnInit() {
-    this.tiposEquipamentosController.getEquipamentos().subscribe({
-      next: (resp: any) => {
-        this.tipoEqps = resp.data;
-      },
-    });
-    this.createFilterForm();
-    this.initForm();
-    this.getEquips();
+    this.getAllEquipamentosAndSelectTipo(this.projectId);
+    this.getTiposEquipamentos();
+    debugger;
+    if (this.projectId.length > 2) {
+      if (this.projectId[2]) {
+        if (this.projectId[1].equal === false) {
+          this.form.controls['tipoEqp'].setValue(
+            this.projectId[2].data.tipoEqp
+          );
+          this.form.controls['eqp'].setValue(this.projectId[2].data.eqp);
+          
+          this.form.controls['answer'].setValue(this.projectId[2].data.answer);
+        } else {
+          this.form.controls['answer'].reset();
+        }
+      }
+    }
   }
 
-  initForm = () => {
-    this.registerForm = this.fb.group({
-      tipoEqp: [null, [Validators.required]],
-      eqp: [null, [Validators.required]],
-      eqpText: [null, [Validators.required]],
+  getTiposEquipamentos = () => {
+    this.tiposEquipamentosController.getEquipamentos().subscribe({
+      next: (resp: any) => {
+        this.optionsTipoEquipamentos = resp.data;
+        const selectedTipoEqp = this.form.value.tipoEqp;
+        if (selectedTipoEqp) {
+          this.getAllEquipamentosAndSelectTipo(selectedTipoEqp);
+        }
+      },
     });
   };
 
-  formFilter!: UntypedFormGroup;
-  createFilterForm = () => {
-    this.formFilter = this.fb.group({
-      answers: this.fb.array([]),
-    });
+  getAllEquipamentosAndSelectTipo = (selectedTipoEqp: any) => {
+    this.projetosEquipamentosController
+      .getByProjetoId(this.projectId[1].data.atttId.id)
+      .subscribe({
+        next: (resp: any) => {
+          this.allEquips = resp.data;
+          this.optionsEquipamentos = this.allEquips.filter(
+            (f: any) => f.hardwareModel.hardwareTypeId === selectedTipoEqp.id
+          );
+
+          let op = {
+            description: 'Digitar',
+            id: 0,
+          };
+          this.optionsEquipamentos.push(op);
+          this.selectTipo({ value: selectedTipoEqp });
+        },
+      });
   };
 
+  checkValue = () => {
+    debugger;
+    if (this.form.value.eqp.id == 0) {
+      this.optionDigit = true;
+      this.form.value.eqpText == '';
+    } else {
+      this.optionDigit = false;
+    }
+  };
+
+  deleteEqp(e: any) {
+    this.newEquips.splice(e, 1);
+  }
   get answerForm(): FormArray {
-    return this.formFilter.get('answers') as FormArray;
+    return this.form.get('answer') as FormArray;
   }
 
   newAnswer(desc: string): FormGroup {
@@ -79,101 +122,94 @@ export class EquipamentoComponent implements OnInit {
     });
   }
 
-  getEqpById = (data: any) => {
+  selectTipo = (e: any) => {
     debugger;
-    this.projetosEquipamentosController
-      .getByProjetoId(this.projectData.tipo.id)
-      .subscribe({
-        next: (resp: any) => {
-          this.eqps = resp.data;
-          this.eqps = this.eqps.filter(
-            (f: any) =>
-              f.hardwareModel.hardwareTypeId ==
-              this.registerForm.value.tipoEqp.id
-          );
-          let op = {
-            description: 'Digitar',
-            id: 0,
-          };
-          this.eqps.push(op);
-        },
-      });
-
-    this.tiposEquipamentosPerguntasController
-      .getByHardwareId(this.registerForm.value.tipoEqp.id)
-      .subscribe({
-        next: (resp: any) => {
-          this.answersCommand = resp.data;
-          this.answersCommand.map((m: any) => {
-            this.answerForm.push(this.newAnswer(m.description));
-          });
-        },
-      });
-  };
-
-  getEquips = () => {
-    this.projetosEquipamentosController
-      .getByProjetoId(this.projectData.tipo.id)
-      .subscribe({
-        next: (resp: any) => {
-          this.allEquips = resp.data;
-        },
-      });
-  };
-
-  deleteEqp = (e: any) => {
-    this.allEquips.splice(e, 1);
-  };
-
-  checkValue = () => {
-    debugger;
-    if (this.registerForm.value.eqp.id == 0) {
-      this.optionDigit = true;
-      this.registerForm.value.eqpText == '' ? '' : (this.btnAv = true);
-    } else {
-      this.optionDigit = false;
-      this.btnAv = true;
+    const selectedTipoEqp = this.form.value.tipoEqp;
+    if (selectedTipoEqp) {
+      this.optionsEquipamentos = this.allEquips.filter(
+        (f: any) => f.hardwareModel.hardwareTypeId === selectedTipoEqp.id
+      );
+      let op = {
+        description: 'Digitar',
+        id: 0,
+      };
+      this.optionsEquipamentos.push(op);
+      this.tiposEquipamentosPerguntasController
+        .getByHardwareId(this.form.value.tipoEqp.id)
+        .subscribe({
+          next: (resp: any) => {
+            this.answersCommand = resp.data;
+            this.answersCommand.map((x: any) => {
+              this.answerForm.push(this.newAnswer(x.description));
+            });
+          },
+        });
+      const eqpDropdown = document.getElementById('eqp');
+      if (eqpDropdown) {
+        eqpDropdown.dispatchEvent(new Event('change'));
+      }
     }
   };
 
-  changeAnswer = (pg: any, resp: any, i: number) => {
-    let answer = {
-      description: pg.description,
-      awnser: resp.checked == 1 ? 1 : 0,
-    };
-    this.formFilter.value.answerSwitch.push(answer); //aqui!!
-  };
-
+  resetForm() {
+    this.form.controls['tipoEqp'].reset();
+    this.form.controls['eqp'].reset();
+    this.form.controls['eqpText'].reset();
+    this.form.controls['answer'].reset();
+  }
   avancar = () => {
     debugger;
-    this.formFilter.value;
-    this.eqpText;
+    const dirty = this.form.value;
+    this.form.value.eqpText;
+    let allAnswers = this.form.value.answer.map((item: any) => item.answer);
     let newData = {
-      description: this.eqpText
-        ? this.eqpText
-        : this.registerForm.value.eqp.description,
+      answer: allAnswers,
+      description: this.form.value.eqpText
+        ? this.form.value.eqpText
+        : this.form.value.eqp.description,
       hardwareModel: {
-        hardwareType: {
-          name: this.registerForm.value.tipoEqp.name,
-        },
+        hardwareType: { name: this.form.value.tipoEqp.name },
       },
     };
-    debugger;
-    this.allEquips.push(newData);
-    this.newEqp = !this.newEqp;
-    // let data = {
-    //   projectsCompanyId: this.eqp.projectsCompanyId,
-    //   type: this.projectData.tipo.value,
-    //   hardwares: {
-    //     hardwareProjectId: this.eqp.id,
-    //     hardwareTypeId: this.tipoEqp.id,
-    //     hardwareModelId: this.eqp.hardwareModelId,
-    //     hardwareProjectCode: this.eqp.projectsCompanyId,
-    //     respostas: {
+    this.newEquips.push(newData);
+    console.log(this.projectId);
+    this.onSave.emit({
+      data: this.form.value,
+      step: StepScreen.EQUIPAMENTOS,
+    });
+    this.finalizar = true;
+    this.resetForm();
+    let equipamentoData = { newData, step: 3 };
+  };
 
-    //     }
-    //   }
-    // }
-    // this.onSave.emit();
+  finalizarSac = () => {
+    debugger;
+    const finalData = this.projectId;
+    const dadosParaEnviar = {
+      projectsCompanyId: finalData[0].data.customerId,
+      type: finalData[1].data.atttId.value.toLowerCase(),
+      hardwares: [
+        {
+          hardwareProjectId: finalData[2].data.eqp.id,
+          hardwareTypeId:
+            finalData[2].data.eqp.hardwareModel === 0
+              ? finalData[2].data.eqp.hardwareModel.hardwareTypeId
+              : null,
+          hardwareModelId: finalData[2].data.eqp.hardwareModelId,
+          hardwareProjectCode: finalData[2].data.eqp.code,
+          respostas: finalData[2].data.answer.map((item: any) => ({
+            description: item.description,
+            awnser: item.answer,
+          })),
+        },
+      ],
+    };
+    this.sacsController.save(dadosParaEnviar).subscribe({
+      next: async (resp) => {
+        this.messageService.success('Sucesso', 'Sac criado com sucesso!');
+        this.router.navigate(['sac']);
+      },
+      complete: () => {},
+    });
   };
 }

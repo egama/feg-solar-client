@@ -1,29 +1,15 @@
 <div class="container-fluid">
-  <div class="card-novo-sac justify-content-around  {{ nextStep ? 'disable-cards' : '' }}">
-    <form class="py-3" autocomplete="off" [formGroup]="registerForm">
-      <label class="ps-4" *ngIf="allEquips.length > 0">{{
-        allEquips.length > 0 ? "Equipamentos:" : "Não há equipamentos cadastrados nessa usina"}}</label>
-      <div class="col-12 justify-content-start mb-4" *ngFor="let eqp of allEquips; let i = index">
+  <div class="card-novo-sac justify-content-around ">
+    <form class="py-3" autocomplete="off" [formGroup]="form">
+      <label class="ps-4" >{{newEquips.length > 0 ? "Equipamentos:" : "Cadastre o equipamento"}}</label>
+      <div class="col-12 justify-content-start mb-4" *ngFor="let eqp of newEquips; let i = index">
         <div class="card-novo-sac p-4">
-          <label>{{ eqp.hardwareModel.hardwareType.name }} -
-            <span
-              >{{ eqp.description }}
-              <i (click)="deleteEqp(i)"
-                class="ms-2 p-2 rounded-circle border-1 cursor-pointer feg-border-color-primary pi pi-trash feg-color-red"></i></span
-          ></label>
+          <label>{{ eqp.hardwareModel.hardwareType.name }} - <span>{{ eqp.description }}<i
+                (click)="deleteEqp($event)" class="ms-2 p-2 rounded-circle border-1 cursor-pointer feg-border-color-primary pi pi-trash feg-color-red"></i></span></label>
         </div>
         <p-divider></p-divider>
       </div>
-
-      <div class="col-12 d-flex py-3 d-flex justify-content-end" *ngIf="!newEqp">
-        <p-button
-          styleClass="w-full"
-          label="Novo Equipamento"
-          (onClick)="newEqp = !newEqp"
-        ></p-button>
-      </div>
-
-      <div *ngIf="newEqp" class="col-12 d-flex py-3 px-4 d-flex justify-content-between">
+      <div  class="col-12 d-flex d-flex justify-content-between">
         <div class="col-4 px-1">
           <p-dropdown
             placeholder="Selecione o tipo do equipamento"
@@ -31,20 +17,19 @@
             styleClass="w-full"
             optionLabel="name"
             formControlName="tipoEqp"
-            [options]="tipoEqps"
-            (onChange)="getEqpById($event)"
-          ></p-dropdown>
+            
+            [options]="optionsTipoEquipamentos"
+            (onChange)="selectTipo($event)"></p-dropdown>
         </div>
         <div class="col-4 px-1">
           <p-dropdown
             placeholder="Selecione o equipamento"
             appendTo="body"
             styleClass="w-full"
-            [options]="eqps"
+            [options]="optionsEquipamentos"
             formControlName="eqp"
             optionLabel="description"
-            (onChange)="checkValue()"
-          ></p-dropdown>
+            (onChange)="checkValue()"></p-dropdown>
         </div>
         <div class="col-4 px-1">
           <input
@@ -59,38 +44,56 @@
         </div>
       </div>
     </form>
+    <form  [formGroup]="form">
+      <div formArrayName="answer" *ngFor="let pg of answersCommand; let i = index" class="row py-3 px-4 d-flex col-12">
+        <div [formGroupName]="i" *ngIf="pg.typeQuestion == 'textarea'" class="col-6 px-1">
+          <label for="float-input">pergunta texto:</label>
+          <textarea
+            rows="5"
+            cols="70"
+            [disabled]="true"
+            formControlName="answer"
+            pInputTextarea
+            class="w-full"
+            inputStyleClass="w-full"></textarea>
+        </div>
 
-    <form *ngIf="newEqp" [formGroup]="formFilter">
-      <div formArrayName="answers" *ngFor="let pg of answersCommand; let i = index" class="py-3 px-4 d-flex">
-        <div [formGroupName]="i" class="col-6 px-1" *ngIf="pg.typeQuestion != 'switch'">
-          <span>{{ pg.description }}: </span>
+        <div [formGroupName]="i" *ngIf="pg.typeQuestion == 'switch'"class="col-3">
+          <span class="me-2">Pergunta swit:</span>
+          <p-inputSwitch
+            styleClass="ps-3 d-flex"
+            [trueValue]="1"
+            formControlName="answer"
+            [falseValue]="0"></p-inputSwitch>
+        </div>
+        <div [formGroupName]="i" class="col-6" *ngIf="pg.typeQuestion == 'text'">
+          <span>Pergunta normal: </span>
           <input
             class="feg-input w-full"
             id="float-input"
             type="text"
             formControlName="answer"
-            pInputText
-          />
-        </div>
-
-        <div [formGroupName]="i" *ngIf="pg.typeQuestion == 'switch'" class="col-3">
-          <span class="me-2">{{ pg.description }}:</span>
-          <p-inputSwitch
-            styleClass="ps-3 d-flex"
-            [trueValue]="1"
-            formControlName="answer"
-            [falseValue]="0"
-          ></p-inputSwitch>
+            pInputText/>
         </div>
       </div>
     </form>
-
-    <div class="col-12 d-flex py-3 d-flex justify-content-end" *ngIf="btnAv && newEqp">
+    <div class="row">
+      <div class="col-10"></div>
+    <div class="col-2 d-flex py-3 d-flex justify-content-start">
       <p-button
         styleClass="w-full"
         label="Salvar Equipamento"
         (onClick)="avancar()">
       </p-button>
     </div>
+  </div>
+  </div>
+  <div class="col-12 d-flex py-3 d-flex justify-content-end">
+    <p-button
+      *ngIf="finalizar"
+      styleClass="w-full"
+      label="Finalizar Sac"
+      (onClick)="finalizarSac()">
+    </p-button>
   </div>
 </div>

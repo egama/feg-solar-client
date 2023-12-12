@@ -10,6 +10,7 @@ import { ClienteUsinaComponent } from './form/cliente-usina/cliente-usina.compon
 import { EquipamentoComponent } from './form/equipamento/equipamento.component';
 import { TipoAtendimentoComponent } from './form/tipo-atendimento/tipo-atendimento.component';
 import { FormComponent } from './form/form.component';
+import { VisualizarSacComponent } from './view/visualizar-chamado-sac.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FormComponent } from './form/form.component';
     EquipamentoComponent,
     TipoAtendimentoComponent,
     FormComponent,
+    VisualizarSacComponent,
   ],
   imports: [
     FormsModule,

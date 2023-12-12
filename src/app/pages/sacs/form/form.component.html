@@ -2,18 +2,29 @@
   <div class="box-content-aba">
     <div abaform class="col-12">
       <div class="row py-3">
-        <feg-cliente-usina [form]="getFormChild('customer')" (onSave)="nextStep($event)"></feg-cliente-usina>
+        <feg-cliente-usina
+          [form]="getFormChild('customer')"
+          [allData]="allData"
+          (onSave)="nextStep($event)"
+          (onEditInProgress)="onEditInProgress($event)"
+        ></feg-cliente-usina>
       </div>
 
-      <div class="row py-3" *ngIf="stepTwo">
+      <div class="row py-3" *ngIf="stepAtual >= 2">
         <feg-tipo-atendimento
           (onSave)="nextStep($event)"
+          [allData]="allData"
+          [tipoAtendimentoData]="tipoAtendimentoData"
           [form]="getFormAttendance('attendance')"
         ></feg-tipo-atendimento>
       </div>
 
-      <div class="row py-3">
-        <feg-novo-equipamento [projectData]="AllData" *ngIf="stepThree"></feg-novo-equipamento>
+      <div class="row py-3" *ngIf="stepAtual >= 3">
+        <feg-novo-equipamento
+          [projectId]="allData"
+          (onSave)="nextStep($event)"
+          [form]="getFormHardware('hardwareProjects')"
+        ></feg-novo-equipamento>
       </div>
     </div>
   </div>

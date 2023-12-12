@@ -25,7 +25,6 @@
         <div class="col-5">
           <div class="d-flex flex-column">
             <label class="ps-3 pt-1">Usina:</label>
-
             <div>
               <p-dropdown
                 [showClear]="true"
@@ -51,14 +50,18 @@
         </div>
 
         <div class="d-flex col-6 flex-column mt-2">
-          <label class="ps-3 col-md-6 pt-1" *ngIf="selectedCustomer"><strong>CNPJ do Cliente:<br /> </strong>{{ selectedCustomer?.cnpj }}</label>
-          <label class="ps-3 col-md-6 pt-1" *ngIf="selectedCustomer"><strong>IE do Cliente:<br /> </strong>{{ selectedCustomer?.ie }}</label>
+          <ng-container *ngIf="selectedCustomer">
+            <label class="ps-3 col-md-6 pt-1" ><strong>CNPJ do Cliente:<br /> </strong>{{ selectedCustomer?.cnpj }}</label>
+            <label class="ps-3 col-md-6 pt-1" ><strong>IE do Cliente:<br /> </strong>{{ selectedCustomer?.ie }}</label>
+          </ng-container>
         </div>
 
         <div class="d-flex col-5 flex-column mt-2">
-          <label class="ps-3 pt-1 col-md-6" *ngIf="selectedFactory"><strong>CNPJ da Usina:<br /> </strong>{{ selectedFactory?.document }}</label>
-          <label class="ps-3 pt-1 col-md-6" *ngIf="selectedFactory"><strong>IE da Usina:<br /> </strong>{{ selectedFactory?.ie }}</label>
-          <label class="ps-3 pt-1 col-md-6" *ngIf="selectedFactory"><strong>Endereço da Usina:<br /> </strong>{{ selectedFactory?.address }}, {{selectedFactory?.addressNumber}} - {{selectedFactory?.addressCity}}</label>
+          <ng-container *ngIf="selectedFactory">
+            <label class="ps-3 pt-1 col-md-6"><strong>CNPJ da Usina:<br /> </strong>{{ selectedFactory?.document }}</label>
+            <label class="ps-3 pt-1 col-md-6"><strong>IE da Usina:<br /> </strong>{{ selectedFactory?.ie }}</label>
+            <label class="ps-3 pt-1 col-md-6"><strong>Endereço da Usina:<br /> </strong>{{ selectedFactory?.address }}, {{selectedFactory?.addressNumber}} - {{selectedFactory?.addressCity}}</label>
+          </ng-container>
         </div>
 
         <div class="row">
