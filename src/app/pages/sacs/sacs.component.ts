@@ -1,22 +1,29 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { SacsController } from 'src/app/core/controllers/sacs/sacs.controller';
 import { Router } from '@angular/router';
-
+import { AbaFormService } from 'src/app/core/services/aba-form.service';
 
 @Component({
   selector: 'app-sacs',
   templateUrl: './sacs.component.html',
 })
 export class SacsComponent implements OnInit {
-  @ViewChild("cgc") cgc: any;
+  @ViewChild('cgc') cgc: any;
   data: any[] = [];
-  sacSelected: any = null
+  sacSelected: any = null;
   menuSelecao: any;
 
   constructor(
     private sacsController: SacsController,
     private router: Router,
-    ) {}
+    public abaFormService: AbaFormService
+  ) {}
 
   ngOnInit(): void {
     this.getSacs();
@@ -28,38 +35,29 @@ export class SacsComponent implements OnInit {
         label: `Ver Histórico`,
         command: () => {
           this.cgc.hide();
-          this.router.navigate([`sac/view/${data.Sac.id}`]);
+          debugger;
+          this.abaFormService.setParams({ id: data.id });
+          this.router.navigate([`sac/view/${data.id}`]);
         },
       },
     ];
-
     this.menuSelecao = {
       data,
       menuItem,
     };
-
     this.cgc.toggle(event);
   };
-
-  // verSac = (data: any) => {
-  //   debugger
-  //     this.router.navigate([`sac/view/${data.Sac.id}`]);
-  
-  // };
 
   getSacs = () => {
     this.sacsController.getById().subscribe({
       next: (resp) => {
         if (Array.isArray(resp)) {
           this.data = resp;
-          this.sacSelected = this.data
-          console.log(this.data)
+          this.sacSelected = this.data;
         } else {
           this.data = [resp];
-          this.sacSelected = this.data
-          console.log(this.data)
+          this.sacSelected = this.data;
         }
-        console.log(this.data)
       },
       complete: () => {},
     });

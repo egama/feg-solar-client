@@ -1,156 +1,110 @@
-<form class="py-3" autocomplete="off" [formGroup]="form">
-    <div class="container-fluid box-page">
-      <div class="card-novo-sac justify-content-around">
-        <div class="row">
-          <div class="col-6">
-            <div class="d-flex flex-column">
-              <label class="ps-3 pt-1">Cliente:</label>
-              <div>
-                <p-dropdown
-                  placeholder="Selecione o Cliente"
-                  appendTo="body"
-                  formControlName="customerId"
-                  styleClass="col-4 ms-3"
-                  optionValue="id"
-                  [disabled]="true"
-                  [options]="optionsCustomers"
-                  optionLabel="corporateName">
-                </p-dropdown>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-5">
-            <div class="d-flex flex-column">
-              <label class="ps-3 pt-1">Usina:</label>
-              <div>
-                <p-dropdown
-                  placeholder="Selecione a Usina"
-                  appendTo="body"
-                  formControlName="projectsId"
-                  optionValue="id"
-                  styleClass="col-5 ms-3"
-                  optionLabel="nickname"
-                  [disabled]="true"
-                  [options]="optionsProjects">
-                </p-dropdown>
-              </div>
-            </div>
-          </div>
-  
-          <div class="d-flex col-6 flex-column mt-2">
-            <ng-container>
-              <label class="ps-3 col-md-6 pt-1" ><strong>CNPJ do Cliente:<br /> </strong>{{ selectedCustomer?.cnpj }}</label>
-              <label class="ps-3 col-md-6 pt-1" ><strong>IE do Cliente:<br /> </strong>{{ selectedCustomer?.ie }}</label>
-            </ng-container>
-          </div>
-  
-          <div class="d-flex col-5 flex-column mt-2">
-            <ng-container>
-              <label class="ps-3 pt-1 col-md-6"><strong>CNPJ da Usina:<br /> </strong>{{ selectedFactory?.document }}</label>
-              <label class="ps-3 pt-1 col-md-6"><strong>IE da Usina:<br /> </strong>{{ selectedFactory?.ie }}</label>
-              <label class="ps-3 pt-1 col-md-6"><strong>Endereço da Usina:<br /> </strong>{{ selectedFactory?.address }}, {{selectedFactory?.addressNumber}} - {{selectedFactory?.addressCity}}</label>
-            </ng-container>
-          </div>
-        </div>
-          <div class="row">
-            <div class="col-11 justify-content-start">
-              <label class="ps-3 pt-1 d-flex flex-column">Tipo Atendimento:</label>
-              <p-dropdown
-                placeholder="Selecione o Atendimento"
-                appendTo="body"
-                [disabled]="true"
-                styleClass="col-4 ms-3"
-                formControlName="atttId"
-                optionLabel="name">
-              </p-dropdown>
-            </div>
+<div class="container-fluid box-page mb-5">
+  <div class="card-novo-sac justify-content-around py-3">
+    <div class="row mt-4">
+      <div class="col-6">
+        <div class="d-flex flex-column">
+          <label class="ps-3 pt-1"><strong>Cliente:</strong></label>
+          <div class="ps-3 pt-1">
+            <p>{{ data?.data?.projectsCompany?.customerCompany?.customer?.corporateName }}</p>
           </div>
         </div>
       </div>
 
-
-      <!-- <div class="container-fluid">
-        <div class="card-novo-sac justify-content-around ">
-            <label class="ps-4" >{{newEquips.length > 0 ? "Equipamentos:" : "Cadastre o equipamento"}}</label>
-            <div class="col-12 justify-content-start mb-4" *ngFor="let eqp of newEquips; let i = index">
-              <div class="card-novo-sac p-4">
-                <label>{{ eqp.hardwareModel.hardwareType.name }} - <span>{{ eqp.description }}<i
-                      (click)="deleteEqp($event)" class="ms-2 p-2 rounded-circle border-1 cursor-pointer feg-border-color-primary pi pi-trash feg-color-red"></i></span></label>
-              </div>
-              <p-divider></p-divider>
-            </div>
-            <div  class="col-12 d-flex d-flex justify-content-between">
-              <div class="col-4 px-1">
-                <p-dropdown
-                  placeholder="Selecione o tipo do equipamento"
-                  appendTo="body"
-                  styleClass="w-full"
-                  optionLabel="name"
-                  formControlName="tipoEqp"
-                  
-                  [options]="optionsTipoEquipamentos"
-                  (onChange)="selectTipo($event)"></p-dropdown>
-              </div>
-              <div class="col-4 px-1">
-                <p-dropdown
-                  placeholder="Selecione o equipamento"
-                  appendTo="body"
-                  styleClass="w-full"
-                  [options]="optionsEquipamentos"
-                  formControlName="eqp"
-                  optionLabel="description"
-                  (onChange)="checkValue()"></p-dropdown>
-              </div>
-              <div class="col-4 px-1">
-                <input
-                  *ngIf="optionDigit"
-                  class="feg-input w-full"
-                  id="float-input"
-                  formControlName="eqpText"
-                  (blur)="checkValue()"
-                  type="text"
-                  pInputText
-                />
-              </div>
-            </div>
-            <div
-            formArrayName="answer" *ngFor="let pg of answersCommand; let i = index"
-              class="row py-3 px-4 d-flex col-12">
-              <div [formGroupName]="i" *ngIf="pg.typeQuestion == 'textarea'" class="col-6 px-1">
-                <label for="float-input">pergunta texto:</label>
-                <textarea
-                  rows="5"
-                  cols="70"
-                  [disabled]="true"
-                  formControlName="answer"
-                  pInputTextarea
-                  class="w-full"
-                  inputStyleClass="w-full"></textarea>
-              </div>
-      
-              <div [formGroupName]="i" *ngIf="pg.typeQuestion == 'switch'"class="col-3">
-                <span class="me-2">Pergunta swit:</span>
-                <p-inputSwitch
-                  styleClass="ps-3 d-flex"
-                  [trueValue]="1"
-                  formControlName="answer"
-                  [falseValue]="0"></p-inputSwitch>
-              </div>
-              <div [formGroupName]="i" class="col-6" *ngIf="pg.typeQuestion == 'text'">
-                <span>Pergunta normal: </span>
-                <input
-                  class="feg-input w-full"
-                  id="float-input"
-                  type="text"
-                  formControlName="answer"
-                  pInputText/>
-              </div>
-            </div>
+      <div class="col-5">
+        <div class="d-flex flex-column">
+          <label class="ps-3 pt-1"><strong>Usina:</strong></label>
+          <div class="ps-3 pt-1">
+            <p>{{ data?.data?.projectsCompany?.project?.nickname }}</p>
+          </div>
         </div>
-      </div> -->
-      
+      </div>
 
+      <div class="d-flex col-6 flex-column mt-2">
+        <ng-container>
+          <label class="ps-3 col-md-6 pt-1"><strong>CNPJ do Cliente:<br /></strong>{{ data?.data?.projectsCompany?.customerCompany?.customer?.cnpj }}</label>
+          <label class="ps-3 col-md-6 pt-1"><strong>IE do Cliente:<br /></strong>{{ data?.data?.projectsCompany?.customerCompany?.customer?.ie }}</label>
+        </ng-container>
+      </div>
 
-  </form>
-  
+      <div class="d-flex col-5 flex-column mt-2">
+        <ng-container>
+          <label class="ps-3 pt-1 col-md-6"><strong>CNPJ da Usina:<br /></strong>{{ data?.data?.projectsCompany?.project?.document }}</label>
+          <label class="ps-3 pt-1 col-md-6"><strong>IE da Usina:<br /> </strong>{{ data?.data?.projectsCompany?.project?.ie }}</label>
+          <label class="ps-3 pt-1 col-md-6"><strong>Endereço da Usina:<br /> </strong>{{ data?.data?.projectsCompany?.project?.address }},
+            {{ data?.data?.projectsCompany?.project?.addressNumber }} -
+            {{ data?.data?.projectsCompany?.project?.addressCity }}</label
+          >
+        </ng-container>
+      </div>
+
+      <p-divider></p-divider>
+    </div>
+    <div class="row mt-4">
+      <div class="col-11 justify-content-start mb-3">
+        <label class="ps-3 pt-1 d-flex flex-column"
+          ><strong>Tipo Atendimento:</strong></label
+        >
+        <div class="ps-3 pt-1">
+          <p>{{ data?.data?.type }}</p>
+        </div>
+      </div>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="col-12 d-flex d-flex justify-content-between mt-4">
+      <div class="col-4 px-1 mt-4 mb-3">
+        <label class="ps-3 pt-1 d-flex flex-column"
+          ><strong>Tipo de equipamento:</strong></label
+        >
+        <div class="ps-3 pt-1">
+          <p>
+            {{ data?.data?.SacHardwares[0]?.HardwareProjects?.description }}
+          </p>
+        </div>
+      </div>
+      <div class="col-4 px-1 mt-4 mb-3">
+        <label class="ps-3 pt-1 d-flex flex-column"><strong>Equipamento:</strong></label>
+        <div class="ps-3 pt-1">
+          <p>{{data?.data?.projectsCompany?.HardwareProjects[0]?.hardwareModel?.hardwareType?.name}}</p>
+        </div>
+      </div>
+      <div class="col-4 px-1 mt-4 mb-3">
+        <div *ngIf="data?.data?.projectsCompany?.HardwareProjects[0]?.hardwareModel?.hardwareType?.digitar" class="ps-3 pt-1">
+          <p></p>
+        </div>
+      </div>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="row py-3 px-4 d-flex col-12">
+      <div class="col-12 px-1 ps-3 pt-1">
+        <p><strong>Comentários:</strong></p>
+      </div>
+
+      <div class="col-12 px-1 ps-3 pt-1 mt-2 ml-20">
+        <label for="float-input"><strong>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[1]?.description }}:</strong></label>
+        <p>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[1]?.awnser }}</p>
+      </div>
+
+      <div class="col-12 ps-3 pt-1 mt-2 ml-20">
+        <span class="me-2"><strong>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[0]?.description}}:</strong></span>
+        <p>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[0]?.awnser  != 1 ? "Não" : "Sim"}}</p>
+      </div>
+
+      <div class="col-12 ps-3 pt-1 mt-2 ml-20">
+        <span><strong>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[2]?.description }}:</strong></span>
+        <p>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[2]?.awnser }}</p>
+      </div>
+    </div>
+
+    <div class="col-12 d-flex py-3 d-flex justify-content-end">
+      <p-button
+        styleClass="w-full"
+        label="Voltar"
+        (onClick)="voltar()">
+      </p-button>
+    </div>
+  </div>
+</div>

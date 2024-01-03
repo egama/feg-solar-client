@@ -32,8 +32,8 @@ export class FormComponent implements OnInit {
         atttId: [null, [Validators.required]],
       }),
       hardwareProjects: this.fb.group({
-        tipoEqp: [null, [Validators.required]],
-        eqp: [null, [Validators.required]],
+        tipoEqp: [[null], [Validators.required]],
+        eqp: [[null], [Validators.required]],
         eqpText: [null, [Validators.required]],
         answer: this.fb.array([]),
       }),

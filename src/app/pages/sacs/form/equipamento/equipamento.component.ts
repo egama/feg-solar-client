@@ -25,7 +25,7 @@ export class EquipamentoComponent implements OnInit {
   optionsAwnser: any[] = [];
   allEquips: any[] = [];
   newEquips: any[] = [];
-  answer: any[] = [];
+  hardwares: any[] = [];
   finalizar: boolean = false;
 
   /** Input & Output * ViewChild */
@@ -57,8 +57,11 @@ export class EquipamentoComponent implements OnInit {
             this.projectId[2].data.tipoEqp
           );
           this.form.controls['eqp'].setValue(this.projectId[2].data.eqp);
-          
-          this.form.controls['answer'].setValue(this.projectId[2].data.answer);
+          if (this.projectId[2].data.answer) {
+            this.form.controls['answer'].setValue(
+              this.projectId[2].data.answer
+            );
+          }
         } else {
           this.form.controls['answer'].reset();
         }
@@ -111,6 +114,7 @@ export class EquipamentoComponent implements OnInit {
   deleteEqp(e: any) {
     this.newEquips.splice(e, 1);
   }
+
   get answerForm(): FormArray {
     return this.form.get('answer') as FormArray;
   }
@@ -118,7 +122,7 @@ export class EquipamentoComponent implements OnInit {
   newAnswer(desc: string): FormGroup {
     return this.fb.group({
       description: [desc],
-      answer: [null, Validators.required],
+      answer: ["", Validators.required],
     });
   }
 
@@ -157,53 +161,49 @@ export class EquipamentoComponent implements OnInit {
     this.form.controls['eqpText'].reset();
     this.form.controls['answer'].reset();
   }
+
   avancar = () => {
     debugger;
-    const dirty = this.form.value;
     this.form.value.eqpText;
-    let allAnswers = this.form.value.answer.map((item: any) => item.answer);
+    let allAnswers = this.form.value.answer.map((item: any) => {
+      return {
+        description: item.description,
+        awnser: item.answer,
+      }
+    });
     let newData = {
       answer: allAnswers,
       description: this.form.value.eqpText
         ? this.form.value.eqpText
         : this.form.value.eqp.description,
-      hardwareModel: {
-        hardwareType: { name: this.form.value.tipoEqp.name },
-      },
+      hardwareTypeId: this.form.value.tipoEqp.companiesId,
+      typeEquipament: this.form.value.tipoEqp.name,
+      equipament: this.form.value.eqp.description,
+      hardwareProjectId: this.form.value.eqp.id,
+      hardwareModelId: this.form.value.eqp.hardwareModelId,
+      code: this.form.value.eqp.code,
     };
-    this.newEquips.push(newData);
-    console.log(this.projectId);
+    this.newEquips = [...this.newEquips, { ...newData }];
+
     this.onSave.emit({
-      data: this.form.value,
+      data: this.newEquips,
       step: StepScreen.EQUIPAMENTOS,
     });
     this.finalizar = true;
     this.resetForm();
-    let equipamentoData = { newData, step: 3 };
   };
 
   finalizarSac = () => {
     debugger;
     const finalData = this.projectId;
+    const hardwaresData = (this.projectId[2] = [this.projectId[2]]) ;
+
     const dadosParaEnviar = {
       projectsCompanyId: finalData[0].data.customerId,
       type: finalData[1].data.atttId.value.toLowerCase(),
-      hardwares: [
-        {
-          hardwareProjectId: finalData[2].data.eqp.id,
-          hardwareTypeId:
-            finalData[2].data.eqp.hardwareModel === 0
-              ? finalData[2].data.eqp.hardwareModel.hardwareTypeId
-              : null,
-          hardwareModelId: finalData[2].data.eqp.hardwareModelId,
-          hardwareProjectCode: finalData[2].data.eqp.code,
-          respostas: finalData[2].data.answer.map((item: any) => ({
-            description: item.description,
-            awnser: item.answer,
-          })),
-        },
-      ],
+      hardwares: hardwaresData,
     };
+
     this.sacsController.save(dadosParaEnviar).subscribe({
       next: async (resp) => {
         this.messageService.success('Sucesso', 'Sac criado com sucesso!');

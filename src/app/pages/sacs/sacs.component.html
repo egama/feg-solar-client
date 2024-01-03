@@ -3,24 +3,24 @@
     <div class="box-content ca-par" *ngFor="let dataItem of item.data">
       <div class="row">
         <div class="col-md-4 mb-3">
-          <p>Chamado: {{ dataItem?.Sac?.id }}</p>
+          <p>Chamado: {{ dataItem?.id }}</p>
         </div>
         <div class="col-md-4 mb-3">
-          <p>Cliente: {{ dataItem?.HardwareProjects?.description }}</p>
+          <p>Cliente: {{ dataItem?.projectsCompany?.project?.nickname }}</p>
         </div>
         <div class="col-md-3 mb-3">
-          <p>Status: {{ dataItem?.Status?.name }}</p>
+          <p>Status: {{ dataItem?.SacHardwares[0]?.Status?.name }}</p>
         </div>
         <div class="col-md-1"></div>
         
         <div class="col-md-4">
-          <p>Código: {{ dataItem?.HardwareProjects?.code }}</p>
+          <p>Código: {{ dataItem?.projectsCompany?.project?.code }}</p>
         </div>
         <div class="col-md-4">
           <p>Usina: Usina de Teste</p>
         </div>
         <div class="col-md-3">
-          <p>Tipo: {{ dataItem?.Sac?.type }}</p>
+          <p>Tipo: {{ dataItem?.type }}</p>
         </div>
         <div class="col-md-1 d-flex align-self-center">
           <button

@@ -4,7 +4,7 @@
       <label class="ps-4" >{{newEquips.length > 0 ? "Equipamentos:" : "Cadastre o equipamento"}}</label>
       <div class="col-12 justify-content-start mb-4" *ngFor="let eqp of newEquips; let i = index">
         <div class="card-novo-sac p-4">
-          <label>{{ eqp.hardwareModel.hardwareType.name }} - <span>{{ eqp.description }}<i
+          <label>{{ eqp.typeEquipament }} - <span>{{ eqp.description }}<i
                 (click)="deleteEqp($event)" class="ms-2 p-2 rounded-circle border-1 cursor-pointer feg-border-color-primary pi pi-trash feg-color-red"></i></span></label>
         </div>
         <p-divider></p-divider>
@@ -47,7 +47,7 @@
     <form  [formGroup]="form">
       <div formArrayName="answer" *ngFor="let pg of answersCommand; let i = index" class="row py-3 px-4 d-flex col-12">
         <div [formGroupName]="i" *ngIf="pg.typeQuestion == 'textarea'" class="col-6 px-1">
-          <label for="float-input">pergunta texto:</label>
+          <label for="float-input">{{pg.description}}:</label>
           <textarea
             rows="5"
             cols="70"
@@ -59,15 +59,16 @@
         </div>
 
         <div [formGroupName]="i" *ngIf="pg.typeQuestion == 'switch'"class="col-3">
-          <span class="me-2">Pergunta swit:</span>
+          <span class="me-2">{{pg.description}}:</span>
           <p-inputSwitch
             styleClass="ps-3 d-flex"
             [trueValue]="1"
+            [falseValue]="2"
             formControlName="answer"
-            [falseValue]="0"></p-inputSwitch>
+            ></p-inputSwitch>
         </div>
         <div [formGroupName]="i" class="col-6" *ngIf="pg.typeQuestion == 'text'">
-          <span>Pergunta normal: </span>
+          <span>{{pg.description}}: </span>
           <input
             class="feg-input w-full"
             id="float-input"
