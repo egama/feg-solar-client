@@ -32,8 +32,8 @@
           <label class="ps-3 pt-1 col-md-6"><strong>IE da Usina:<br /> </strong>{{ data?.data?.projectsCompany?.project?.ie }}</label>
           <label class="ps-3 pt-1 col-md-6"><strong>Endereço da Usina:<br /> </strong>{{ data?.data?.projectsCompany?.project?.address }},
             {{ data?.data?.projectsCompany?.project?.addressNumber }} -
-            {{ data?.data?.projectsCompany?.project?.addressCity }}</label
-          >
+            {{ data?.data?.projectsCompany?.project?.addressCity }}
+          </label>
         </ng-container>
       </div>
 
@@ -82,22 +82,31 @@
       <div class="col-12 px-1 ps-3 pt-1">
         <p><strong>Comentários:</strong></p>
       </div>
+    
+      <ng-container *ngIf="data?.data?.SacHardwares[0]?.SacHardwaresQuestion && data?.data?.SacHardwares[0]?.SacHardwaresQuestion.length > 0; else semComentarios">
+        <div class="col-12 px-1 ps-3 pt-1 mt-2 ml-20">
+          <label for="float-input"><strong>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[1]?.description }}:</strong></label>
+          <p>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[1]?.awnser }}</p>
+        </div>
+    
+        <div class="col-12 ps-3 pt-1 mt-2 ml-20">
+          <span class="me-2"><strong>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[0]?.description}}:</strong></span>
+          <p>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[0]?.awnser == 1 ? "Sim" : "Não"}}</p>
+        </div>
+    
+        <div class="col-12 ps-3 pt-1 mt-2 ml-20">
+          <span><strong>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[2]?.description }}:</strong></span>
+          <p>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[2]?.awnser }}</p>
+        </div>
+      </ng-container>
 
-      <div class="col-12 px-1 ps-3 pt-1 mt-2 ml-20">
-        <label for="float-input"><strong>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[1]?.description }}:</strong></label>
-        <p>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[1]?.awnser }}</p>
-      </div>
-
-      <div class="col-12 ps-3 pt-1 mt-2 ml-20">
-        <span class="me-2"><strong>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[0]?.description}}:</strong></span>
-        <p>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[0]?.awnser  != 1 ? "Não" : "Sim"}}</p>
-      </div>
-
-      <div class="col-12 ps-3 pt-1 mt-2 ml-20">
-        <span><strong>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[2]?.description }}:</strong></span>
-        <p>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[2]?.awnser }}</p>
-      </div>
+      <ng-template #semComentarios>
+        <div class="col-12 ps-3 pt-1 mt-2 ml-20">
+          <p><strong>Sem comentários</strong></p>
+        </div>
+      </ng-template>
     </div>
+    
 
     <div class="col-12 d-flex py-3 d-flex justify-content-end">
       <p-button

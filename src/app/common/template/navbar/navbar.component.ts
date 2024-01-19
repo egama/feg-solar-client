@@ -31,8 +31,4 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(["sac"]);
   }
 
-
-  novoSac = () => {
-    this.router.navigate(["sac/new"]);
-  };
 }

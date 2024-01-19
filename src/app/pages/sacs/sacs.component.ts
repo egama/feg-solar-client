@@ -8,6 +8,7 @@ import {
 import { SacsController } from 'src/app/core/controllers/sacs/sacs.controller';
 import { Router } from '@angular/router';
 import { AbaFormService } from 'src/app/core/services/aba-form.service';
+import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
 
 @Component({
   selector: 'app-sacs',
@@ -18,18 +19,37 @@ export class SacsComponent implements OnInit {
   data: any[] = [];
   sacSelected: any = null;
   menuSelecao: any;
+  formFilter!: UntypedFormGroup;
 
   constructor(
-    private sacsController: SacsController,
     private router: Router,
-    public abaFormService: AbaFormService
+    private fb: UntypedFormBuilder,
+    public abaFormService: AbaFormService,
+    private sacsController: SacsController,
   ) {}
 
   ngOnInit(): void {
     this.getSacs();
+    this.createFilterForm();
   }
+  
+  createFilterForm = () => {
+    this.formFilter = this.fb.group({
+      search: [""],
+    });
+  };
+
+  search = (tb1: any) => {
+    tb1.filterGlobal(this.formFilter.value.search, "contains");
+  };
+
+  novo = async () => {
+    
+    this.router.navigate(["sac/new"]);
+  };
 
   createMenuItem = async (event: any, data: any) => {
+    debugger
     const menuItem = [
       {
         label: `Ver Histórico`,
@@ -51,13 +71,7 @@ export class SacsComponent implements OnInit {
   getSacs = () => {
     this.sacsController.getById().subscribe({
       next: (resp) => {
-        if (Array.isArray(resp)) {
-          this.data = resp;
-          this.sacSelected = this.data;
-        } else {
-          this.data = [resp];
-          this.sacSelected = this.data;
-        }
+        this.data = resp.data
       },
       complete: () => {},
     });

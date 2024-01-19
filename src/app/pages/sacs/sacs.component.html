@@ -1,4 +1,4 @@
-<div class="box-page mb-5">
+<!-- <div class="box-page mb-5">
   <div *ngFor="let item of data">
     <div class="box-content ca-par" *ngFor="let dataItem of item.data">
       <div class="row">
@@ -32,6 +32,81 @@
             class="p-button-rounded p-button-secondary p-button-outlined"
           ></button>
         </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="box-page mb-5">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 mt-4">
+        <form [formGroup]="formFilter">
+          <div class="row mb-2">
+            <div class="col-12 col-md-4">
+              <span class="p-input-icon-right w-full">
+                <i class="pi pi-search"></i>
+                <input
+                  pInputText
+                  type="text"
+                  class="w-full"
+                  pInputText
+                  (input)="search(tb1)"
+                  formControlName="search"
+                />
+              </span>
+            </div>
+            <div class="col-12 col-md-5"></div>
+            <div class="col-12 col-md-3">
+              <p-button
+                (onClick)="novo()"
+                label="{{ 'Adicionar' | translate }}"
+                styleClass="col-12"
+              ></p-button>
+            </div>
+          </div>
+        </form>
+
+        <p-table
+          #tb1
+          [value]="data"
+          [paginator]="true"
+          [rows]="20"
+          [tableStyle]="{ 'min-width': '50rem' }"
+          [globalFilterFields]="['name', 'status']"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 10rem"># {{ "Chamados" | translate }}</th>
+              <th>{{ "Cliente" | translate }}</th>
+              <th>{{ "Código" | translate }}</th>
+              <th>{{ "Usina" | translate }}</th>
+              <th>{{ "Tipo" | translate }}</th>
+              <th>{{ "Status" | translate }}</th>
+              <th style="width: 10rem"></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-data>
+            <tr>
+              <td>{{ data.id }}</td>
+              <td>{{ data?.projectsCompany?.project?.nickname }}</td>
+              <td>{{ data?.projectsCompany?.project?.code }}</td>
+              <td>{{ "Usina de teste " }}</td>
+              <td>{{ data?.type }}</td>
+              <td>{{ data?.SacHardwares[0]?.Status?.name }}</td>
+              <td style="text-align: center">
+                <button
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="pi pi-ellipsis-v"
+                  class="p-button-rounded p-button-secondary p-button-outlined me-3"
+                  (click)="createMenuItem($event, data)"
+                ></button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
       </div>
     </div>
   </div>

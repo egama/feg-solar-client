@@ -183,7 +183,7 @@ export class EquipamentoComponent implements OnInit {
       hardwareModelId: this.form.value.eqp.hardwareModelId,
       code: this.form.value.eqp.code,
     };
-    this.newEquips = [...this.newEquips, { ...newData }];
+    this.newEquips.push(newData);
 
     this.onSave.emit({
       data: this.newEquips,
