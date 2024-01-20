@@ -77,3 +77,9 @@ export const ENUM_CURRENCY = {
   BRL: "BRL",
   USD: "USD",
 };
+
+export const ENUM_MENU_APPLICATION = {
+  WEB: 1,
+  APP_COMMISSIONING: 2,
+  APP_SELLER: 3,
+};

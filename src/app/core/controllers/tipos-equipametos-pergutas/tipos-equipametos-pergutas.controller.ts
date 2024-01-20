@@ -7,8 +7,8 @@ export class TiposEquipamentosPerguntasController {
   constructor(private api: ApiFegItService) {}
   private prefix = "/hardware-type-question";
 
-  getAll = (applcation: number): Observable<any> => {
-    return this.api.get(`${this.prefix}/${applcation}/all`);
+  getAll = (applcation: number, hardwareTypeId: number): Observable<any> => {
+    return this.api.get(`${this.prefix}/${applcation}/all/${hardwareTypeId}`);
   };
 
   getById = (id: number): Observable<any> => {

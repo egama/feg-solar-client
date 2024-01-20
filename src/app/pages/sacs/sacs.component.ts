@@ -55,7 +55,7 @@ export class SacsComponent implements OnInit {
         label: `Ver Histórico`,
         command: () => {
           this.cgc.hide();
-          debugger;
+          
           this.abaFormService.setParams({ id: data.id });
           this.router.navigate([`sac/view/${data.id}`]);
         },

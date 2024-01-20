@@ -15,7 +15,6 @@ export class FormComponent implements OnInit {
   constructor(private fb: UntypedFormBuilder) {}
 
   form!: UntypedFormGroup;
-  allData: any[] = [];
   stepAtual: number = 1;
 
   ngOnInit() {
@@ -47,13 +46,6 @@ export class FormComponent implements OnInit {
   getFormChild = (name: string) => {
     return this.form.controls[name];
   };
-  getFormAttendance = (name: string) => {
-    return this.form.controls[name];
-  };
-
-  getFormHardware = (name: string) => {
-    return this.form.controls[name];
-  };
 
   onEditInProgress = (data: any) => {
     this.stepAtual = data.step;
@@ -62,20 +54,20 @@ export class FormComponent implements OnInit {
   tipoAtendimentoData: any[] = [];
 
   nextStep = (data: any) => {
-    if (data.step == 1 && !data.equal) {
-      this.allData[0] = data;
-    } else {
-      this.allData.push(data);
-    }
-    if (data.step == 2 && !data.equal) {
-      this.allData[1] = data;
-    }
-    if (data.step == 3 && !data.equal) {
-      this.allData[2] = data;
-    }
     this.stepAtual = data.step + 1;
     if (this.stepAtual <= (StepScreen.EQUIPAMENTOS as number) && data.dirty) {
       // this.form.controls['hardwareProjects'].setValue([]);
     }
+  };
+
+  allEquips: any[] = [];
+  addEquipamentos = (e: any) => {
+    this.allEquips = e.data;
+  };
+
+  enviar = () => {
+    this.form;
+    this.allEquips;
+    debugger;
   };
 }

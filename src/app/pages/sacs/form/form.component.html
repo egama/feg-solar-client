@@ -4,7 +4,6 @@
       <div class="row py-3">
         <feg-cliente-usina
           [form]="getFormChild('customer')"
-          [allData]="allData"
           (onSave)="nextStep($event)"
           (onEditInProgress)="onEditInProgress($event)"
         ></feg-cliente-usina>
@@ -13,18 +12,21 @@
       <div class="row py-3" *ngIf="stepAtual >= 2">
         <feg-tipo-atendimento
           (onSave)="nextStep($event)"
-          [allData]="allData"
-          [tipoAtendimentoData]="tipoAtendimentoData"
-          [form]="getFormAttendance('attendance')"
+          [form]="getFormChild('attendance')"
         ></feg-tipo-atendimento>
       </div>
 
       <div class="row py-3" *ngIf="stepAtual >= 3">
         <feg-novo-equipamento
-          [projectId]="allData"
-          (onSave)="nextStep($event)"
-          [form]="getFormHardware('hardwareProjects')"
+          (onAdd)="addEquipamentos($event)"
+          [projectId]="getFormChild('customer').value.projectsId"
+          [form]="getFormChild('hardwareProjects')"
         ></feg-novo-equipamento>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <p-button (onClick)="enviar()"> Enviar solicitação </p-button>
+        </div>
       </div>
     </div>
   </div>

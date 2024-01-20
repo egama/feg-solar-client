@@ -10,7 +10,6 @@ import { StepScreen } from '../form.types';
 export class ClienteUsinaComponent implements OnInit {
   @Input() form!: any;
   @Output() onSave = new EventEmitter();
-  @Input() allData!: any;
   @Output() onEditInProgress = new EventEmitter();
 
   constructor(
@@ -85,7 +84,7 @@ export class ClienteUsinaComponent implements OnInit {
   };
 
   avancar = () => {
-    debugger;
+    
     this.page = 'view';
     this.oldVersion == null ? this.oldVersion = this.form.value : ''
     let equal: boolean = false;

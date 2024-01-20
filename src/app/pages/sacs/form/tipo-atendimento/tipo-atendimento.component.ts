@@ -8,8 +8,9 @@ import { StepScreen } from '../form.types';
 })
 export class TipoAtendimentoComponent implements OnInit {
   @Input() form!: any;
-  @Input() allData!: any;
-  @Input() tipoAtendimentoData!: any;
+  // @Input() allData!: any;
+  // @Input() tipoAtendimentoData!: any;
+
   @Output() onSave = new EventEmitter();
   @Output() onEditInProgress = new EventEmitter();
 
@@ -22,17 +23,17 @@ export class TipoAtendimentoComponent implements OnInit {
 
   constructor() {}
   ngOnInit() {
-    debugger;
+    
     this.page = 'edit';
     this.oldVersion = this.form.value;
     this.enableField(true);
-    if (this.allData[0].data.customerId === this.allData[0].old.customerId) {
-      if (this.allData[1]) {
-        this.allData[0].equal == true
-          ? this.form.controls['atttId'].setValue(this.allData[1].data.atttId)
-          : this.form.controls['atttId'].setValue({});
-      }
-    } else {this.form.controls['atttId'].reset()}
+    // if (this.allData[0].data.customerId === this.allData[0].old.customerId) {
+    //   if (this.allData[1]) {
+    //     this.allData[0].equal == true
+    //       ? this.form.controls['atttId'].setValue(this.allData[1].data.atttId)
+    //       : this.form.controls['atttId'].setValue({});
+    //   }
+    // } else {this.form.controls['atttId'].reset()}
     
   }
 

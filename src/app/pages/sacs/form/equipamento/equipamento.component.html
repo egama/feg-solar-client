@@ -1,53 +1,76 @@
-<div class="container-fluid">
-  <div class="card-novo-sac justify-content-around ">
-    <form class="py-3" autocomplete="off" [formGroup]="form">
-      <label class="ps-4" >{{newEquips.length > 0 ? "Equipamentos:" : "Cadastre o equipamento"}}</label>
-      <div class="col-12 justify-content-start mb-4" *ngFor="let eqp of newEquips; let i = index">
-        <div class="card-novo-sac p-4">
-          <label>{{ eqp.typeEquipament }} - <span>{{ eqp.description }}<i
-                (click)="deleteEqp($event)" class="ms-2 p-2 rounded-circle border-1 cursor-pointer feg-border-color-primary pi pi-trash feg-color-red"></i></span></label>
-        </div>
-        <p-divider></p-divider>
-      </div>
-      <div  class="col-12 d-flex d-flex justify-content-between">
-        <div class="col-4 px-1">
-          <p-dropdown
-            placeholder="Selecione o tipo do equipamento"
-            appendTo="body"
-            styleClass="w-full"
-            optionLabel="name"
-            formControlName="tipoEqp"
-            
-            [options]="optionsTipoEquipamentos"
-            (onChange)="selectTipo($event)"></p-dropdown>
-        </div>
-        <div class="col-4 px-1">
-          <p-dropdown
-            placeholder="Selecione o equipamento"
-            appendTo="body"
-            styleClass="w-full"
-            [options]="optionsEquipamentos"
-            formControlName="eqp"
-            optionLabel="description"
-            (onChange)="checkValue()"></p-dropdown>
-        </div>
-        <div class="col-4 px-1">
-          <input
-            *ngIf="optionDigit"
-            class="feg-input w-full"
-            id="float-input"
-            formControlName="eqpText"
-            (blur)="checkValue()"
-            type="text"
-            pInputText
-          />
+<form [formGroup]="form">
+  <div class="container-fluid">
+    <div class="row" *ngIf="listEquipamentos.length > 0">
+      <div class="col-12">
+        <p>Equipamentos:</p>
+        <div
+          class="col-12 justify-content-start mb-4"
+          *ngFor="let eqp of listEquipamentos; let i = index"
+        >
+          <span>
+            <i
+              (click)="deleteEqp($event)"
+              class="me-2 feg-fs-14 p-1 rounded-circle border-1 cursor-pointer feg-border-color-red pi pi-trash feg-color-red"
+            >
+            </i>
+          </span>
+          <label>{{ eqp.description }}</label>
         </div>
       </div>
-    </form>
-    <form  [formGroup]="form">
-      <div formArrayName="answer" *ngFor="let pg of answersCommand; let i = index" class="row py-3 px-4 d-flex col-12">
-        <div [formGroupName]="i" *ngIf="pg.typeQuestion == 'textarea'" class="col-6 px-1">
-          <label for="float-input">{{pg.description}}:</label>
+    </div>
+
+    <div class="row" *ngIf="showForm">
+      <p-divider></p-divider>
+      <p class="py-2 spartan-bold">Novo equipamento</p>
+
+      <div class="col-4">
+        <p>Tipo de Equipamento:</p>
+        <p-dropdown
+          placeholder="Selecione o tipo do equipamento"
+          appendTo="body"
+          styleClass="w-full"
+          optionLabel="name"
+          formControlName="tipoEqp"
+          [options]="optionsTipoEquipamentos"
+          (onChange)="changeTipoEquipamento($event)"
+        ></p-dropdown>
+      </div>
+      <div class="col-4">
+        <p>Equipamento:</p>
+        <p-dropdown
+          placeholder="Selecione o equipamento"
+          appendTo="body"
+          styleClass="w-full"
+          [options]="optionsEquipamentos"
+          formControlName="eqp"
+          optionLabel="description"
+          (onChange)="changeEquipamento()"
+        ></p-dropdown>
+      </div>
+      <div class="col-4" *ngIf="optionDigit">
+        <p>Digite o numero do equipamento:</p>
+        <input
+          class="feg-input w-full"
+          id="float-input"
+          formControlName="eqpText"
+          type="text"
+          pInputText
+        />
+      </div>
+    </div>
+    <div class="row" formArrayName="answer" *ngIf="questionsData.length > 0">
+      <p class="mt-4 mb-3">
+        Por favor, responda as perguntas referente ao tipo de equipamento
+        selecionado
+      </p>
+
+      <div
+        [formGroupName]="i"
+        *ngFor="let pg of questionsData; let i = index"
+        class="col-6"
+      >
+        <span class="me-2">{{ pg.description }}:</span>
+        <ng-container *ngIf="pg.typeQuestion == 'textarea'">
           <textarea
             rows="5"
             cols="70"
@@ -55,46 +78,40 @@
             formControlName="answer"
             pInputTextarea
             class="w-full"
-            inputStyleClass="w-full"></textarea>
-        </div>
+            inputStyleClass="w-full"
+          ></textarea>
+        </ng-container>
 
-        <div [formGroupName]="i" *ngIf="pg.typeQuestion == 'switch'"class="col-3">
-          <span class="me-2">{{pg.description}}:</span>
+        <ng-container *ngIf="pg.typeQuestion == 'switch'">
           <p-inputSwitch
             styleClass="ps-3 d-flex"
             [trueValue]="1"
             [falseValue]="2"
             formControlName="answer"
-            ></p-inputSwitch>
-        </div>
-        <div [formGroupName]="i" class="col-6" *ngIf="pg.typeQuestion == 'text'">
-          <span>{{pg.description}}: </span>
+          ></p-inputSwitch>
+        </ng-container>
+
+        <ng-container *ngIf="pg.typeQuestion == 'text'">
           <input
             class="feg-input w-full"
             id="float-input"
             type="text"
             formControlName="answer"
-            pInputText/>
-        </div>
+            pInputText
+          />
+        </ng-container>
       </div>
-    </form>
+    </div>
     <div class="row">
       <div class="col-10"></div>
-    <div class="col-2 d-flex py-3 d-flex justify-content-start">
-      <p-button
-        styleClass="w-full"
-        label="Salvar Equipamento"
-        (onClick)="avancar()">
-      </p-button>
+      <div class="col-2 d-flex py-3 d-flex justify-content-start">
+        <p-button
+          styleClass="w-full"
+          label="Salvar Equipamento"
+          (onClick)="avancar()"
+        >
+        </p-button>
+      </div>
     </div>
   </div>
-  </div>
-  <div class="col-12 d-flex py-3 d-flex justify-content-end">
-    <p-button
-      *ngIf="finalizar"
-      styleClass="w-full"
-      label="Finalizar Sac"
-      (onClick)="finalizarSac()">
-    </p-button>
-  </div>
-</div>
+</form>
