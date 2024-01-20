@@ -99,7 +99,7 @@ export class EquipamentoComponent implements OnInit {
   deleteEqp(e: any) {
     this.listEquipamentos.splice(e, 1);
     this.form.setValue(this.listEquipamentos);
-    
+
     if (this.listEquipamentos.length == 0) {
       this.showForm = true;
     }
@@ -107,6 +107,8 @@ export class EquipamentoComponent implements OnInit {
 
   openForm = () => {
     this.showForm = true;
+    this.formCreate;
+    debugger;
     this.resetForm();
   };
 
@@ -142,7 +144,7 @@ export class EquipamentoComponent implements OnInit {
     this.formCreate.controls['tipoEqp'].reset();
     this.formCreate.controls['eqp'].reset();
     this.formCreate.controls['eqpText'].reset();
-    this.formCreate.controls['answer'].reset();
+    this.formCreate.controls['answer'].clear();
     this.questionsData = [];
   }
 
