@@ -29,11 +29,12 @@ export class EquipamentoComponent implements OnInit {
   showForm = true;
   optionDigit: boolean = false;
   listEquipamentos: any[] = [];
+  public formCreate: any;
 
   /** Input & Output * ViewChild */
-  @Input() form!: any;
   @Input() projectId: number = 0;
-  @Output() onAdd = new EventEmitter();
+  @Input() form: any;
+  // @Output() onAdd = new EventEmitter();
 
   constructor(
     private fb: UntypedFormBuilder,
@@ -46,9 +47,19 @@ export class EquipamentoComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.createForm();
     this.getTiposEquipamentos();
     this.getAllEquipamentosByProjeto();
   }
+
+  createForm = () => {
+    this.formCreate = this.fb.group({
+      tipoEqp: [[null], [Validators.required]],
+      eqp: [[null], [Validators.required]],
+      eqpText: [null, [Validators.required]],
+      answer: this.fb.array([]),
+    });
+  };
 
   getTiposEquipamentos = () => {
     this.tiposEquipamentosController.getEquipamentos().subscribe({
@@ -70,35 +81,40 @@ export class EquipamentoComponent implements OnInit {
 
   questionsData: any[] = [];
   changeEquipamento = () => {
-    this.form.value.eqpText == '';
-    this.optionDigit = this.form.value.eqp.id == 0;
+    this.formCreate.value.eqpText == '';
+    this.optionDigit = this.formCreate.value.eqp.id == 0;
 
     this.tiposEquipamentosPerguntasController
-      .getAll(ENUM_MENU_APPLICATION.WEB, this.form.value.tipoEqp.id)
+      .getAll(ENUM_MENU_APPLICATION.WEB, this.formCreate.value.tipoEqp.id)
       .subscribe({
         next: (resp: any) => {
-          debugger;
-
           this.questionsData = resp.data;
           resp.data.map((x: any) => {
             this.answerForm.push(this.newAnswer(x));
           });
-
-          debugger;
         },
       });
   };
 
   deleteEqp(e: any) {
     this.listEquipamentos.splice(e, 1);
+    this.form.setValue(this.listEquipamentos);
+    
+    if (this.listEquipamentos.length == 0) {
+      this.showForm = true;
+    }
   }
 
+  openForm = () => {
+    this.showForm = true;
+    this.resetForm();
+  };
+
   get answerForm(): FormArray {
-    return this.form.get('answer') as FormArray;
+    return this.formCreate.get('answer') as FormArray;
   }
 
   newAnswer(data: any): FormGroup {
-    debugger;
     return this.fb.group({
       id: [data.id],
       description: [data.description],
@@ -108,7 +124,7 @@ export class EquipamentoComponent implements OnInit {
   }
 
   changeTipoEquipamento = (e: any) => {
-    const selectedTipoEqp = this.form.value.tipoEqp;
+    const selectedTipoEqp = this.formCreate.value.tipoEqp;
 
     if (selectedTipoEqp) {
       this.optionsEquipamentos = this.allEquips.filter(
@@ -123,15 +139,15 @@ export class EquipamentoComponent implements OnInit {
   };
 
   resetForm() {
-    this.form.controls['tipoEqp'].reset();
-    this.form.controls['eqp'].reset();
-    this.form.controls['eqpText'].reset();
-    this.form.controls['answer'].reset();
+    this.formCreate.controls['tipoEqp'].reset();
+    this.formCreate.controls['eqp'].reset();
+    this.formCreate.controls['eqpText'].reset();
+    this.formCreate.controls['answer'].reset();
     this.questionsData = [];
   }
 
   avancar = () => {
-    let answer = this.form.value.answer.map((item: any) => {
+    let answer = this.formCreate.value.answer.map((item: any) => {
       return {
         id: item.id,
         awnser: item.answer,
@@ -139,24 +155,21 @@ export class EquipamentoComponent implements OnInit {
     });
 
     let newData = {
-      description: `${this.form.value.tipoEqp.name} - ${
-        this.form.value.eqpText
-          ? this.form.value.eqpText
-          : this.form.value.eqp.description
+      description: `${this.formCreate.value.tipoEqp.name} - ${
+        this.formCreate.value.eqpText
+          ? this.formCreate.value.eqpText
+          : this.formCreate.value.eqp.description
       }`,
       answer,
-      hardwareTypeId: this.form.value.tipoEqp.id,
-      equipament: this.form.value.eqp.description,
-      hardwareProjectId: this.form.value.eqp.id,
-      code: this.form.value.eqp.code,
+      hardwareTypeId: this.formCreate.value.tipoEqp.id,
+      equipament: this.formCreate.value.eqp.description,
+      hardwareProjectId: this.formCreate.value.eqp.id,
+      code: this.formCreate.value.eqp.code,
     };
-    debugger;
     this.listEquipamentos.push(newData);
     this.showForm = false;
 
-    this.onAdd.emit({
-      data: this.listEquipamentos,
-    });
+    this.form.setValue(this.listEquipamentos);
     this.resetForm();
   };
 

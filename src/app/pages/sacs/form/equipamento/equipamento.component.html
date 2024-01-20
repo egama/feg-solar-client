@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="formCreate">
   <div class="container-fluid">
     <div class="row" *ngIf="listEquipamentos.length > 0">
       <div class="col-12">
@@ -15,6 +15,16 @@
             </i>
           </span>
           <label>{{ eqp.description }}</label>
+        </div>
+        <div class="col-12 col-md-2">
+          <button
+            label="Adicionar novo item"
+            class="p-button-outlined p-button-success w-full"
+            pButton
+            (click)="openForm()"
+            type="button"
+            icon="pi pi-plus"
+          ></button>
         </div>
       </div>
     </div>
@@ -102,15 +112,17 @@
         </ng-container>
       </div>
     </div>
-    <div class="row">
-      <div class="col-10"></div>
-      <div class="col-2 d-flex py-3 d-flex justify-content-start">
-        <p-button
-          styleClass="w-full"
-          label="Salvar Equipamento"
-          (onClick)="avancar()"
-        >
-        </p-button>
+
+    <div class="row" *ngIf="showForm">
+      <div class="col-12">
+        <div class="d-flex justify-content-end">
+          <p-button
+            styleClass="w-full"
+            label="Salvar Equipamento"
+            (onClick)="avancar()"
+          >
+          </p-button>
+        </div>
       </div>
     </div>
   </div>

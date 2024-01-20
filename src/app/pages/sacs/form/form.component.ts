@@ -30,18 +30,9 @@ export class FormComponent implements OnInit {
       attendance: this.fb.group({
         atttId: [null, [Validators.required]],
       }),
-      hardwareProjects: this.fb.group({
-        tipoEqp: [[null], [Validators.required]],
-        eqp: [[null], [Validators.required]],
-        eqpText: [null, [Validators.required]],
-        answer: this.fb.array([]),
-      }),
+      hardwareProjects: [[], [Validators.required, Validators.minLength(1)]],
     });
   };
-
-  get hardwareProjects(): FormArray {
-    return this.form.get('answer') as FormArray;
-  }
 
   getFormChild = (name: string) => {
     return this.form.controls[name];
@@ -60,14 +51,8 @@ export class FormComponent implements OnInit {
     }
   };
 
-  allEquips: any[] = [];
-  addEquipamentos = (e: any) => {
-    this.allEquips = e.data;
-  };
-
   enviar = () => {
     this.form;
-    this.allEquips;
     debugger;
   };
 }

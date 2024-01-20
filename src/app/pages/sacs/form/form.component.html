@@ -18,14 +18,28 @@
 
       <div class="row py-3" *ngIf="stepAtual >= 3">
         <feg-novo-equipamento
-          (onAdd)="addEquipamentos($event)"
-          [projectId]="getFormChild('customer').value.projectsId"
           [form]="getFormChild('hardwareProjects')"
+          [projectId]="getFormChild('customer').value.projectsId"
         ></feg-novo-equipamento>
       </div>
-      <div class="row">
+
+      <div class="row" *ngIf="stepAtual >= 3">
         <div class="col-12">
-          <p-button (onClick)="enviar()"> Enviar solicitação </p-button>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <div class="d-flex justify-content-end">
+                  <p-button
+                    styleClass="w-full"
+                    label="Enviar solicitação"
+                    [disabled]="form.invalid"
+                    (click)="enviar()"
+                  >
+                  </p-button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
