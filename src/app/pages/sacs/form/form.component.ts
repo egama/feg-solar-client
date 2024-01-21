@@ -66,7 +66,6 @@ export class FormComponent implements OnInit {
           hardwareProjectId: hp.hardwareProjectId,
           hardwareProjectCode: hp.code,
           hardwareTypeId: hp.hardwareTypeId,
-          description: hp.code,
           answer: hp.answer,
         };
       }),

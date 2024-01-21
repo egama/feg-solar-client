@@ -1,12 +1,11 @@
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { ApiFegItService } from "../../services/api-fegit.service";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ApiFegItService } from '../../services/api-fegit.service';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class SacsController {
   constructor(private api: ApiFegItService) {}
-  private prefix = "/sac";
-  
+  private prefix = '/sac';
 
   getById = (): Observable<any> => {
     return this.api.get(`${this.prefix}`);
@@ -21,14 +20,10 @@ export class SacsController {
   };
 
   private put = (body: any): Observable<any> => {
-    return this.api.put(`${this.prefix}`, {
-      body,
-    });
+    return this.api.put(`${this.prefix}`, body);
   };
 
   private post = (body: any): Observable<any> => {
-    return this.api.post(`${this.prefix}`, {
-      body,
-    });
+    return this.api.post(`${this.prefix}`, body);
   };
 }
