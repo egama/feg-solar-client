@@ -39,10 +39,10 @@
               [showClear]="true"
               placeholder="Selecione a Usina"
               appendTo="body"
-              formControlName="projectsId"
+              formControlName="projectsCompanyId"
               optionValue="id"
               styleClass="col-5"
-              optionLabel="nickname"
+              optionLabel="project.nickname"
               [options]="optionsProjects"
               (onChange)="onFactorySelected($event.value)"
             >
@@ -51,17 +51,17 @@
           <div class="col-12" *ngIf="selectedFactory">
             <label class="pt-1 col-md-6"
               ><strong>CNPJ da Usina:<br /> </strong
-              >{{ selectedFactory?.document }}</label
+              >{{ selectedFactory?.project.document }}</label
             >
             <label class="pt-1 col-md-6"
               ><strong>IE da Usina:<br /> </strong
-              >{{ selectedFactory?.ie }}</label
+              >{{ selectedFactory?.project.ie }}</label
             >
             <label class="pt-1 col-md-12"
               ><strong>Endereço da Usina:<br /> </strong
-              >{{ selectedFactory?.address }},
-              {{ selectedFactory?.addressNumber }} -
-              {{ selectedFactory?.addressCity }}</label
+              >{{ selectedFactory?.project.address }},
+              {{ selectedFactory?.project.addressNumber }} -
+              {{ selectedFactory?.project.addressCity }}</label
             >
           </div>
         </div>

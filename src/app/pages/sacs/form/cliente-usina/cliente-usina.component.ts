@@ -30,7 +30,7 @@ export class ClienteUsinaComponent implements OnInit {
   }
 
   onCustomerClear() {
-    this.form.controls['projectsId'].reset();
+    this.form.controls['projectsCompanyId'].reset();
     this.form.controls['customerId'].reset();
     this.selectedCustomer = null;
     this.selectedFactory = null;
@@ -45,7 +45,7 @@ export class ClienteUsinaComponent implements OnInit {
   };
 
   editar = () => {
-    debugger
+    debugger;
     this.page = 'edit';
     this.enableField(true);
     this.oldVersion = this.form.value;
@@ -55,10 +55,10 @@ export class ClienteUsinaComponent implements OnInit {
   enableField = (value: boolean) => {
     if (value) {
       this.form.controls['customerId'].enable();
-      this.form.controls['projectsId'].enable();
+      this.form.controls['projectsCompanyId'].enable();
     } else {
       this.form.controls['customerId'].disable();
-      this.form.controls['projectsId'].disable();
+      this.form.controls['projectsCompanyId'].disable();
     }
   };
 
@@ -78,23 +78,22 @@ export class ClienteUsinaComponent implements OnInit {
   getAllProjetos = () => {
     this.projetosController.getByCustomer(this.selectedCustomer.id).subscribe({
       next: (resp) => {
-        this.optionsProjects = resp.data.map((m: any) => m.project);
+        this.optionsProjects = resp.data;
       },
     });
   };
 
   avancar = () => {
-    
     this.page = 'view';
-    this.oldVersion == null ? this.oldVersion = this.form.value : ''
+    this.oldVersion == null ? (this.oldVersion = this.form.value) : '';
     let equal: boolean = false;
-    this.oldVersion === this.form.value ? equal = !equal : ''
+    this.oldVersion === this.form.value ? (equal = !equal) : '';
     this.enableField(false);
-      this.onSave.emit({
-        old: this.oldVersion,
-        data: this.form.value,
-        step: StepScreen.CLIENTE,
-        equal: equal
-      });
+    this.onSave.emit({
+      old: this.oldVersion,
+      data: this.form.value,
+      step: StepScreen.CLIENTE,
+      equal: equal,
+    });
   };
 }

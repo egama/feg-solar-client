@@ -32,7 +32,7 @@ export class EquipamentoComponent implements OnInit {
   public formCreate: any;
 
   /** Input & Output * ViewChild */
-  @Input() projectId: number = 0;
+  @Input() projectsCompanyId: number = 0;
   @Input() form: any;
   // @Output() onAdd = new EventEmitter();
 
@@ -71,7 +71,7 @@ export class EquipamentoComponent implements OnInit {
 
   getAllEquipamentosByProjeto = () => {
     this.projetosEquipamentosController
-      .getByProjetoId(this.projectId)
+      .getByProjetoId(this.projectsCompanyId)
       .subscribe({
         next: (resp: any) => {
           this.allEquips = resp.data;
@@ -81,8 +81,12 @@ export class EquipamentoComponent implements OnInit {
 
   questionsData: any[] = [];
   changeEquipamento = () => {
-    this.formCreate.value.eqpText == '';
     this.optionDigit = this.formCreate.value.eqp.id == 0;
+    this.formCreate.controls['eqpText'].setValue(
+      this.formCreate.value.eqp.id == 0
+        ? ''
+        : this.formCreate.value.eqp.description
+    );
 
     this.tiposEquipamentosPerguntasController
       .getAll(ENUM_MENU_APPLICATION.WEB, this.formCreate.value.tipoEqp.id)
@@ -166,29 +170,14 @@ export class EquipamentoComponent implements OnInit {
       hardwareTypeId: this.formCreate.value.tipoEqp.id,
       equipament: this.formCreate.value.eqp.description,
       hardwareProjectId: this.formCreate.value.eqp.id,
-      code: this.formCreate.value.eqp.code,
+      code: this.formCreate.value.eqpText
+        ? this.formCreate.value.eqpText
+        : this.formCreate.value.eqp.code,
     };
     this.listEquipamentos.push(newData);
     this.showForm = false;
 
     this.form.setValue(this.listEquipamentos);
     this.resetForm();
-  };
-
-  finalizarSac = () => {
-    // const finalData = this.projectId;
-    // const hardwaresData = (this.projectId[2] = [this.projectId[2]]);
-    // const dadosParaEnviar = {
-    //   projectsCompanyId: finalData[0].data.customerId,
-    //   type: finalData[1].data.atttId.value.toLowerCase(),
-    //   hardwares: hardwaresData,
-    // };
-    // this.sacsController.save(dadosParaEnviar).subscribe({
-    //   next: async (resp) => {
-    //     this.messageService.success('Sucesso', 'Sac criado com sucesso!');
-    //     this.router.navigate(['sac']);
-    //   },
-    //   complete: () => {},
-    // });
   };
 }

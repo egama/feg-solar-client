@@ -19,7 +19,7 @@
       <div class="row py-3" *ngIf="stepAtual >= 3">
         <feg-novo-equipamento
           [form]="getFormChild('hardwareProjects')"
-          [projectId]="getFormChild('customer').value.projectsId"
+          [projectsCompanyId]="getFormChild('customer').value.projectsCompanyId"
         ></feg-novo-equipamento>
       </div>
 
