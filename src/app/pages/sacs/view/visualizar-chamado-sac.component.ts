@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SacsController } from 'src/app/core/controllers/sacs/sacs.controller';
 import { AbaFormService } from 'src/app/core/services/aba-form.service';
 
@@ -9,23 +9,28 @@ import { AbaFormService } from 'src/app/core/services/aba-form.service';
   templateUrl: './visualizar-chamado-sac.component.html',
 })
 export class VisualizarSacComponent implements OnInit {
-
   constructor(
     private sacsController: SacsController,
     public abaFormService: AbaFormService,
     private router: Router,
-  ) {}
-  
-  form!: UntypedFormGroup;
-  data: any;
-
-  ngOnInit() {
-    const param = this.abaFormService.getParams();
-      this.getSacById(param?.id);
+    private activatedrouter: ActivatedRoute
+  ) {
+    this.activatedrouter.params.subscribe((params) => {
+      debugger;
+      if (params && params['id']) this.id = params['id'];
+    });
   }
 
-  getSacById = (id: number) => {
-    this.sacsController.getSacById(id).subscribe({
+  form!: UntypedFormGroup;
+  data: any;
+  id: number = 0;
+
+  ngOnInit() {
+    this.getSacById();
+  }
+
+  getSacById = () => {
+    this.sacsController.getSacById(this.id).subscribe({
       next: (resp: any) => {
         this.data = resp;
       },
@@ -33,6 +38,6 @@ export class VisualizarSacComponent implements OnInit {
   };
 
   voltar = () => {
-    this.router.navigate(["sac"]);
+    this.router.navigate(['sac']);
   };
 }

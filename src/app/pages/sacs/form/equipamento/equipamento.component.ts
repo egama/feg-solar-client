@@ -131,7 +131,13 @@ export class EquipamentoComponent implements OnInit {
         id: 0,
       };
       this.optionsEquipamentos.push(op);
+
+      this.getModeloByType();
     }
+  };
+
+  getModeloByType = () => {
+    //TODO: get
   };
 
   resetForm() {

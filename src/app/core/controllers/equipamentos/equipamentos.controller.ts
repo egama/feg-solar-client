@@ -14,8 +14,8 @@ export class EquipamentosController {
     return this.api.get(`${this.prefix}/${id}`);
   };
 
-  getByType = (type: number, companyId: number): Observable<any> => {
-    return this.api.get(`${this.prefix}/${type}/${companyId}`);
+  getByType = (type: number): Observable<any> => {
+    return this.api.get(`${this.prefix}/by-type/${type}`);
   };
 
   save = (body: any) => {

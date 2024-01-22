@@ -1,58 +1,128 @@
 <div class="container-fluid box-page mb-5">
-  <div class="card-novo-sac justify-content-around py-3">
-    <div class="row mt-4">
-      <div class="col-6">
-        <div class="d-flex flex-column">
-          <label class="ps-3 pt-1"><strong>Cliente:</strong></label>
-          <div class="ps-3 pt-1">
-            <p>{{ data?.data?.projectsCompany?.customerCompany?.customer?.corporateName }}</p>
-          </div>
+  <div class="row mt-4">
+    <div class="col-12 col-md-6">
+      <div class="row">
+        <div class="col-12 mt-2">
+          <label class="fw-bold">Cliente:</label>
+          <p>
+            {{
+              data?.data?.projectsCompany?.customerCompany?.customer
+                ?.corporateName
+            }}
+          </p>
+        </div>
+
+        <div class="col-12 col-md-6 mt-2">
+          <label class="fw-bold">CNPJ do Cliente: </label>
+          <p>
+            {{ data?.data?.projectsCompany?.customerCompany?.customer?.cnpj }}
+          </p>
+        </div>
+        <div class="col-12 col-md-6 mt-2">
+          <label class="fw-bold">IE do Cliente: </label>
+          <p>
+            {{ data?.data?.projectsCompany?.customerCompany?.customer?.ie }}
+          </p>
         </div>
       </div>
+    </div>
 
-      <div class="col-5">
-        <div class="d-flex flex-column">
-          <label class="ps-3 pt-1"><strong>Usina:</strong></label>
-          <div class="ps-3 pt-1">
-            <p>{{ data?.data?.projectsCompany?.project?.nickname }}</p>
-          </div>
+    <div class="col-12 col-md-6">
+      <div class="row">
+        <div class="col-12 mt-2">
+          <label class="fw-bold">Usina:</label>
+          <p>{{ data?.data?.projectsCompany?.project?.nickname }}</p>
         </div>
-      </div>
 
-      <div class="d-flex col-6 flex-column mt-2">
-        <ng-container>
-          <label class="ps-3 col-md-6 pt-1"><strong>CNPJ do Cliente:<br /></strong>{{ data?.data?.projectsCompany?.customerCompany?.customer?.cnpj }}</label>
-          <label class="ps-3 col-md-6 pt-1"><strong>IE do Cliente:<br /></strong>{{ data?.data?.projectsCompany?.customerCompany?.customer?.ie }}</label>
-        </ng-container>
-      </div>
-
-      <div class="d-flex col-5 flex-column mt-2">
-        <ng-container>
-          <label class="ps-3 pt-1 col-md-6"><strong>CNPJ da Usina:<br /></strong>{{ data?.data?.projectsCompany?.project?.document }}</label>
-          <label class="ps-3 pt-1 col-md-6"><strong>IE da Usina:<br /> </strong>{{ data?.data?.projectsCompany?.project?.ie }}</label>
-          <label class="ps-3 pt-1 col-md-6"><strong>Endereço da Usina:<br /> </strong>{{ data?.data?.projectsCompany?.project?.address }},
+        <div class="col-12 col-md-6 mt-2">
+          <label class="fw-bold">CNPJ da Usina: </label>
+          <p>
+            {{ data?.data?.projectsCompany?.project?.document }}
+          </p>
+        </div>
+        <div class="col-12 col-md-6 mt-2">
+          <label class="fw-bold">IE da Usina: </label>
+          <p>
+            {{ data?.data?.projectsCompany?.project?.ie }}
+          </p>
+        </div>
+        <div class="col-12 mt-2">
+          <label class="fw-bold">Endereço da Usina: </label>
+          <p>
+            {{ data?.data?.projectsCompany?.project?.address }},
             {{ data?.data?.projectsCompany?.project?.addressNumber }} -
             {{ data?.data?.projectsCompany?.project?.addressCity }}
-          </label>
-        </ng-container>
-      </div>
-
-      <p-divider></p-divider>
-    </div>
-    <div class="row mt-4">
-      <div class="col-11 justify-content-start mb-3">
-        <label class="ps-3 pt-1 d-flex flex-column"
-          ><strong>Tipo Atendimento:</strong></label
-        >
-        <div class="ps-3 pt-1">
-          <p>{{ data?.data?.type }}</p>
+          </p>
         </div>
       </div>
     </div>
+  </div>
 
+  <div class="row mt-2">
+    <div class="col-12">
+      <label class="fw-bold me-3">Tipo Atendimento: </label>
+      <label>{{ (data?.data?.type || "").toUpperCase() }}</label>
+    </div>
+  </div>
+
+  <div class="row mt-3">
     <p-divider></p-divider>
+    <div class="col-12">
+      <label class="fw-bold">Equipamentos: </label>
+    </div>
+    <div class="col-12">
+      <div
+        class="row mt-3"
+        *ngFor="let sacHardware of data?.data?.SacHardwares"
+      >
+        <div class="col-12 col-md-4">
+          <label class="fw-bold">Tipo de equipamento: </label>
+          <p>
+            {{
+              sacHardware?.HardwareProjects?.hardwareType?.name
+            }}
+          </p>
+        </div>
 
-    <div class="col-12 d-flex d-flex justify-content-between mt-4" *ngFor="let sacHardware of data?.data?.SacHardwares">
+        <div class="col-12 col-md-4">
+          <label class="fw-bold">Equipamento: </label>
+          <p>
+            {{ sacHardware?.HardwareProjects?.description }}
+          </p>
+        </div>
+        <div class="col-12 col-md-4">
+          <label class="fw-bold">Status: </label>
+          <p>
+            {{ sacHardware?.Status?.name }}
+          </p>
+        </div>
+        <div class="col-12 mt-3">
+          <div class="row">
+            <div
+              class="col-12 col-md-4"
+              *ngFor="let question of sacHardware?.SacHardwaresQuestion"
+            >
+              <label class="fw-bold">{{ question?.description }}</label>
+              <p *ngIf="question?.typeQuestion == 'switch'">
+                {{ question?.awnser == "1" ? "Sim" : "Não" }}
+              </p>
+              <p *ngIf="question?.typeQuestion != 'switch'">
+                {{ question?.awnser }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p-divider></p-divider>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="card-novo-sac justify-content-around py-3">
+    <div
+      class="col-12 d-flex d-flex justify-content-between mt-4"
+      *ngFor="let sacHardware of data?.data?.SacHardwares"
+    >
       <div class="col-4 px-1 mt-4 mb-3">
         <label class="ps-3 pt-1 d-flex flex-column"
           ><strong>Tipo de equipamento:</strong></label
@@ -64,49 +134,76 @@
         </div>
       </div>
       <div class="col-4 px-1 mt-4 mb-3">
-        <label class="ps-3 pt-1 d-flex flex-column"><strong>Equipamento:</strong></label>
+        <label class="ps-3 pt-1 d-flex flex-column"
+          ><strong>Equipamento:</strong></label
+        >
         <div class="ps-3 pt-1">
-          <p>{{ sacHardware?.HardwareProjects?.hardwareModel?.hardwareType?.name }}</p>
+          <p>
+            {{
+              sacHardware?.HardwareProjects?.hardwareModel?.hardwareType?.name
+            }}
+          </p>
         </div>
       </div>
-      <div class="col-4 px-1 mt-4 mb-3" *ngIf="sacHardware?.HardwareProjects?.hardwareModel?.hardwareType?.digitar">
+      <div
+        class="col-4 px-1 mt-4 mb-3"
+        *ngIf="
+          sacHardware?.HardwareProjects?.hardwareModel?.hardwareType?.digitar
+        "
+      >
         <div class="ps-3 pt-1">
           <p></p>
         </div>
       </div>
     </div>
-    
-    
 
     <p-divider></p-divider>
 
-    <div class="row py-3 px-4 d-flex col-12" *ngFor="let sacHardware of data?.data?.SacHardwares">
+    <div
+      class="row py-3 px-4 d-flex col-12"
+      *ngFor="let sacHardware of data?.data?.SacHardwares"
+    >
       <div class="col-12 px-1 ps-3 pt-1">
-        <p><strong>Comentários de: </strong>{{sacHardware?.HardwareProjects?.description}}</p>
+        <p>
+          <strong>Comentários de: </strong
+          >{{ sacHardware?.HardwareProjects?.description }}
+        </p>
       </div>
-      <ng-container *ngIf="sacHardware?.SacHardwaresQuestion && sacHardware?.SacHardwaresQuestion.length > 0; else semComentarios">
-        <div class="col-12 px-1 ps-3 pt-1 mt-2 ml-20" *ngFor="let question of sacHardware?.SacHardwaresQuestion">
-          <label for="float-input"><strong>{{ question?.description }}:</strong></label>
-          <p *ngIf="question?.typeQuestion == 'switch'">{{ question?.awnser == '1' ? 'Sim' : 'Não' }}</p>
-          <p *ngIf="question?.typeQuestion != 'switch'">{{ question?.awnser }}</p>
+      <ng-container
+        *ngIf="
+          sacHardware?.SacHardwaresQuestion &&
+            sacHardware?.SacHardwaresQuestion.length > 0;
+          else semComentarios
+        "
+      >
+        <div
+          class="col-12 px-1 ps-3 pt-1 mt-2 ml-20"
+          *ngFor="let question of sacHardware?.SacHardwaresQuestion"
+        >
+          <label for="float-input"
+            ><strong>{{ question?.description }}:</strong></label
+          >
+          <p *ngIf="question?.typeQuestion == 'switch'">
+            {{ question?.awnser == "1" ? "Sim" : "Não" }}
+          </p>
+          <p *ngIf="question?.typeQuestion != 'switch'">
+            {{ question?.awnser }}
+          </p>
         </div>
       </ng-container>
       <ng-template #semComentarios>
         <div class="col-12 ps-3 pt-1 mt-2 ml-20">
-          <p><strong>Não há comentários para o tipo de equipamento:</strong> {{ sacHardware?.HardwareProjects?.description }}</p>
+          <p>
+            <strong>Não há comentários para o tipo de equipamento:</strong>
+            {{ sacHardware?.HardwareProjects?.description }}
+          </p>
         </div>
       </ng-template>
     </div>
-    
-    
-    
 
     <div class="col-12 d-flex py-3 d-flex justify-content-end">
-      <p-button
-        styleClass="w-full"
-        label="Voltar"
-        (onClick)="voltar()">
+      <p-button styleClass="w-full" label="Voltar" (onClick)="voltar()">
       </p-button>
     </div>
-  </div>
+  </div> -->
 </div>
