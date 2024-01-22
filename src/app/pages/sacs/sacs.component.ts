@@ -9,6 +9,8 @@ import { SacsController } from 'src/app/core/controllers/sacs/sacs.controller';
 import { Router } from '@angular/router';
 import { AbaFormService } from 'src/app/core/services/aba-form.service';
 import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
+import { MessageService } from "src/app/core/services/messageService";
+import { ModalConfirmType } from 'src/app/common/modais/confirm/confirm.type';
 
 @Component({
   selector: 'app-sacs',
@@ -16,6 +18,8 @@ import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
 })
 export class SacsComponent implements OnInit {
   @ViewChild('cgc') cgc: any;
+  @ViewChild("mconf") mconf?: any;
+  id: any;
   data: any[] = [];
   sacSelected: any = null;
   menuSelecao: any;
@@ -26,6 +30,7 @@ export class SacsComponent implements OnInit {
     private fb: UntypedFormBuilder,
     public abaFormService: AbaFormService,
     private sacsController: SacsController,
+    private messageService: MessageService,
   ) {}
 
   ngOnInit(): void {
@@ -44,20 +49,38 @@ export class SacsComponent implements OnInit {
   };
 
   novo = async () => {
-    
     this.router.navigate(["sac/new"]);
   };
 
-  deletSac = (id: number) => {
-    this.sacsController.delete(id).subscribe({
-      next: (resp: any) => {
+  modal = new ModalConfirmType();
+  exitClick(): void {
+    this.modal = {
+      ...this.modal,
+      title: "Você deseja esse SAC?",
+      actionPrimary: this.cancelExit,
+      actionSecundary: this.deletSac,
+      labelPrimaryButton: "Não",
+      labelSecundaryButton: "Sim",
+    };
+    this.mconf.openModal();
+  }
+  
+  cancelExit = () => {
+    this.abaFormService.closeCanceled();
+  };
 
+  deletSac = () => {
+    this.sacsController.delete(this.id).subscribe({
+      next: (resp: any) => {
+      },
+      complete: () => {
+        this.messageService.success("Sucesso", "SAC cancelado com sucesso!");
+        this.getSacs();
       }
     })
   }
 
   createMenuItem = async (event: any, data: any) => {
-    debugger
     const menuItem = [
       {
         label: `Ver Histórico`,
@@ -71,9 +94,9 @@ export class SacsComponent implements OnInit {
       {
         label: `Excluir Sac`,
         command: () => {
-          debugger
+          this.id = data.id
           this.cgc.hide();
-          this.deletSac(data.id);
+          this.exitClick();
         },
       },
     ];
@@ -87,7 +110,7 @@ export class SacsComponent implements OnInit {
   getSacs = () => {
     this.sacsController.getById().subscribe({
       next: (resp) => {
-        this.data = resp.data
+        this.data = resp.data.filter((x: any) => x.statusesId != 102)
       },
       complete: () => {},
     });

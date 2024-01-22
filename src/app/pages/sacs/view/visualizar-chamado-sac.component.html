@@ -82,7 +82,7 @@
 
     <div class="row py-3 px-4 d-flex col-12" *ngFor="let sacHardware of data?.data?.SacHardwares">
       <div class="col-12 px-1 ps-3 pt-1">
-        <p><strong>Comentários:</strong></p>
+        <p><strong>Comentários de: </strong>{{sacHardware?.HardwareProjects?.description}}</p>
       </div>
       <ng-container *ngIf="sacHardware?.SacHardwaresQuestion && sacHardware?.SacHardwaresQuestion.length > 0; else semComentarios">
         <div class="col-12 px-1 ps-3 pt-1 mt-2 ml-20" *ngFor="let question of sacHardware?.SacHardwaresQuestion">
@@ -93,7 +93,7 @@
       </ng-container>
       <ng-template #semComentarios>
         <div class="col-12 ps-3 pt-1 mt-2 ml-20">
-          <p><strong>Não há comentários</strong></p>
+          <p><strong>Não há comentários para o tipo de equipamento:</strong> {{ sacHardware?.HardwareProjects?.description }}</p>
         </div>
       </ng-template>
     </div>

@@ -119,6 +119,7 @@
           <p-button
             styleClass="w-full"
             label="Salvar Equipamento"
+            [disabled]="!formCreate.valid"
             (onClick)="avancar()"
           >
           </p-button>

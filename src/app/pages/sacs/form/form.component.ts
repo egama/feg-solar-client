@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormArray,
   UntypedFormBuilder,
@@ -9,6 +9,8 @@ import { StepScreen } from './form.types';
 import { SacsController } from 'src/app/core/controllers/sacs/sacs.controller';
 import { MessageService } from "src/app/core/services/messageService";
 import { Router } from '@angular/router';
+import { ModalConfirmType } from 'src/app/common/modais/confirm/confirm.type';
+import { AbaFormService } from 'src/app/core/services/aba-form.service';
 
 @Component({
   selector: 'feg-form',
@@ -16,12 +18,14 @@ import { Router } from '@angular/router';
 })
 export class FormComponent implements OnInit {
   constructor(
+    private router: Router,
     private fb: UntypedFormBuilder,
+    public abaFormService: AbaFormService,
     private sacsController: SacsController,
     private messageService: MessageService,
-    private router: Router
   ) {}
 
+  @ViewChild("mconf") mconf?: any;
   form!: UntypedFormGroup;
   stepAtual: number = 1;
 
@@ -61,7 +65,6 @@ export class FormComponent implements OnInit {
 
   enviar = () => {
     this.form;
-    debugger;
     const data = {
       type: this.form.controls['attendance'].value?.atttId?.value,
       projectsCompanyId: this.form.controls['customer'].value.projectsCompanyId,
@@ -74,7 +77,6 @@ export class FormComponent implements OnInit {
         };
       }),
     };
-    debugger;
     this.sacsController.save(data).subscribe({
       next: async (resp) => {
         this.messageService.success('Sucesso', 'Sac criado com sucesso!');
@@ -83,6 +85,24 @@ export class FormComponent implements OnInit {
       complete: () => {},
     });
   };
+
+  modal = new ModalConfirmType();
+  exitClick(): void {
+    this.modal = {
+      ...this.modal,
+      title: "Você deseja esse SAC?",
+      actionPrimary: this.cancelExit,
+      actionSecundary: this.onCancel,
+      labelPrimaryButton: "Não",
+      labelSecundaryButton: "Sim",
+    };
+    this.mconf.openModal();
+  }
+  
+  cancelExit = () => {
+    this.abaFormService.closeCanceled();
+  };
+
 
   onCancel = () => {
     this.router.navigate(["sac"]);

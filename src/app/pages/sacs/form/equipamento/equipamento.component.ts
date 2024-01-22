@@ -1,19 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   FormArray,
   FormGroup,
   UntypedFormBuilder,
-  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { ProjetosEquipamentosController } from 'src/app/core/controllers/projetos-equipamentos/projetos-equipamentos.controller';
 import { TiposEquipamentosController } from 'src/app/core/controllers/tipos-equipamentos/tipos-equipmentos.controller';
 import { TiposEquipamentosPerguntasController } from 'src/app/core/controllers/tipos-equipametos-pergutas/tipos-equipametos-pergutas.controller';
-import { EquipamentosController } from 'src/app/core/controllers/equipamentos/equipamentos.controller';
-import { StepScreen } from '../form.types';
-import { SacsController } from 'src/app/core/controllers/sacs/sacs.controller';
-import { MessageService } from 'src/app/core/services/messageService';
-import { Router } from '@angular/router';
 import { ENUM_MENU_APPLICATION } from 'src/app/core/enums/enum';
 
 @Component({
@@ -40,10 +34,7 @@ export class EquipamentoComponent implements OnInit {
     private fb: UntypedFormBuilder,
     private tiposEquipamentosController: TiposEquipamentosController,
     private projetosEquipamentosController: ProjetosEquipamentosController,
-    private tiposEquipamentosPerguntasController: TiposEquipamentosPerguntasController,
-    private sacsController: SacsController,
-    private router: Router,
-    private messageService: MessageService
+    private tiposEquipamentosPerguntasController: TiposEquipamentosPerguntasController
   ) {}
 
   ngOnInit() {
@@ -112,7 +103,6 @@ export class EquipamentoComponent implements OnInit {
   openForm = () => {
     this.showForm = true;
     this.formCreate;
-    debugger;
     this.resetForm();
   };
 

@@ -45,7 +45,6 @@ export class ClienteUsinaComponent implements OnInit {
   };
 
   editar = () => {
-    debugger;
     this.page = 'edit';
     this.enableField(true);
     this.oldVersion = this.form.value;

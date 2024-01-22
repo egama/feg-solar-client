@@ -30,7 +30,7 @@
               <div class="col-12 col-md-8 mt-4"></div>
               <div class="col-12 col-md-2 mt-4">
                 <p-button
-                  (onClick)="onCancel()"
+                  (onClick)="exitClick()"
                   label="{{ 'default.cancel' | translate }}"
                   styleClass="col-12 p-button-white"
                 ></p-button>
@@ -50,3 +50,5 @@
     </div>
   </div>
 </div>
+
+<feg-modal-confirm [data]="modal" #mconf></feg-modal-confirm>

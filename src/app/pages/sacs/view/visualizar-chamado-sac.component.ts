@@ -25,7 +25,6 @@ export class VisualizarSacComponent implements OnInit {
   }
 
   getSacById = (id: number) => {
-    debugger
     this.sacsController.getSacById(id).subscribe({
       next: (resp: any) => {
         this.data = resp;
