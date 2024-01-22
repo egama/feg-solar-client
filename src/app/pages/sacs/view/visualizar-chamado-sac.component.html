@@ -96,7 +96,12 @@
             {{ sacHardware?.Status?.name }}
           </p>
         </div>
-        <div class="col-12 mt-3">
+        <div class="col-12" *ngIf="!sacHardware.verMais">
+          <a class="feg-color-primary" (click)="sacHardware.verMais = true"
+            >Ver mais</a
+          >
+        </div>
+        <div class="col-12 mt-3" *ngIf="sacHardware.verMais">
           <div class="row">
             <div
               class="col-12 col-md-4"
@@ -109,6 +114,12 @@
               <p *ngIf="question?.typeQuestion != 'switch'">
                 {{ question?.awnser }}
               </p>
+            </div>
+
+            <div class="col-12">
+              <a class="feg-color-primary" (click)="sacHardware.verMais = false"
+                >Ver menos</a
+              >
             </div>
           </div>
         </div>
