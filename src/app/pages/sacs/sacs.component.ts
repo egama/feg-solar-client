@@ -108,7 +108,7 @@ export class SacsComponent implements OnInit {
   };
 
   getSacs = () => {
-    this.sacsController.getById().subscribe({
+    this.sacsController.getMine().subscribe({
       next: (resp) => {
         this.data = resp.data.filter((x: any) => x.statusesId != 102)
       },

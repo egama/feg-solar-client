@@ -21,7 +21,7 @@
             <div class="col-12 col-md-3">
               <p-button
                 (onClick)="novo()"
-                label="{{ 'Adicionar' | translate }}"
+                label="{{ 'Novo Sac' | translate }}"
                 styleClass="col-12"
               ></p-button>
             </div>
@@ -50,11 +50,11 @@
           <ng-template pTemplate="body" let-data>
             <tr>
               <td>{{ data.id }}</td>
-              <td>{{ data?.projectsCompany?.project?.nickname }}</td>
+              <td>{{ data?.projectsCompany?.project?.customer.fantasyName }}</td>
               <td>{{ data?.projectsCompany?.project?.code }}</td>
-              <td>{{ "Usina de teste " }}</td>
+              <td>{{ data?.projectsCompany?.project?.nickname }}</td>
               <td>{{ data?.type }}</td>
-              <td>{{ data?.SacHardwares[0]?.Status?.name }}</td>
+              <td>{{ data?.Status?.name }}</td>
               <td style="text-align: center">
                 <button
                   pButton
