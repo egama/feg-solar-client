@@ -48,6 +48,14 @@ export class SacsComponent implements OnInit {
     this.router.navigate(["sac/new"]);
   };
 
+  deletSac = (id: number) => {
+    this.sacsController.delete(id).subscribe({
+      next: (resp: any) => {
+
+      }
+    })
+  }
+
   createMenuItem = async (event: any, data: any) => {
     debugger
     const menuItem = [
@@ -58,6 +66,14 @@ export class SacsComponent implements OnInit {
           
           this.abaFormService.setParams({ id: data.id });
           this.router.navigate([`sac/view/${data.id}`]);
+        },
+      },
+      {
+        label: `Excluir Sac`,
+        command: () => {
+          debugger
+          this.cgc.hide();
+          this.deletSac(data.id);
         },
       },
     ];

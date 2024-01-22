@@ -26,4 +26,8 @@ export class SacsController {
   private post = (body: any): Observable<any> => {
     return this.api.post(`${this.prefix}`, body);
   };
+  
+  delete = (id: number): Observable<any> => {
+    return this.api.delete(`${this.prefix}/${id}`);
+  };
 }

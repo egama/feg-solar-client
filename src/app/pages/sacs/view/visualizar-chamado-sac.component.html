@@ -52,60 +52,53 @@
 
     <p-divider></p-divider>
 
-    <div class="col-12 d-flex d-flex justify-content-between mt-4">
+    <div class="col-12 d-flex d-flex justify-content-between mt-4" *ngFor="let sacHardware of data?.data?.SacHardwares">
       <div class="col-4 px-1 mt-4 mb-3">
         <label class="ps-3 pt-1 d-flex flex-column"
           ><strong>Tipo de equipamento:</strong></label
         >
         <div class="ps-3 pt-1">
           <p>
-            {{ data?.data?.SacHardwares[0]?.HardwareProjects?.description }}
+            {{ sacHardware?.HardwareProjects?.description }}
           </p>
         </div>
       </div>
       <div class="col-4 px-1 mt-4 mb-3">
         <label class="ps-3 pt-1 d-flex flex-column"><strong>Equipamento:</strong></label>
         <div class="ps-3 pt-1">
-          <p>{{data?.data?.projectsCompany?.HardwareProjects[0]?.hardwareModel?.hardwareType?.name}}</p>
+          <p>{{ sacHardware?.HardwareProjects?.hardwareModel?.hardwareType?.name }}</p>
         </div>
       </div>
-      <div class="col-4 px-1 mt-4 mb-3">
-        <div *ngIf="data?.data?.projectsCompany?.HardwareProjects[0]?.hardwareModel?.hardwareType?.digitar" class="ps-3 pt-1">
+      <div class="col-4 px-1 mt-4 mb-3" *ngIf="sacHardware?.HardwareProjects?.hardwareModel?.hardwareType?.digitar">
+        <div class="ps-3 pt-1">
           <p></p>
         </div>
       </div>
     </div>
+    
+    
 
     <p-divider></p-divider>
 
-    <div class="row py-3 px-4 d-flex col-12">
+    <div class="row py-3 px-4 d-flex col-12" *ngFor="let sacHardware of data?.data?.SacHardwares">
       <div class="col-12 px-1 ps-3 pt-1">
         <p><strong>Comentários:</strong></p>
       </div>
-    
-      <ng-container *ngIf="data?.data?.SacHardwares[0]?.SacHardwaresQuestion && data?.data?.SacHardwares[0]?.SacHardwaresQuestion.length > 0; else semComentarios">
-        <div class="col-12 px-1 ps-3 pt-1 mt-2 ml-20">
-          <label for="float-input"><strong>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[1]?.description }}:</strong></label>
-          <p>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[1]?.awnser }}</p>
-        </div>
-    
-        <div class="col-12 ps-3 pt-1 mt-2 ml-20">
-          <span class="me-2"><strong>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[0]?.description}}</strong></span>
-          <p>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[0]?.awnser == 1 ? "Sim" : "Não"}}</p>
-        </div>
-    
-        <div class="col-12 ps-3 pt-1 mt-2 ml-20">
-          <span><strong>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[2]?.description }}:</strong></span>
-          <p>{{ data?.data?.SacHardwares[0]?.SacHardwaresQuestion[2]?.awnser }}</p>
+      <ng-container *ngIf="sacHardware?.SacHardwaresQuestion && sacHardware?.SacHardwaresQuestion.length > 0; else semComentarios">
+        <div class="col-12 px-1 ps-3 pt-1 mt-2 ml-20" *ngFor="let question of sacHardware?.SacHardwaresQuestion">
+          <label for="float-input"><strong>{{ question?.description }}:</strong></label>
+          <p *ngIf="question?.typeQuestion == 'switch'">{{ question?.awnser == '1' ? 'Sim' : 'Não' }}</p>
+          <p *ngIf="question?.typeQuestion != 'switch'">{{ question?.awnser }}</p>
         </div>
       </ng-container>
-
       <ng-template #semComentarios>
         <div class="col-12 ps-3 pt-1 mt-2 ml-20">
-          <p><strong>Sem comentários</strong></p>
+          <p><strong>Não há comentários</strong></p>
         </div>
       </ng-template>
     </div>
+    
+    
     
 
     <div class="col-12 d-flex py-3 d-flex justify-content-end">

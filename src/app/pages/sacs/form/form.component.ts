@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { StepScreen } from './form.types';
 import { SacsController } from 'src/app/core/controllers/sacs/sacs.controller';
+import { MessageService } from "src/app/core/services/messageService";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'feg-form',
@@ -15,7 +17,9 @@ import { SacsController } from 'src/app/core/controllers/sacs/sacs.controller';
 export class FormComponent implements OnInit {
   constructor(
     private fb: UntypedFormBuilder,
-    private sacsController: SacsController
+    private sacsController: SacsController,
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   form!: UntypedFormGroup;
@@ -73,27 +77,14 @@ export class FormComponent implements OnInit {
     debugger;
     this.sacsController.save(data).subscribe({
       next: async (resp) => {
-        // this.messageService.success('Sucesso', 'Sac criado com sucesso!');
-        // this.router.navigate(['sac']);
+        this.messageService.success('Sucesso', 'Sac criado com sucesso!');
+        this.router.navigate(['sac']);
       },
       complete: () => {},
     });
   };
 
-  finalizarSac = () => {
-    // const finalData = this.projectId;
-    // const hardwaresData = (this.projectId[2] = [this.projectId[2]]);
-    // const dadosParaEnviar = {
-    //   projectsCompanyId: finalData[0].data.customerId,
-    //   type: finalData[1].data.atttId.value.toLowerCase(),
-    //   hardwares: hardwaresData,
-    // };
-    // this.sacsController.save(dadosParaEnviar).subscribe({
-    //   next: async (resp) => {
-    //     this.messageService.success('Sucesso', 'Sac criado com sucesso!');
-    //     this.router.navigate(['sac']);
-    //   },
-    //   complete: () => {},
-    // });
+  onCancel = () => {
+    this.router.navigate(["sac"]);
   };
 }
