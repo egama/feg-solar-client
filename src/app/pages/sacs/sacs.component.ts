@@ -56,7 +56,7 @@ export class SacsComponent implements OnInit {
   exitClick(): void {
     this.modal = {
       ...this.modal,
-      title: "Você deseja esse SAC?",
+      title: "Você deseja cancelar esse SAC?",
       actionPrimary: this.cancelExit,
       actionSecundary: this.deletSac,
       labelPrimaryButton: "Não",
@@ -110,7 +110,8 @@ export class SacsComponent implements OnInit {
   getSacs = () => {
     this.sacsController.getMine().subscribe({
       next: (resp) => {
-        this.data = resp.data.filter((x: any) => x.statusesId != 102)
+        debugger
+        this.data = resp.data
       },
       complete: () => {},
     });

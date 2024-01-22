@@ -90,7 +90,8 @@ export class FormComponent implements OnInit {
   exitClick(): void {
     this.modal = {
       ...this.modal,
-      title: "Você deseja esse SAC?",
+      title: "Você deseja cancelar a operação?",
+      subtitle: "Todos os campos preenchidos serão perdidos.",
       actionPrimary: this.cancelExit,
       actionSecundary: this.onCancel,
       labelPrimaryButton: "Não",
