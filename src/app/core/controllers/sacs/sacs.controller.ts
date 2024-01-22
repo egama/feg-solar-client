@@ -7,8 +7,8 @@ export class SacsController {
   constructor(private api: ApiFegItService) {}
   private prefix = '/sac';
 
-  getById = (): Observable<any> => {
-    return this.api.get(`${this.prefix}`);
+  getMine = (): Observable<any> => {
+    return this.api.get(`${this.prefix}/mine`);
   };
 
   getSacById = (id: number): Observable<any> => {
@@ -26,7 +26,7 @@ export class SacsController {
   private post = (body: any): Observable<any> => {
     return this.api.post(`${this.prefix}`, body);
   };
-  
+
   delete = (id: number): Observable<any> => {
     return this.api.delete(`${this.prefix}/${id}`);
   };
