@@ -92,7 +92,7 @@ export class SacsComponent implements OnInit {
         },
       },
       {
-        label: `Excluir Sac`,
+        label: `Cancelar`,
         command: () => {
           this.id = data.id
           this.cgc.hide();
