@@ -7,8 +7,8 @@ export class ClientesController {
   constructor(private api: ApiFegItService) {}
   private prefix = "/clientes";
 
-  getAll = (): Observable<any> => {
-    return this.api.get(`${this.prefix}`);
+  getByUserProject = (): Observable<any> => {
+    return this.api.get(`${this.prefix}/by-user-project`);
   };
 
   getByCustomerCompanyId = (id: number): Observable<any> => {

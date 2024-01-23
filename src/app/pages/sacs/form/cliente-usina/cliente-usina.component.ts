@@ -37,7 +37,7 @@ export class ClienteUsinaComponent implements OnInit {
   }
 
   getAllClientes = () => {
-    this.clientesController.getAll().subscribe({
+    this.clientesController.getByUserProject().subscribe({
       next: (resp: any) => {
         this.optionsCustomers = resp.data.map((m: any) => m.customer);
       },

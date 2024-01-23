@@ -46,10 +46,10 @@ export class EquipamentoComponent implements OnInit {
 
   createForm = () => {
     this.formCreate = this.fb.group({
-      hardwareModelId: [null, [Validators.required]],
       tipoEqp: [[null], [Validators.required]],
-      eqpText: [null, [Validators.required]],
       eqp: [[null], [Validators.required]],
+      hardwareModelId: [null, [Validators.required]],
+      eqpText: [null, [Validators.required]],
       answer: this.fb.array([]),
     });
   };
@@ -79,6 +79,12 @@ export class EquipamentoComponent implements OnInit {
       this.formCreate.value.eqp.id == 0
         ? ''
         : this.formCreate.value.eqp.description
+    );
+
+    this.formCreate.controls['hardwareModelId'].setValue(
+      this.formCreate.value.eqp.id == 0
+        ? null
+        : this.formCreate.value.eqp.hardwareModelId
     );
 
     this.tiposEquipamentosPerguntasController
@@ -174,7 +180,7 @@ export class EquipamentoComponent implements OnInit {
       // userProjectId: this.userProjectId,
       hardwareTypeId: this.formCreate.value.tipoEqp.id,
       equipament: this.formCreate.value.eqp.description,
-      hardwareModelId: this.formCreate.value.hardwareModelId.id,
+      hardwareModelId: this.formCreate.value.hardwareModelId,
       hardwareProjectId: this.formCreate.value.eqp.id,
       code: this.formCreate.value.eqpText
         ? this.formCreate.value.eqpText

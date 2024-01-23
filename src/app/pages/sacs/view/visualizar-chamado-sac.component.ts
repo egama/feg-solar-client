@@ -16,7 +16,7 @@ export class VisualizarSacComponent implements OnInit {
     private activatedrouter: ActivatedRoute
   ) {
     this.activatedrouter.params.subscribe((params) => {
-      debugger;
+      
       if (params && params['id']) this.id = params['id'];
     });
   }

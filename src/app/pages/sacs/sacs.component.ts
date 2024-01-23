@@ -97,7 +97,7 @@ export class SacsComponent implements OnInit {
   getSacs = () => {
     this.sacsController.getMine().subscribe({
       next: (resp) => {
-        debugger;
+        
         this.data = resp.data;
       },
       complete: () => {},
