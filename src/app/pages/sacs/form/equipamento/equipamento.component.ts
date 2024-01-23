@@ -171,6 +171,7 @@ export class EquipamentoComponent implements OnInit {
           : this.formCreate.value.eqp.description
       }`,
       answer,
+      // userProjectId: this.userProjectId,
       hardwareTypeId: this.formCreate.value.tipoEqp.id,
       equipament: this.formCreate.value.eqp.description,
       hardwareModelId: this.formCreate.value.hardwareModelId.id,
