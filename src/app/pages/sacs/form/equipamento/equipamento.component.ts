@@ -18,6 +18,7 @@ export class EquipamentoComponent implements OnInit {
   /** Variables */
   optionsTipoEquipamentos: any[] = [];
   optionsEquipamentos: any[] = [];
+  optionsModel: any[] = [];
   optionsAwnser: any[] = [];
   allEquips: any[] = [];
   showForm = true;
@@ -45,9 +46,10 @@ export class EquipamentoComponent implements OnInit {
 
   createForm = () => {
     this.formCreate = this.fb.group({
+      hardwareModelId: [null, [Validators.required]],
       tipoEqp: [[null], [Validators.required]],
-      eqp: [[null], [Validators.required]],
       eqpText: [null, [Validators.required]],
+      eqp: [[null], [Validators.required]],
       answer: this.fb.array([]),
     });
   };
@@ -137,7 +139,13 @@ export class EquipamentoComponent implements OnInit {
   };
 
   getModeloByType = () => {
-    //TODO: get
+    const selectedTipoEqp = this.formCreate.value.tipoEqp;
+
+    if (selectedTipoEqp) {
+      this.optionsModel = this.allEquips.filter(
+        (f: any) => f.hardwareModel.hardwareTypeId === selectedTipoEqp.id
+      );
+    }
   };
 
   resetForm() {
@@ -165,7 +173,7 @@ export class EquipamentoComponent implements OnInit {
       answer,
       hardwareTypeId: this.formCreate.value.tipoEqp.id,
       equipament: this.formCreate.value.eqp.description,
-      hardwareModelId: 0,
+      hardwareModelId: this.formCreate.value.hardwareModelId.id,
       hardwareProjectId: this.formCreate.value.eqp.id,
       code: this.formCreate.value.eqpText
         ? this.formCreate.value.eqpText

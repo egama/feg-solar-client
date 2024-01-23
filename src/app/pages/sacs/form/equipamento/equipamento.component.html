@@ -33,7 +33,7 @@
       <p-divider></p-divider>
       <p class="py-2 spartan-bold">Novo equipamento</p>
 
-      <div class="col-4">
+      <div class="col-3">
         <p>Tipo de Equipamento:</p>
         <p-dropdown
           placeholder="Selecione o tipo do equipamento"
@@ -45,7 +45,7 @@
           (onChange)="changeTipoEquipamento($event)"
         ></p-dropdown>
       </div>
-      <div class="col-4">
+      <div class="col-3">
         <p>Equipamento:</p>
         <p-dropdown
           placeholder="Selecione o equipamento"
@@ -57,7 +57,19 @@
           (onChange)="changeEquipamento()"
         ></p-dropdown>
       </div>
-      <div class="col-4" *ngIf="optionDigit">
+      <div class="col-3" *ngIf="optionDigit">
+        <p>Modelo:</p>
+        <p-dropdown
+          placeholder="Selecione o modelo"
+          appendTo="body"
+          styleClass="w-full"
+          [options]="optionsModel"
+          formControlName="hardwareModelId"
+          optionLabel="description"
+          (onChange)="changeEquipamento()"
+        ></p-dropdown>
+      </div>
+      <div class="col-3" *ngIf="optionDigit">
         <p>Digite o numero do equipamento:</p>
         <input
           class="feg-input w-full"
@@ -113,7 +125,7 @@
       </div>
     </div>
 
-    <div class="row" *ngIf="showForm">
+    <div class="row mt-3" *ngIf="showForm">
       <div class="col-12">
         <div class="d-flex justify-content-end">
           <p-button

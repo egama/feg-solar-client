@@ -64,6 +64,7 @@ export class FormComponent implements OnInit {
   };
 
   enviar = () => {
+    debugger
     this.form;
     const data = {
       type: this.form.controls['attendance'].value?.atttId?.value,
