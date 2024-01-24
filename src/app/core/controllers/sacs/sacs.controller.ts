@@ -34,12 +34,4 @@ export class SacsController {
   delete = (id: number): Observable<any> => {
     return this.api.delete(`${this.prefix}/${id}`);
   };
-
-  // upload = (file: any, name: string) => {
-  //   const data = new FormData();
-  //   data.append("file", file);
-  //   data.append("name", name);
-
-  //   return this.api.postFile(`${this.prefix}/upload`, data);
-  // };
 }
