@@ -38,6 +38,7 @@ export class FormDadosEnvioComponent implements OnInit {
       carrierName: ['', [Validators.required]],
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
+      dacte: ['', [Validators.required]],
       hardwareProjects: [[], [Validators.required]],
       observation: [''],
     });
@@ -45,7 +46,9 @@ export class FormDadosEnvioComponent implements OnInit {
 
   nr: any;
   handleFileInput = (e: any) => {
+    debugger
     this.nr = e.target?.files && e.target?.files[0];
+    debugger
   };
 
   optionsEquipamentos: any[] = [];
