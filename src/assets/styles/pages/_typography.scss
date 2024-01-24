@@ -1,15 +1,15 @@
 .title {
-    font-size: 26px;
-    font-family: "Spartan-Bold";
+  font-size: 26px;
+  font-family: "Spartan-Bold";
 }
 
 .name {
-    font-size: 20px;
-    font-family: "Spartan-Bold";
+  font-size: 20px;
+  font-family: "Spartan-Bold";
 }
 
 body {
-    background-color: $body;
+  background-color: $body;
 }
 
 p,
@@ -21,22 +21,27 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Spartan-Medium", Arial, Helvetica, sans-serif;
-    margin: 0;
-    color: $black;
+  @extend .feg-fs-13;
+  font-family: "Spartan-Medium", Arial, Helvetica, sans-serif;
+  margin: 0;
+  color: $black;
 
-    &.bold {
-        font-family: "Spartan-Bold";
-    }
+  &.bold {
+    font-family: "Spartan-Bold";
+  }
 
-    &.extra-bold {
-        font-family: "Spartan-ExtraBold";
-    }
+  &.extra-bold {
+    font-family: "Spartan-ExtraBold";
+  }
 }
 
 a,
 a:hover,
 a:focus,
 a:active {
-    color: $primary;
+  color: $primary;
+}
+
+label {
+  @extend .feg-fs-13;
 }

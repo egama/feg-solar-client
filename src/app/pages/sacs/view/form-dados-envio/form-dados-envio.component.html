@@ -2,10 +2,10 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 mt-2">
-        <p class="mb-3">
+        <label class="mb-3">
           Favor selecionar os <strong>equipamentos</strong> que serão enviados e
           seus dados de rastreio.
-        </p>
+        </label>
 
         <label for="float-input">Equipamentos</label>
 
@@ -49,7 +49,7 @@
         <div class="row">
           <div class="col-10">
             <p for="float-input">DACTE (SE TIVER)</p>
-            <span class="feg-fs-10">{{ nr?.name }}</span>
+            <p class="feg-fs-10 mt-3">{{ nr?.name }}</p>
           </div>
           <div class="col-2">
             <input
@@ -61,9 +61,9 @@
             />
             <p-button
               icon="pi pi-upload"
-              (click)="fileUpload.click()"
+              (onClick)="fileUpload.click()"
               pTooltip="Submeter DACTE"
-              tooltipPosition="top"
+              tooltipPosition="left"
               ptoolt
               label=""
               styleClass="p-button-warning mr-3"
@@ -75,11 +75,11 @@
       <p-divider></p-divider>
 
       <div class="col-12 mb-4">
-        <p>
+        <label>
           Dados do <strong>responsável</strong> pelo recebimento do equipamento
           na usina, para quando o equipamento <strong>retornar</strong> ao
           cliente
-        </p>
+        </label>
       </div>
       <div class="col-12">
         <label for="float-input">Nome</label>
