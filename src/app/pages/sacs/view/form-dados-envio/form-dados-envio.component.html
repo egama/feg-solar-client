@@ -2,6 +2,15 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 mt-2">
+        <label for="float-input">Equipamentos</label>
+        <p-multiSelect
+          [options]="data"
+          formControlName="hardwareProjects"
+          optionLabel="name"
+          placeholder="Select Cities"
+        ></p-multiSelect>
+      </div>
+      <div class="col-12 mt-2">
         <label for="float-input">Código de Rastreio</label>
         <input
           class="col-12"
@@ -96,6 +105,17 @@
           formControlName="contatoObs"
         >
         </textarea>
+      </div>
+    </div>
+    <div class="col-12 mt-2">
+      <div class="d-flex justify-content-end">
+        <p-button
+          styleClass="w-full"
+          label="Salvar Equipamento"
+          [disabled]="!form.valid"
+          (onClick)="avancar()"
+        >
+        </p-button>
       </div>
     </div>
   </div>

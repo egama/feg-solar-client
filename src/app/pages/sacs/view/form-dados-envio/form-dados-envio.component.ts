@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { SacsController } from 'src/app/core/controllers/sacs/sacs.controller';
+import { AbaFormService } from 'src/app/core/services/aba-form.service';
 
 @Component({
   selector: 'feg-form-dados-envio',
@@ -8,17 +10,28 @@ import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 export class FormDadosEnvioComponent implements OnInit {
   form!: UntypedFormGroup;
 
-  constructor(private fb: UntypedFormBuilder) {}
+  constructor(
+    private fb: UntypedFormBuilder,
+    private sacsController: SacsController,
+    public abaFormService: AbaFormService,
+    ) {}
   ngOnInit() {
     this.createForm();
+    this.getSacById();
+    const param = this.abaFormService.getParams();
+    debugger
+    if (param?.id) {
+      this.form.controls["id"].setValue(param?.id);
+    }
   }
 
   createForm = () => {
     this.form = this.fb.group({
-      codigoRastreio: [''],
-      transportadora: [''],
-      contatoNome: [''],
-      contatoTelefone: [''],
+      codigoRastreio: ['', [Validators.required]],
+      transportadora: ['', [Validators.required]],
+      contatoNome: ['', [Validators.required]],
+      contatoTelefone: ['', [Validators.required]],
+      hardwareProjects: ['', [Validators.required]],
       contatoObs: [''],
     });
   };
@@ -26,5 +39,32 @@ export class FormDadosEnvioComponent implements OnInit {
   nr: any;
   handleFileInput = (e: any) => {
     this.nr = e.target?.files && e.target?.files[0];
+  };
+
+  id: number = 0
+  data: any[] = [];
+  getSacById = () => {
+    this.sacsController.getSacById(this.id).subscribe({
+      next: (resp: any) => {
+        this.data = resp.data.filter((x: any) => x.SacHardwares.Status.name === 'RMA Aguardando Envio');
+      },
+    });
+  };
+
+  avancar = () => {
+    debugger
+    const data = {
+      trackingCode: this.form.value.codigoRastreio,
+      carrierName: this.form.value.transportadora,
+      name: this.form.value.contatoNome,
+      phone: this.form.value.contatoTelefone,
+      observation: this.form.value.contatoObs,
+    }
+    debugger
+    this.sacsController.envio(data).subscribe({
+      next: () => {
+
+      }
+    })
   };
 }
