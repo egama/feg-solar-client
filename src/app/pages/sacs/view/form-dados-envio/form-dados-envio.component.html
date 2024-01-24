@@ -12,7 +12,9 @@
         <p-multiSelect
           [options]="optionsEquipamentos"
           formControlName="hardwareProjects"
-          optionLabel="name"
+          styleClass="w-full"
+          optionLabel="HardwareProjects.description"
+          optionValue="id"
           placeholder="Select Cities"
         ></p-multiSelect>
       </div>
@@ -26,7 +28,7 @@
           pInputText
           autocomplete="off"
           placeholder="Código de Rastreio"
-          formControlName="codigoRastreio"
+          formControlName="trackingCode"
         />
       </div>
 
@@ -39,7 +41,7 @@
           pInputText
           autocomplete="off"
           placeholder="Código de Rastreio"
-          formControlName="transportadora"
+          formControlName="carrierName"
         />
       </div>
 
@@ -87,7 +89,7 @@
           type="text"
           pInputText
           autocomplete="off"
-          formControlName="contatoNome"
+          formControlName="name"
         />
       </div>
       <div class="col-12">
@@ -98,7 +100,7 @@
           type="text"
           autocomplete="off"
           mask="(99) 99999-9999"
-          formControlName="contatoTelefone"
+          formControlName="phone"
         ></p-inputMask>
       </div>
       <div class="col-12">
@@ -109,7 +111,7 @@
           type="text"
           pInputText
           autocomplete="off"
-          formControlName="contatoObs"
+          formControlName="observation"
         >
         </textarea>
       </div>

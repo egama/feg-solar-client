@@ -5,6 +5,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { SacsController } from 'src/app/core/controllers/sacs/sacs.controller';
+import { ENUM_STATUS_SAC } from 'src/app/core/enums/enum';
 import { AbaFormService } from 'src/app/core/services/aba-form.service';
 
 @Component({
@@ -21,23 +22,24 @@ export class FormDadosEnvioComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.createForm();
-    this.getSacById();
     const param = this.abaFormService.getParams();
-    debugger;
+
     if (param?.id) {
       this.form.controls['id'].setValue(param?.id);
     }
+
+    this.getSacById();
   }
 
   createForm = () => {
     this.form = this.fb.group({
       id: [null],
-      codigoRastreio: ['', [Validators.required]],
-      transportadora: ['', [Validators.required]],
-      contatoNome: ['', [Validators.required]],
-      contatoTelefone: ['', [Validators.required]],
-      hardwareProjects: ['', [Validators.required]],
-      contatoObs: [''],
+      trackingCode: ['', [Validators.required]],
+      carrierName: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      phone: ['', [Validators.required]],
+      hardwareProjects: [[], [Validators.required]],
+      observation: [''],
     });
   };
 
@@ -50,9 +52,8 @@ export class FormDadosEnvioComponent implements OnInit {
   getSacById = () => {
     this.sacsController.getSacById(this.form.value.id).subscribe({
       next: (resp: any) => {
-        debugger;
-        this.optionsEquipamentos = resp.data.filter(
-          (x: any) => x.SacHardwares.Status.name === 'RMA Aguardando Envio'
+        this.optionsEquipamentos = (resp.data?.SacHardwares || []).filter(
+          (x: any) => x.statusesId === ENUM_STATUS_SAC.RMA_AGUARDANDO_ENVIO
         );
       },
     });
@@ -61,11 +62,8 @@ export class FormDadosEnvioComponent implements OnInit {
   avancar = () => {
     debugger;
     const data = {
-      trackingCode: this.form.value.codigoRastreio,
-      carrierName: this.form.value.transportadora,
-      name: this.form.value.contatoNome,
-      phone: this.form.value.contatoTelefone,
-      observation: this.form.value.contatoObs,
+      ...this.form.value,
+      dacte: 'urlAqui',
     };
     debugger;
     this.sacsController.envio(data).subscribe({
