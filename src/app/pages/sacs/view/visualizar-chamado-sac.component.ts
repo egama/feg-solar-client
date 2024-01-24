@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SacsController } from 'src/app/core/controllers/sacs/sacs.controller';
@@ -22,6 +22,8 @@ export class VisualizarSacComponent implements OnInit, OnDestroy {
     });
   }
 
+  @ViewChild('cgc') cgc: any;
+
   form!: UntypedFormGroup;
   data: any;
   id: number = 0;
@@ -32,6 +34,18 @@ export class VisualizarSacComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.abaFormService.close();
   }
+
+  allMenu: any[] = [];
+
+  menuSelecao: any;
+  openMenu = (e: any, item: any) => {
+    debugger;
+    this.menuSelecao = {
+      data: item,
+      opcoes: item.menu,
+    };
+    this.cgc.toggle(event);
+  };
 
   equipamentos: any[] = [];
   getSacById = () => {
@@ -44,8 +58,13 @@ export class VisualizarSacComponent implements OnInit, OnDestroy {
             equipamento: sh?.HardwareProjects?.description,
             status: sh?.Status?.name,
             statusId: sh?.statusesId,
+            menu: this.allMenu.filter((m) =>
+              m.status.find((s: any) => s == sh?.statusesId)
+            ),
           };
         });
+
+        debugger;
       },
     });
   };
