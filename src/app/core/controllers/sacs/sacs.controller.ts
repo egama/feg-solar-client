@@ -23,6 +23,10 @@ export class SacsController {
     return this.api.put(`${this.prefix}`, body);
   };
 
+  envio = (body: any): Observable<any> => {
+    return this.api.put(`${this.prefix}/rastreio`, body);
+  };
+
   private post = (body: any): Observable<any> => {
     return this.api.post(`${this.prefix}`, body);
   };

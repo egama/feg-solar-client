@@ -3,19 +3,18 @@
     <div class="row">
       <div class="col-12 mt-2">
         <p class="mb-3">
-          Favor selecionar os <strong>equipamentos</strong> que serão enviados e seus dados de rastreio.
+          Favor selecionar os <strong>equipamentos</strong> que serão enviados e
+          seus dados de rastreio.
         </p>
 
         <label for="float-input">Equipamentos</label>
-        <input
-          class="col-12"
-          id="float-input"
-          type="text"
-          pInputText
-          autocomplete="off"
-          placeholder="Código de Rastreio"
-          formControlName="codigoRastreio"
-        />
+
+        <p-multiSelect
+          [options]="optionsEquipamentos"
+          formControlName="hardwareProjects"
+          optionLabel="name"
+          placeholder="Select Cities"
+        ></p-multiSelect>
       </div>
 
       <div class="col-12 mt-2">
@@ -113,6 +112,17 @@
           formControlName="contatoObs"
         >
         </textarea>
+      </div>
+    </div>
+    <div class="col-12 mt-2">
+      <div class="d-flex justify-content-end">
+        <p-button
+          styleClass="w-full"
+          label="Salvar Equipamento"
+          [disabled]="!form.valid"
+          (onClick)="avancar()"
+        >
+        </p-button>
       </div>
     </div>
   </div>

@@ -46,7 +46,6 @@ export class VisualizarSacComponent implements OnInit, OnDestroy {
             statusId: sh?.statusesId,
           };
         });
-        debugger;
       },
     });
   };
@@ -56,7 +55,6 @@ export class VisualizarSacComponent implements OnInit, OnDestroy {
   };
 
   setarDadosEnvio = () => {
-    debugger;
     this.abaFormService.enable({
       code: 'dados-envio',
       component: FormDadosEnvioComponent,
