@@ -84,6 +84,12 @@ export const ENUM_MENU_APPLICATION = {
   APP_SELLER: 3,
 };
 
+export const ENUM_QUESTION_TYPE = {
+  ATENDIMENTO: 1,
+  ANALI_TEC: 2,
+  COMISSIONAMENTO: 3,
+};
+
 export const ENUM_STATUS_SAC = {
   ABERTO: 100,
   CONCLUIDO: 101,

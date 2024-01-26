@@ -2,6 +2,7 @@
   "default": {
     "cancel": "Cancelar",
     "save": "Salvar",
+    "continue": "Continuar",
     "doubt": "Dúvidas, perguntas, acesse nossa",
     "central": "Central de Ajuda Feg Solar",
     "development": "Desenvolvimento",
@@ -146,7 +147,6 @@
         "namecollaborator": "Nome do Colaborador",
         "accessprofile": "Nome do Perfil",
         "savecollaborator": "Colaborador salvo com sucesso!"
-
       },
       "profile": {
         "profile": "Perfil",
