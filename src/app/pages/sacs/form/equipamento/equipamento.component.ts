@@ -8,7 +8,7 @@ import {
 import { ProjetosEquipamentosController } from 'src/app/core/controllers/projetos-equipamentos/projetos-equipamentos.controller';
 import { TiposEquipamentosController } from 'src/app/core/controllers/tipos-equipamentos/tipos-equipmentos.controller';
 import { TiposEquipamentosPerguntasController } from 'src/app/core/controllers/tipos-equipametos-pergutas/tipos-equipametos-pergutas.controller';
-import { ENUM_MENU_APPLICATION } from 'src/app/core/enums/enum';
+import { ENUM_QUESTION_TYPE } from 'src/app/core/enums/enum';
 
 @Component({
   selector: 'feg-novo-equipamento',
@@ -88,7 +88,7 @@ export class EquipamentoComponent implements OnInit {
     );
 
     this.tiposEquipamentosPerguntasController
-      .getAll(ENUM_MENU_APPLICATION.WEB, this.formCreate.value.tipoEqp.id)
+      .getAll(ENUM_QUESTION_TYPE.ATENDIMENTO, this.formCreate.value.tipoEqp.id)
       .subscribe({
         next: (resp: any) => {
           this.questionsData = resp.data;
