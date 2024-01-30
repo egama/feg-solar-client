@@ -12,6 +12,7 @@ import { TipoAtendimentoComponent } from './form/tipo-atendimento/tipo-atendimen
 import { FormComponent } from './form/form.component';
 import { VisualizarSacComponent } from './view/visualizar-chamado-sac.component';
 import { FormDadosEnvioComponent } from './view/form-dados-envio/form-dados-envio.component';
+import { FormPropostaComponent } from './view/form-proposta/form-proposta.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { FormDadosEnvioComponent } from './view/form-dados-envio/form-dados-envi
     FormComponent,
     VisualizarSacComponent,
     FormDadosEnvioComponent,
+    FormPropostaComponent,
   ],
   imports: [
     FormsModule,

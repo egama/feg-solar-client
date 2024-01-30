@@ -5,6 +5,7 @@ import { SacsController } from 'src/app/core/controllers/sacs/sacs.controller';
 import { AbaFormService } from 'src/app/core/services/aba-form.service';
 import { FormDadosEnvioComponent } from './form-dados-envio/form-dados-envio.component';
 import { ENUM_STATUS_SAC } from 'src/app/core/enums/enum';
+import { FormPropostaComponent } from './form-proposta/form-proposta.component';
 
 @Component({
   selector: 'feg-visualizar-sac',
@@ -78,6 +79,18 @@ export class VisualizarSacComponent implements OnInit, OnDestroy {
       code: 'dados-envio',
       component: FormDadosEnvioComponent,
       label: 'Dados de envio',
+      callback: () => {},
+      params: {
+        id: this.id,
+      },
+    });
+  };
+
+  verPropostas = () => {
+    this.abaFormService.enable({
+      code: 'proposta',
+      component: FormPropostaComponent,
+      label: 'Proposta',
       callback: () => {},
       params: {
         id: this.id,

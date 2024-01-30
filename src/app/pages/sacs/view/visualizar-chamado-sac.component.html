@@ -80,6 +80,13 @@
               styleClass="p-button-warning"
               (onClick)="setarDadosEnvio()"
             ></p-button>
+            <p-button
+              *ngIf="hasAnyStatus(ENUM_STATUS_SAC.RMA_AGUARDANDO_PROPOSTA)"
+              icon="pi pi-exclamation-triangle"
+              label="Ver proposta"
+              styleClass="p-button-warning"
+              (onClick)="verPropostas()"
+            ></p-button>
           </div>
         </div>
       </div>
@@ -106,6 +113,11 @@
                   *ngIf="equip.statusId == ENUM_STATUS_SAC.RMA_AGUARDANDO_ENVIO"
                   pTooltip="Por favor, informar dados de envio do equipamento"
                   class="pi pi-exclamation-triangle feg-color-orange"
+                ></i>
+                <i
+                  *ngIf="equip.statusId == ENUM_STATUS_SAC.RMA_PROPOSTA_ENVIADA"
+                  pTooltip="Por favor, analisar e responder a proposta"
+                  class="pi pi-file-pdf feg-color-orange"
                 ></i>
                 {{ equip.status }}
               </td>

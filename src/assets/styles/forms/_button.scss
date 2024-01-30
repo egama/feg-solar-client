@@ -121,6 +121,25 @@ button.p-button {
             }
         }
     }
+    &-red {
+        background: $red;
+        border: 1px solid $red;
+
+        span {
+            color: $white;
+        }
+
+        &:enabled:active,
+        &:enabled:hover,
+        &:hover {
+            background: $red;
+            border: 1px solid $red;
+
+            span {
+                color: $white;
+            }
+        }
+    }
 }
 
 
