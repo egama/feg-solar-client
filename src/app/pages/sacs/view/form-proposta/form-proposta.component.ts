@@ -1,15 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  UntypedFormBuilder,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MessageService } from 'src/app/core/services/messageService';
 import { CoreController } from 'src/app/core/controllers/core/core.controller';
 import { SacsController } from 'src/app/core/controllers/sacs/sacs.controller';
-import { ENUM_STATUS_SAC } from 'src/app/core/enums/enum';
 import { AbaFormService } from 'src/app/core/services/aba-form.service';
-import * as uuid from 'uuid';
 import { TranslateService } from '@ngx-translate/core';
 import { BudgetController } from 'src/app/core/controllers/budget/budget.controller';
 
@@ -31,12 +25,12 @@ export class FormPropostaComponent implements OnInit {
   ) {}
 
   proposta: any[] = [];
-  data: any
-  approved: any
+  data: any;
+  approved: any;
 
   ngOnInit() {
     this.createForm();
-    debugger
+    debugger;
     const param = this.abaFormService.getParams();
     if (param?.id) {
       this.form.controls['id'].setValue(param?.id);
@@ -55,30 +49,30 @@ export class FormPropostaComponent implements OnInit {
   getPropostaBySacId = () => {
     this.budgetController.getFinalizadoBySacId(this.form.value.id).subscribe({
       next: (resp: any) => {
-        debugger
+        debugger;
         this.data = resp.data;
       },
     });
   };
 
   avancar = () => {
-    debugger
-    this.sacsController.avancar(this.data.id, this.form.value.approved).subscribe({
-      next: () => {
-        debugger;
-      },
-    });
+    debugger;
+    this.sacsController
+      .avancar(this.data.id, this.form.value.approved)
+      .subscribe({
+        next: () => {
+          debugger;
+        },
+      });
   };
-  
 
   aprovar = () => {
     this.form.controls['approved'].setValue(true);
     this.avancar();
   };
-  
+
   reprovar = () => {
     this.form.controls['approved'].setValue(false);
     this.avancar();
   };
-  
 }
