@@ -31,9 +31,12 @@ export class FormPropostaComponent implements OnInit {
   ) {}
 
   proposta: any[] = [];
+  data: any
+  approved: any
 
   ngOnInit() {
     this.createForm();
+    debugger
     const param = this.abaFormService.getParams();
     if (param?.id) {
       this.form.controls['id'].setValue(param?.id);
@@ -45,22 +48,37 @@ export class FormPropostaComponent implements OnInit {
     this.form = this.fb.group({
       id: [null],
       lido: [false],
+      approved: [false],
     });
   };
 
   getPropostaBySacId = () => {
     this.budgetController.getFinalizadoBySacId(this.form.value.id).subscribe({
       next: (resp: any) => {
-        debugger;
+        debugger
+        this.data = resp.data;
       },
     });
   };
 
+  avancar = () => {
+    debugger
+    this.sacsController.avancar(this.data.id, this.form.value.approved).subscribe({
+      next: () => {
+        debugger;
+      },
+    });
+  };
+  
+
   aprovar = () => {
-    this.form;
-    debugger;
+    this.form.controls['approved'].setValue(true);
+    this.avancar();
   };
+  
   reprovar = () => {
-    debugger;
+    this.form.controls['approved'].setValue(false);
+    this.avancar();
   };
+  
 }
