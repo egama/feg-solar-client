@@ -1,6 +1,33 @@
 <form [formGroup]="form">
   <div class="container-fluid">
     <div class="row">
+      <div class="col-12">
+        <p><strong>Proposta para:</strong> {{ data.description }}</p>
+        <label class="fw-bold">Descrição:</label>
+
+        <div class="row" *ngFor="let budgetItem of data.BudgetsItems">
+          <div class="col-md-5 ms-3">
+            <label class="fw-bold">Quantidade:</label>
+            <p>{{ budgetItem.unit }}</p>
+          </div>
+
+          <div class="col-md-5 ms-3">
+            <label class="fw-bold">Preço Unitário:</label>
+            <p>{{ budgetItem.unitPrice }}</p>
+          </div>
+
+          <div class="col-md-5 ms-3">
+            <label class="fw-bold">Desconto:</label>
+            <p>{{ budgetItem.discount }}</p>
+          </div>
+
+          <div class="col-md-5 ms-3">
+            <label class="fw-bold">Preço total:</label>
+            <p>{{ budgetItem.totalPrice }}</p>
+          </div>
+          <p-divider type="dashed"></p-divider>
+        </div>
+      </div>
       <div class="col-12 mt-2">
         <p-checkbox
           formControlName="lido"

@@ -31,6 +31,7 @@ export class FormPropostaComponent implements OnInit {
   ) {}
 
   proposta: any[] = [];
+  data: any
 
   ngOnInit() {
     this.createForm();
@@ -51,7 +52,7 @@ export class FormPropostaComponent implements OnInit {
   getPropostaBySacId = () => {
     this.budgetController.getFinalizadoBySacId(this.form.value.id).subscribe({
       next: (resp: any) => {
-        debugger;
+        this.data = resp.data;
       },
     });
   };
