@@ -72,12 +72,12 @@ export class FormPropostaComponent implements OnInit {
   
 
   aprovar = () => {
-    this.form.controls['approved'].setValue(true); // Set status to true
+    this.form.controls['approved'].setValue(true);
     this.avancar();
   };
   
   reprovar = () => {
-    this.form.controls['approved'].setValue(false); // Set status to false
+    this.form.controls['approved'].setValue(false);
     this.avancar();
   };
   
