@@ -34,4 +34,8 @@ export class SacsController {
   delete = (id: number): Observable<any> => {
     return this.api.delete(`${this.prefix}/${id}`);
   };
+
+  avancar = (id: number, body: any) => {
+    return this.api.put(`${this.prefix}/avancar/proposta-resposta/${id}`, body);
+  };
 }
