@@ -79,7 +79,9 @@ export class VisualizarSacComponent implements OnInit, OnDestroy {
       code: 'dados-envio',
       component: FormDadosEnvioComponent,
       label: 'Dados de envio',
-      callback: () => {},
+      callback: () => {
+        this.getSacById();
+      },
       params: {
         id: this.id,
       },
@@ -91,7 +93,9 @@ export class VisualizarSacComponent implements OnInit, OnDestroy {
       code: 'proposta',
       component: FormPropostaComponent,
       label: 'Proposta',
-      callback: () => {},
+      callback: () => {
+        this.getSacById();
+      },
       params: {
         id: this.id,
       },

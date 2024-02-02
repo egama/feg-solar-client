@@ -1,15 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  UntypedFormBuilder,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MessageService } from 'src/app/core/services/messageService';
 import { CoreController } from 'src/app/core/controllers/core/core.controller';
 import { SacsController } from 'src/app/core/controllers/sacs/sacs.controller';
-import { ENUM_STATUS_SAC } from 'src/app/core/enums/enum';
 import { AbaFormService } from 'src/app/core/services/aba-form.service';
-import * as uuid from 'uuid';
 import { TranslateService } from '@ngx-translate/core';
 import { BudgetController } from 'src/app/core/controllers/budget/budget.controller';
 
@@ -36,7 +30,11 @@ export class FormPropostaComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+<<<<<<< HEAD
     
+=======
+    debugger;
+>>>>>>> 2a3f5c2009d320ac06979d44bb468c254d93567f
     const param = this.abaFormService.getParams();
     if (param?.id) {
       this.form.controls['id'].setValue(param?.id);
@@ -55,13 +53,18 @@ export class FormPropostaComponent implements OnInit {
   getPropostaBySacId = () => {
     this.budgetController.getFinalizadoBySacId(this.form.value.id).subscribe({
       next: (resp: any) => {
+<<<<<<< HEAD
         
+=======
+        debugger;
+>>>>>>> 2a3f5c2009d320ac06979d44bb468c254d93567f
         this.data = resp.data;
       },
     });
   };
 
   avancar = () => {
+<<<<<<< HEAD
     
     this.sacsController
       .avancarResposta(this.data.id, this.form.value)
@@ -76,6 +79,14 @@ export class FormPropostaComponent implements OnInit {
         },
         complete: () => {
           this.abaFormService.close('completed');
+=======
+    debugger;
+    this.sacsController
+      .avancar(this.data.id, this.form.value.approved)
+      .subscribe({
+        next: () => {
+          debugger;
+>>>>>>> 2a3f5c2009d320ac06979d44bb468c254d93567f
         },
       });
   };
