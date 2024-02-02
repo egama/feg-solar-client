@@ -68,7 +68,7 @@ export class FormDadosEnvioComponent implements OnInit {
   };
 
   avancar = () => {
-    debugger;
+    
     if (this.nr) {
       this.coreController.upload(this.nr, `logo-${uuid.v1()}.pdf`).subscribe({
         next: (data: any) => {
@@ -77,7 +77,7 @@ export class FormDadosEnvioComponent implements OnInit {
             ...this.form.value,
             dacte: this.nr,
           };
-          debugger;
+          
           this.sacsController.envio(envio).subscribe({
             next: async () => {
               this.messageService.success(

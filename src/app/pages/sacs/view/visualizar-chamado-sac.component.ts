@@ -40,7 +40,7 @@ export class VisualizarSacComponent implements OnInit, OnDestroy {
 
   menuSelecao: any;
   openMenu = (e: any, item: any) => {
-    debugger;
+    
     this.menuSelecao = {
       data: item,
       opcoes: item.menu,
@@ -65,7 +65,7 @@ export class VisualizarSacComponent implements OnInit, OnDestroy {
           };
         });
 
-        debugger;
+        
       },
     });
   };
