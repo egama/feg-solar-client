@@ -46,10 +46,26 @@ export class FormPropostaComponent implements OnInit {
     });
   };
 
+  listEquips: any[] = [];
   getPropostaBySacId = () => {
+    this.listEquips = [];
     this.budgetController.getFinalizadoBySacId(this.form.value.id).subscribe({
       next: (resp: any) => {
         this.data = resp.data;
+        (resp.data.BudgetsItems || []).map((d: any) => {
+          const ind = this.listEquips.findIndex(
+            (i) => i.sacHardwaresId == d.sacHardwaresId
+          );
+          if (ind < 0) {
+            this.listEquips.push({
+              sacHardwaresId: d.sacHardwaresId,
+              description: d.SacHardwares.HardwareProjects.description,
+              propostas: [d],
+            });
+          } else {
+            this.listEquips[ind].propostas.push(d);
+          }
+        });
       },
     });
   };
@@ -81,4 +97,24 @@ export class FormPropostaComponent implements OnInit {
     this.form.controls['approved'].setValue(false);
     this.avancar();
   };
+
+  private sumByKey = (key: string) => {
+    return (this.data.BudgetsItems || []).reduce(
+      (accumulator: any, currentValue: any) => accumulator + parseFloat(currentValue[key]),
+      0
+    );
+  };
+
+  get qtd() {
+    return this.sumByKey('unit');
+  }
+  get sub() {
+    return this.sumByKey('unitPrice');
+  }
+  get desc() {
+    return this.sumByKey('discount');
+  }
+  get valueTotal() {
+    return this.sumByKey('totalPrice');
+  }
 }

@@ -1,29 +1,34 @@
 <form [formGroup]="form">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12">
-        <p><strong>Proposta para:</strong> {{ data.description }}</p>
-        <label class="fw-bold">Descrição:</label>
+      <div class="col-12" *ngFor="let equip of listEquips">
+        <p><strong>Proposta para:</strong> {{ equip.description }}</p>
+        <label>Proposta:</label>
 
-        <div class="row" *ngFor="let budgetItem of data.BudgetsItems">
-          <div class="col-md-5 ms-3">
+        <div class="row px-3" *ngFor="let budgetItem of equip.propostas">
+          <div class="col-md-12">
+            <label class="fw-bold">Modelo:</label>
+            <p>{{ budgetItem.ItemHardware.description }}</p>
+          </div>
+
+          <div class="col-md-3">
             <label class="fw-bold">Quantidade:</label>
             <p>{{ budgetItem.unit }}</p>
           </div>
 
-          <div class="col-md-5 ms-3">
-            <label class="fw-bold">Preço Unitário:</label>
-            <p>{{ budgetItem.unitPrice }}</p>
+          <div class="col-md-3">
+            <label class="fw-bold">Valor Un:</label>
+            <p>{{ budgetItem.unitPrice | currency : "R$" }}</p>
           </div>
 
-          <div class="col-md-5 ms-3">
+          <div class="col-md-3">
             <label class="fw-bold">Desconto:</label>
-            <p>{{ budgetItem.discount }}</p>
+            <p>{{ budgetItem.discount | currency : "R$" }}</p>
           </div>
 
-          <div class="col-md-5 ms-3">
-            <label class="fw-bold">Preço total:</label>
-            <p>{{ budgetItem.totalPrice }}</p>
+          <div class="col-md-3">
+            <label class="fw-bold">Valor total:</label>
+            <p>{{ budgetItem.totalPrice | currency : "R$" }}</p>
           </div>
           <p-divider type="dashed"></p-divider>
         </div>
@@ -37,23 +42,52 @@
         ></p-checkbox>
       </div>
     </div>
-    <div class="col-12 mt-2">
-      <div class="d-flex justify-content-evenly">
-        <p-button
-          styleClass="w-full p-button-red me-3"
-          label="Reprovar"
-          [disabled]="!form.valid || !form.value.lido"
-          (onClick)="reprovar()"
-        >
-        </p-button>
+    <div class="row">
+      <div class="coll-12">
+        <div class="row mt-3">
+          <div class="col-12">
+            <p class="feg-fs-14 mt-2"><strong>Qtd. Itens:</strong> {{ qtd }}</p>
+          </div>
 
-        <p-button
-          styleClass="w-full"
-          label="Aprovar"
-          [disabled]="!form.valid || !form.value.lido"
-          (onClick)="aprovar()"
-        >
-        </p-button>
+          <div class="col-12">
+            <p class="feg-fs-14 mt-2">
+              <strong>Subtotal:</strong>{{ sub | currency : "R$" }}
+            </p>
+          </div>
+
+          <div class="col-12">
+            <p class="feg-fs-14 mt-2">
+              <strong>Desconto:</strong>{{ desc | currency : "R$" }}
+            </p>
+          </div>
+
+          <div class="col-12">
+            <p class="feg-fs-14 mt-2">
+              <strong>Valor Total:</strong>{{ valueTotal | currency : "R$" }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 mt-2">
+        <div class="d-flex justify-content-evenly">
+          <p-button
+            styleClass="w-full p-button-red me-3"
+            label="Reprovar"
+            [disabled]="!form.valid || !form.value.lido"
+            (onClick)="reprovar()"
+          >
+          </p-button>
+
+          <p-button
+            styleClass="w-full"
+            label="Aprovar"
+            [disabled]="!form.valid || !form.value.lido"
+            (onClick)="aprovar()"
+          >
+          </p-button>
+        </div>
       </div>
     </div>
   </div>
