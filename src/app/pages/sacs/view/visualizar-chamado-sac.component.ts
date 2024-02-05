@@ -6,6 +6,9 @@ import { AbaFormService } from 'src/app/core/services/aba-form.service';
 import { FormDadosEnvioComponent } from './form-dados-envio/form-dados-envio.component';
 import { ENUM_STATUS_SAC } from 'src/app/core/enums/enum';
 import { FormPropostaComponent } from './form-proposta/form-proposta.component';
+import { ModalConfirmType } from 'src/app/common/modais/confirm/confirm.type';
+import { TranslateService } from '@ngx-translate/core';
+import { MessageService } from 'src/app/core/services/messageService';
 
 @Component({
   selector: 'feg-visualizar-sac',
@@ -16,7 +19,9 @@ export class VisualizarSacComponent implements OnInit, OnDestroy {
     private sacsController: SacsController,
     public abaFormService: AbaFormService,
     private router: Router,
-    private activatedrouter: ActivatedRoute
+    private activatedrouter: ActivatedRoute,
+    private translate: TranslateService,
+    private messageService: MessageService
   ) {
     this.activatedrouter.params.subscribe((params) => {
       if (params && params['id']) this.id = params['id'];
@@ -24,6 +29,7 @@ export class VisualizarSacComponent implements OnInit, OnDestroy {
   }
 
   @ViewChild('cgc') cgc: any;
+  @ViewChild('mconf') mconf?: any;
 
   form!: UntypedFormGroup;
   data: any;
@@ -36,11 +42,62 @@ export class VisualizarSacComponent implements OnInit, OnDestroy {
     this.abaFormService.close();
   }
 
-  allMenu: any[] = [];
+  allMenu: any[] = [
+    {
+      label: 'Cancelar',
+      status: [
+        ENUM_STATUS_SAC.RMA_AGUARDANDO_ENVIO,
+        ENUM_STATUS_SAC.RMA_EM_TRANSPORTE_PARA_CENTRO_DE_REPAROS,
+        ENUM_STATUS_SAC.RMA_RECEBIDO_CENTRAL,
+        ENUM_STATUS_SAC.RMA_EQUIPAMENTO_EM_ANALISE_TECNICA,
+        ENUM_STATUS_SAC.RMA_AGUARDANDO_PROPOSTA,
+        ENUM_STATUS_SAC.RMA_PROPOSTA_ENVIADA,
+        ENUM_STATUS_SAC.RMA_PROPOSTA_RESPONDIDA,
+        ENUM_STATUS_SAC.RMA_AGUARDANDO_RESOLUCAO,
+        ENUM_STATUS_SAC.RMA_AGUARDANDO_EMISSAO_DE_NOTA_DE_ENVIO,
+        ENUM_STATUS_SAC.RMA_AGUARDANDO_DEVOLUCAO,
+      ],
+      command: (e: any) => {
+        this.cgc.hide();
+        this.confirmExclude();
+      },
+    },
+  ];
+
+  modalConfirm = new ModalConfirmType();
+  confirmExclude = async () => {
+    this.modalConfirm = {
+      ...this.modalConfirm,
+      data: this.menuSelecao.data,
+      callbackSuccess: () => {},
+      title: await this.translate.get('Atenção!').toPromise(),
+      subtitle: await this.translate
+        .get('Deseja cancelar a RMA em questão?')
+        .toPromise(),
+      actionPrimary: () => {},
+      actionSecundary: () => this.deletar(),
+      labelPrimaryButton: await this.translate.get('Cancelar').toPromise(),
+      labelSecundaryButton: await this.translate.get('Confirmar').toPromise(),
+    };
+    this.mconf.openModal();
+  };
+
+  deletar = async () => {
+    this.sacsController.delete(this.modalConfirm.data.id).subscribe({
+      next: async (resp: any) => {
+        this.messageService.success(
+          `${await this.translate.get('Sucesso').toPromise()}`,
+          `${await this.translate
+            .get('RMA cancelada com sucesso!')
+            .toPromise()}`
+        );
+        this.getSacById();
+      },
+    });
+  };
 
   menuSelecao: any;
   openMenu = (e: any, item: any) => {
-    
     this.menuSelecao = {
       data: item,
       opcoes: item.menu,
@@ -55,6 +112,7 @@ export class VisualizarSacComponent implements OnInit, OnDestroy {
         this.data = resp.data;
         this.equipamentos = (resp.data?.SacHardwares || []).map((sh: any) => {
           return {
+            id: sh?.id,
             tipo: sh?.HardwareProjects?.hardwareModel?.hardwareType?.name,
             equipamento: sh?.HardwareProjects?.description,
             status: sh?.Status?.name,
@@ -64,8 +122,6 @@ export class VisualizarSacComponent implements OnInit, OnDestroy {
             ),
           };
         });
-
-        
       },
     });
   };

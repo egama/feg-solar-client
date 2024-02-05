@@ -68,7 +68,6 @@ export class FormDadosEnvioComponent implements OnInit {
   };
 
   avancar = () => {
-    
     if (this.nr) {
       this.coreController.upload(this.nr, `logo-${uuid.v1()}.pdf`).subscribe({
         next: (data: any) => {

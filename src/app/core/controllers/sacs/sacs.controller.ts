@@ -32,10 +32,14 @@ export class SacsController {
   };
 
   delete = (id: number): Observable<any> => {
-    return this.api.delete(`${this.prefix}/${id}`);
+    return this.api.delete(`${this.prefix}/rma/sac-hardware/${id}`);
   };
 
   avancarResposta = (id: number, body: any) => {
     return this.api.put(`${this.prefix}/avancar/proposta-resposta/${id}`, body);
+  };
+  
+  avancar = (id: number, body: any) => {
+    return this.api.put(`${this.prefix}/avancar/${id}`, body);
   };
 }

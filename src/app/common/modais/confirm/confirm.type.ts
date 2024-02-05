@@ -13,6 +13,7 @@ export class ModalConfirmType {
   title: string;
   subtitle?: string;
   data?: any;
+  callbackSuccess?: any;
   actionPrimary: () => void;
   actionSecundary: () => void;
 
