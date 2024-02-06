@@ -37,7 +37,7 @@ export class NavbarLogonComponent implements OnInit {
         icon: "pi-lock",
         label: "Alterar Senha",
         command: () => {
-          this.router.navigate(["configuracao/alterar-senha"]);
+          this.router.navigate(["configuracao/primeiro-acesso"]);
         },
       },
       {

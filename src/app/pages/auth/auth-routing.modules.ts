@@ -2,7 +2,7 @@ import { LoginComponent } from "./login/login.component";
 import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { CadastroComponent } from "./cadastro/cadastro.component";
-import { ResetPasswordComponent } from "./reset-password/reset-password.component";
+import { firstLoginComponent } from "./reset-password/reset-password.component";
 import { LoginTemplateComponent } from "src/app/common/login-template/login-template.component";
 import { NovaSenhaComponent } from "./nova-senha/nova-senha.component";
 
@@ -21,8 +21,8 @@ export const routes: Routes = [
         component: CadastroComponent,
       },
       {
-        path: "alterar-senha",
-        component: ResetPasswordComponent,
+        path: "primeiro-acesso",
+        component: firstLoginComponent,
       },
       {
         path: "nova-senha",

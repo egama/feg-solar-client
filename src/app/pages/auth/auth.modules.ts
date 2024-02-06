@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PrimeNGModules } from "src/app/core/modules/primeng.modules";
 import { AuthRoutingModule } from "./auth-routing.modules";
 import { CadastroComponent } from "./cadastro/cadastro.component";
-import { ResetPasswordComponent } from "./reset-password/reset-password.component";
+import { firstLoginComponent } from "./reset-password/reset-password.component";
 import { CommonModules } from "src/app/common/common.module";
 import { NovaSenhaComponent } from "./nova-senha/nova-senha.component";
 import { TranslateModule } from "@ngx-translate/core";
@@ -14,7 +14,7 @@ import { TranslateModule } from "@ngx-translate/core";
   declarations: [
     LoginComponent,
     CadastroComponent,
-    ResetPasswordComponent,
+    firstLoginComponent,
     NovaSenhaComponent,
   ],
   imports: [

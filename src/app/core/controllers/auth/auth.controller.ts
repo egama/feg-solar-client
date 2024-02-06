@@ -38,6 +38,17 @@ export class AuthController {
     );
   };
 
+  primeiroAcesso = (email: string): Observable<any> => {
+    debugger
+    return this.api.post(
+      `/auth/first-login`,
+      {
+        email,
+      },
+      false
+    );
+  };
+
   novaSenha = (key: string, password: string): Observable<any> => {
     return this.api.post(
       `/auth/new-password`,

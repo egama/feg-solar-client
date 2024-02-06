@@ -12,7 +12,7 @@ import { MessageService } from "src/app/core/services/messageService";
   selector: "app-cadastro",
   templateUrl: "./reset-password.component.html",
 })
-export class ResetPasswordComponent implements OnInit {
+export class firstLoginComponent implements OnInit {
   constructor(
     private _router: Router,
     private fb: UntypedFormBuilder,
@@ -36,8 +36,9 @@ export class ResetPasswordComponent implements OnInit {
   form!: UntypedFormGroup;
 
   reset = () => {
+    debugger
     this.loading = true;
-    this.authController.esqueciSenha(this.form.value.email).subscribe({
+    this.authController.primeiroAcesso(this.form.value.email).subscribe({
       next: (resp: any) => {
         this.showSuccessEmail = true;
         this.messageService.success("Sucesso", "E-mail enviado com sucesso!");
