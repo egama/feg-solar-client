@@ -57,19 +57,20 @@
           (onChange)="changeEquipamento()"
         ></p-dropdown>
       </div>
-      <div class="col-3" *ngIf="optionDigit">
+
+      <div class="col-3" *ngIf="formCreate.value.eqp.id === 0">
         <p>Modelo:</p>
         <p-dropdown
           placeholder="Selecione o modelo"
           appendTo="body"
           styleClass="w-full"
-          [options]="optionsModel"
+          [options]="optionsEquipamentos"
           formControlName="hardwareModelId"
           optionLabel="description"
           optionValue="id"
         ></p-dropdown>
       </div>
-      <div class="col-3" *ngIf="optionDigit">
+      <div class="col-3" *ngIf="formCreate.value.eqp.id === 0">
         <p>Digite o numero do equipamento:</p>
         <input
           class="feg-input w-full"
@@ -79,6 +80,8 @@
           pInputText
         />
       </div>
+      
+
     </div>
     <div class="row" formArrayName="answer" *ngIf="questionsData.length > 0">
       <p class="mt-4 mb-3">
