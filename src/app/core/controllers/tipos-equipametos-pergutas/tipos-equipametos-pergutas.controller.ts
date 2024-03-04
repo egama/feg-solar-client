@@ -15,6 +15,14 @@ export class TiposEquipamentosPerguntasController {
     return this.api.get(`${this.prefix}/${id}`);
   };
 
+  getSacByIdQuestionSte = (sacHardwaresId: number): Observable<any> => {
+    return this.api.get(`${this.prefix}/${sacHardwaresId}`);
+  };
+  
+  postSacByIdQuestionSte = (sacHardwaresId: number, body: any): Observable<any> => {
+    return this.api.post(`${this.prefix}/client/${sacHardwaresId}`, body);
+  };
+  
   getByHardwareId = (hardwareId: number): Observable<any> => {
     return this.api.get(`${this.prefix}/type/${hardwareId}`);
   };

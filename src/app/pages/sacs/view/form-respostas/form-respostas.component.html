@@ -1,0 +1,56 @@
+<form [formGroup]="form">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div
+          class="col-12"
+          *ngFor="let item of respostas; let i = index">
+          <div class="row">
+            <div class="col-md-12 mt-3">
+              <div class="d-flex align-items-center mt-3" *ngIf="item.awnser">
+                <div class="col-6">
+                  <p class="m-2" for="float-input"><strong>Portal: </strong>{{ item.awnser }}</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-center" *ngIf="item.description">
+                <div class="col-6">
+                  <p class="m-2" for="float-input"><strong>Você: </strong>{{ item.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-12 mt-4" >
+          <label class="fw-bold" for="float-input">Responder:</label>
+          <input
+            formControlName="answer"
+            class="col-12 cs-input"
+            id="float-input"
+            type="text"
+            pInputText
+          />
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="row flex-column-reverse flex-md-row">
+        <div class="col-12 col-md-6 mt-4">
+          <p-button
+            (onClick)="cancel()"
+            label="{{ 'default.cancel' | translate }}"
+            styleClass="col-12 p-button-white"
+          ></p-button>
+        </div>
+        <div class="col-12 col-md-6 mt-4">
+          <p-button
+            (onClick)="save()"
+            label="{{ 'default.save' | translate }}"
+            styleClass="col-12 "
+          ></p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

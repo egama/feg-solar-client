@@ -70,34 +70,13 @@ export class SacsComponent implements OnInit {
   };
 
   createMenuItem = async (event: any, data: any) => {
-    const menuItem = [
-      {
-        label: `Ver Histórico`,
-        command: () => {
-          this.cgc.hide();
-          this.router.navigate([`sac/view/${data.id}`]);
-        },
-      },
-      {
-        label: `Cancelar`,
-        command: () => {
-          this.id = data.id;
-          this.cgc.hide();
-          this.exitClick();
-        },
-      },
-    ];
-    this.menuSelecao = {
-      data,
-      menuItem,
-    };
-    this.cgc.toggle(event);
+    
+    this.router.navigate([`sac/view/${data.id}`]);
   };
 
   getSacs = () => {
     this.sacsController.getMine().subscribe({
       next: (resp) => {
-        
         this.data = resp.data;
       },
       complete: () => {},

@@ -34,17 +34,21 @@ export class firstLoginComponent implements OnInit {
   };
 
   form!: UntypedFormGroup;
+  emailNotFound: boolean = false;
+  emailNotFoundfail: boolean = false;
 
   reset = () => {
-    debugger
+    
     this.loading = true;
     this.authController.primeiroAcesso(this.form.value.email).subscribe({
       next: (resp: any) => {
         this.showSuccessEmail = true;
         this.messageService.success("Sucesso", "E-mail enviado com sucesso!");
+        this.emailNotFoundfail = false;
         this.loading = false;
       },
       error: (resp: any) => {
+        this.emailNotFoundfail = true;
         this.loading = false;
       },
     });

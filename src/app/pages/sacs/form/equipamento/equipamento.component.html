@@ -51,7 +51,7 @@
           placeholder="Selecione o equipamento"
           appendTo="body"
           styleClass="w-full"
-          [options]="optionsEquipamentos"
+          [options]="allEquipsModel"
           formControlName="eqp"
           optionLabel="description"
           (onChange)="changeEquipamento()"
@@ -64,7 +64,7 @@
           placeholder="Selecione o modelo"
           appendTo="body"
           styleClass="w-full"
-          [options]="optionsEquipamentos"
+          [options]="allEquipsModel"
           formControlName="hardwareModelId"
           optionLabel="description"
           optionValue="id"
@@ -80,8 +80,6 @@
           pInputText
         />
       </div>
-      
-
     </div>
     <div class="row" formArrayName="answer" *ngIf="questionsData.length > 0">
       <p class="mt-4 mb-3">
@@ -125,6 +123,36 @@
             pInputText
           />
         </ng-container>
+
+        <div class="col-12 mt-2" *ngIf="pg.required">
+          <div class="row">
+            <div class="col-1">
+              <input
+                type="file"
+                accept="image/png, image/jpeg"
+                multiple
+                id="file"
+                (change)="handleFileInput($event, i)"
+                #fileUpload
+                style="display: none"
+              />
+              <p-button
+                icon="pi pi-paperclip"
+                (onClick)="fileUpload.click()"
+                tooltipPosition="left"
+                ptoolt
+                label=""
+                styleClass="feg-fs-14 p-button-warning mr-3"
+              ></p-button>
+            </div>
+
+            <div class="col-11">
+              <p class="feg-fs-10 mt-1" *ngFor="let fileName of selectedFileNames[i]">
+                {{ fileName }}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -134,7 +162,7 @@
           <p-button
             styleClass="w-full"
             label="Salvar Equipamento"
-            [disabled]="!formCreate.valid"
+            [disabled]="isSaveButtonDisabled()"
             (onClick)="avancar()"
           >
           </p-button>

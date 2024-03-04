@@ -72,7 +72,7 @@
           <div class="col-6">
             <label class="fw-bold">Equipamentos: </label>
           </div>
-          <div class="col-6">
+          <div class="col-5">
             <p-button
               *ngIf="hasAnyStatus(ENUM_STATUS_SAC.RMA_AGUARDANDO_ENVIO)"
               icon="pi pi-exclamation-triangle"
@@ -87,6 +87,15 @@
               styleClass="p-button-warning"
               (onClick)="verPropostas()"
             ></p-button>
+          </div>
+          <div class="col-1">
+            <p-button
+            (onClick)="voltar()"
+            label="{{
+              'default.back' | translate
+            }}"
+            styleClass="col-12 p-button-white"
+          ></p-button>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 {
   "default": {
     "cancel": "Cancelar",
+    "back": "Voltar",
     "save": "Salvar",
     "continue": "Continuar",
     "doubt": "Dúvidas, perguntas, acesse nossa",
@@ -64,6 +65,7 @@
     },
     "alterpassword": {
       "textemail": "Enviaremos um e-mail com instruções para fazer a alteração de senha.",
+      "textemailfail": "E-mail não cadastrado no nosso sistema.",
       "youremail": "Seu e-mail",
       "emailsent": "Enviamos um email para o cliente cadastrado!",
       "sendemail": "Enviar e-mail"

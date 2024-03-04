@@ -1,4 +1,6 @@
+import * as uuid from 'uuid';
 import { Component, Input, OnInit } from '@angular/core';
+import { CoreController } from 'src/app/core/controllers/core/core.controller';
 import {
   FormArray,
   FormGroup,
@@ -6,8 +8,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { EquipamentosController } from 'src/app/core/controllers/equipamentos/equipamentos.controller';
-import { ProjetosEquipamentosController } from 'src/app/core/controllers/projetos-equipamentos/projetos-equipamentos.controller';
 import { TiposEquipamentosController } from 'src/app/core/controllers/tipos-equipamentos/tipos-equipmentos.controller';
+import { ProjetosEquipamentosController } from 'src/app/core/controllers/projetos-equipamentos/projetos-equipamentos.controller';
 import { TiposEquipamentosPerguntasController } from 'src/app/core/controllers/tipos-equipametos-pergutas/tipos-equipametos-pergutas.controller';
 import { ENUM_QUESTION_TYPE } from 'src/app/core/enums/enum';
 
@@ -17,24 +19,25 @@ import { ENUM_QUESTION_TYPE } from 'src/app/core/enums/enum';
 })
 export class EquipamentoComponent implements OnInit {
   /** Variables */
-  optionsTipoEquipamentos: any[] = [];
-  optionsEquipamentos: any[] = [];
+  showForm = true;
+  allEquips: any[] = [];
+  public formCreate: any;
   optionsModel: any[] = [];
   optionsAwnser: any[] = [];
   allEquipsModel: any[] = [];
-  allEquips: any[] = [];
-  showForm = true;
   optionDigit: boolean = false;
   listEquipamentos: any[] = [];
-  public formCreate: any;
+  optionsEquipamentos: any[] = [];
+  optionsTipoEquipamentos: any[] = [];
 
   /** Input & Output * ViewChild */
-  @Input() projectsCompanyId: number = 0;
   @Input() form: any;
+  @Input() projectsCompanyId: number = 0;
   // @Output() onAdd = new EventEmitter();
 
   constructor(
     private fb: UntypedFormBuilder,
+    public coreController: CoreController,
     private equipamentosController: EquipamentosController,
     private tiposEquipamentosController: TiposEquipamentosController,
     private projetosEquipamentosController: ProjetosEquipamentosController,
@@ -49,52 +52,52 @@ export class EquipamentoComponent implements OnInit {
 
   createForm = () => {
     this.formCreate = this.fb.group({
-      tipoEqp: [[null], [Validators.required]],
-      eqp: [[null], [Validators.required]],
-      hardwareModelId: [null, [Validators.required]],
-      eqpText: [null, [Validators.required]],
       answer: this.fb.array([]),
+      eqp: [[null], [Validators.required]],
+      eqpText: [null, [Validators.required]],
+      tipoEqp: [[null], [Validators.required]],
+      hardwareModelId: [null],
     });
   };
 
   getTiposEquipamentos = () => {
-    debugger
+    ;
     this.tiposEquipamentosController.getEquipamentos().subscribe({
       next: (resp: any) => {
-        debugger
+        ;
         this.optionsTipoEquipamentos = resp.data;
       },
     });
   };
+  
+  isSaveButtonDisabled(): boolean {
+    const tipoEquipamento = this.formCreate.get('tipoEqp').value;
+    const equipamento = this.formCreate.get('eqp').value;
+    const modelo = this.formCreate.get('hardwareModelId').value;
+    const numeroEquipamento = this.formCreate.get('eqpText').value;
+    if (!tipoEquipamento || !equipamento || (equipamento.id === 0 && (!modelo || !numeroEquipamento))) {
+      return true;
+    }
+    return false;
+  }
 
   getAllEquipamentosByModel = (tipoEquipamentoId: number) => {
-    debugger;
-    this.equipamentosController
-      .getById(tipoEquipamentoId)
-      .subscribe({
-        next: (resp: any) => {
-          debugger;
-          const dataArray = [resp.data];
-  
-          this.allEquipsModel = dataArray;
-          this.optionsEquipamentos = this.allEquipsModel.map((equipamento: any) => ({
-            description: equipamento.description,
-            id: equipamento.id
-          }));
-          let op = {
-            description: 'Digitar',
-            id: 0,
-          };
-          this.optionsEquipamentos.push(op);
-        },
-      });
+    ;
+    this.equipamentosController.getByType(tipoEquipamentoId).subscribe({
+      next: (resp: any) => {
+        ; 
+        this.allEquipsModel = resp.data;
+        let op = {
+          description: 'Digitar',
+          id: 0,
+        };
+        this.allEquipsModel.push(op);
+      },
+    });
   };
-  
-
-  
 
   getAllEquipamentosByProjeto = () => {
-    debugger
+    ;
     this.projetosEquipamentosController
       .getByProjetoId(this.projectsCompanyId)
       .subscribe({
@@ -106,7 +109,7 @@ export class EquipamentoComponent implements OnInit {
 
   questionsData: any[] = [];
   changeEquipamento = () => {
-    debugger
+    ;
     this.optionDigit = this.formCreate.value.eqp.id == 0;
     this.formCreate.controls['eqpText'].setValue(
       this.formCreate.value.eqp.id == 0
@@ -157,21 +160,47 @@ export class EquipamentoComponent implements OnInit {
       description: [data.description],
       typeQuestion: [data.typeQuestion],
       answer: ['', Validators.required],
+      file: [null],
+      fileName: [null],
     });
   }
 
-  changeTipoEquipamento = (e: any) => {
-    const selectedTipoEqp = this.formCreate.value.tipoEqp;
+  nr: any[] = [];
+
+  selectedFileNames: any[] = [];
+
+  handleFileInput = (e: any, index: number) => {
+    const files = e.target?.files;
   
+    if (files && files.length > 0) {
+      const fileUploadPromises = [];
+      this.selectedFileNames[index] = [];
+  
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const promise = this.coreController.upload(file, `EVIDENCIA-${uuid.v1()}.pdf`).toPromise();
+        fileUploadPromises.push(promise);
+        this.selectedFileNames[index].push(file.name);
+      }
+      Promise.all(fileUploadPromises).then((responses) => {
+        const urls = responses.map((response: any) => response.data.Location);
+        this.nr[index] = urls;
+      });
+    }
+  };
+  
+
+  changeTipoEquipamento = (e: any) => {
+    ;
+    const selectedTipoEqp = this.formCreate.value.tipoEqp;
+
     if (selectedTipoEqp) {
       this.getAllEquipamentosByModel(selectedTipoEqp.id);
     }
   };
-  
-  
 
   getModeloByType = () => {
-    debugger
+    ;
     const selectedTipoEqp = this.formCreate.value.tipoEqp;
 
     if (selectedTipoEqp) {
@@ -190,10 +219,12 @@ export class EquipamentoComponent implements OnInit {
   }
 
   avancar = () => {
-    let answer = this.formCreate.value.answer.map((item: any) => {
+    
+    let answer = this.formCreate.value.answer.map((item: any,  index: number) => {
       return {
         id: item.id,
         awnser: item.answer,
+        awsUrl: this.nr[index],
       };
     });
 
@@ -204,7 +235,6 @@ export class EquipamentoComponent implements OnInit {
           : this.formCreate.value.eqp.description
       }`,
       answer,
-      // userProjectId: this.userProjectId,
       hardwareTypeId: this.formCreate.value.tipoEqp.id,
       equipament: this.formCreate.value.eqp.description,
       hardwareModelId: this.formCreate.value.hardwareModelId,

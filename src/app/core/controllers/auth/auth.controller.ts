@@ -39,7 +39,7 @@ export class AuthController {
   };
 
   primeiroAcesso = (email: string): Observable<any> => {
-    debugger
+    
     return this.api.post(
       `/auth/first-login`,
       {

@@ -9,6 +9,7 @@ import { FormPropostaComponent } from './form-proposta/form-proposta.component';
 import { ModalConfirmType } from 'src/app/common/modais/confirm/confirm.type';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'src/app/core/services/messageService';
+import { FormRespostasComponent } from './form-respostas/form-respostas.component';
 
 @Component({
   selector: 'feg-visualizar-sac',
@@ -44,18 +45,19 @@ export class VisualizarSacComponent implements OnInit, OnDestroy {
 
   allMenu: any[] = [
     {
+      label: 'Responder',
+      status: [
+        ENUM_STATUS_SAC.STE_AGUARDANDO_CLIENTE,
+      ],
+      command: (e: any) => {
+        this.cgc.hide();
+        this.questionPortal();
+      },
+    },
+    {
       label: 'Cancelar',
       status: [
         ENUM_STATUS_SAC.RMA_AGUARDANDO_ENVIO,
-        ENUM_STATUS_SAC.RMA_EM_TRANSPORTE_PARA_CENTRO_DE_REPAROS,
-        ENUM_STATUS_SAC.RMA_RECEBIDO_CENTRAL,
-        ENUM_STATUS_SAC.RMA_EQUIPAMENTO_EM_ANALISE_TECNICA,
-        ENUM_STATUS_SAC.RMA_AGUARDANDO_PROPOSTA,
-        ENUM_STATUS_SAC.RMA_PROPOSTA_ENVIADA,
-        ENUM_STATUS_SAC.RMA_PROPOSTA_RESPONDIDA,
-        ENUM_STATUS_SAC.RMA_AGUARDANDO_RESOLUCAO,
-        ENUM_STATUS_SAC.RMA_AGUARDANDO_EMISSAO_DE_NOTA_DE_ENVIO,
-        ENUM_STATUS_SAC.RMA_AGUARDANDO_DEVOLUCAO,
       ],
       command: (e: any) => {
         this.cgc.hide();
@@ -140,6 +142,21 @@ export class VisualizarSacComponent implements OnInit, OnDestroy {
       },
       params: {
         id: this.id,
+      },
+    });
+  };
+
+  questionPortal = () => {
+    
+    this.abaFormService.enable({
+      code: 'question',
+      component: FormRespostasComponent,
+      label: 'Responder',
+      callback: () => {
+        this.getSacById();
+      },
+      params: {
+        id: this.menuSelecao.data.id,
       },
     });
   };

@@ -13,17 +13,19 @@ import { FormComponent } from './form/form.component';
 import { VisualizarSacComponent } from './view/visualizar-chamado-sac.component';
 import { FormDadosEnvioComponent } from './view/form-dados-envio/form-dados-envio.component';
 import { FormPropostaComponent } from './view/form-proposta/form-proposta.component';
+import { FormRespostasComponent } from './view/form-respostas/form-respostas.component';
 
 @NgModule({
   declarations: [
     SacsComponent,
-    ClienteUsinaComponent,
-    EquipamentoComponent,
-    TipoAtendimentoComponent,
     FormComponent,
-    VisualizarSacComponent,
-    FormDadosEnvioComponent,
+    EquipamentoComponent,
+    ClienteUsinaComponent,
     FormPropostaComponent,
+    VisualizarSacComponent,
+    FormRespostasComponent,
+    FormDadosEnvioComponent,
+    TipoAtendimentoComponent,
   ],
   imports: [
     FormsModule,

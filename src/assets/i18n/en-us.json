@@ -62,6 +62,7 @@
     },
     "alterpassword": {
       "textemail": "We will send an email with instructions to change your password.",
+      "textemailfail": "E-mail not registered in our system.",
       "youremail": "Your email",
       "emailsent": "We have sent an email to the registered client!",
       "sendemail": "Send email"
