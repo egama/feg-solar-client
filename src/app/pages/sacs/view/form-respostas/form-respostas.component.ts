@@ -78,10 +78,10 @@ export class FormRespostasComponent implements OnInit {
       .subscribe({
         next: async () => {
           this.messageService.success(
-            `${await this.translateService.get("Análise tecnica").toPromise()}`,
+            `${await this.translateService.get("Sucesso").toPromise()}`,
 
             `${await this.translateService
-              .get("Análise tecnica feita com sucesso")
+              .get("Pergunta respondia para o Portal com sucesso!")
               .toPromise()}`
           );
         },
